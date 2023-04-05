@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
+const CreatePost = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log("Title:", title);
+    console.log("Content:", content);
+  };
+
+  return (
+    <div className="container mx-auto mt-10 px-4">
+      <h2 className="text-3xl font-bold mb-6">Create a Post</h2>
+      <form onSubmit={handleSubmit} className="w-full">
+        <div className="mb-4">
+          <label htmlFor="title" className="block text-sm font-bold mb-2">
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-4 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="content" className="block text-sm font-bold mb-2">
+            Content
+          </label>
+          <ReactQuill
+            id="content"
+            value={content}
+            onChange={setContent}
+            theme="snow"
+            className="text-lg"
+            style={{ minHeight: "25rem" }}
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-6 py-3 rounded-md text-lg hover:bg-blue-700"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default CreatePost;

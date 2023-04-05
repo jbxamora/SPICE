@@ -1,9 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Navbar from './components/NavBar'
+import React from "react";
 import Auth from "./components/Auth";
+import Navbar from "./components/Navbar";
+import CreatePost from "./components/CreatePost";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/signup" element={<Auth />} />
+        <Route path="/create" element={<CreatePost />} />
       </Routes>
     </Router>
   );
