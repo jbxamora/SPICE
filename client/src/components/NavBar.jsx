@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-[#020617] text-white fixed w-full top-0 left-0">
+    <nav className="bg-[#020617] text-white fixed w-full top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -22,50 +23,48 @@ const Navbar = () => {
           </div>
           <div className={`hidden md:block ${isOpen ? "block" : "hidden"}`}>
             <div className="ml-10 flex items-baseline space-x-4">
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Home
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/create"
                 className="text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Create
-              </a>
-
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/signup"
                 className="text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Sign Up
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
       <div className={`${isOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/create"
             className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
           >
             Create
-          </a>
-
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/signup"
             className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
