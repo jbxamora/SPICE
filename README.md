@@ -27,6 +27,8 @@ SPICE is a MERN stack recipe blog application that allows users to create, read,
 - Mongoose ODM
 - Heroku
 - JWT
+- Cloudinary
+-TailwindCSS
 
 ## Screenshots
 
