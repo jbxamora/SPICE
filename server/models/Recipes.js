@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reactions");
 const CommentSchema = require("./Comments");
 
-
 const RecipeSchema = new Schema(
   {
     name: {
