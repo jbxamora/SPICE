@@ -4,6 +4,8 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+
+    //Define query resolvers
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('selectedRecipeIds');
@@ -27,12 +29,15 @@ const resolvers = {
     },
   },
 
+  //Define mutation resolvers
   Mutation: {
+    //Create a new user
     createUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
+    //login a user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -50,6 +55,8 @@ const resolvers = {
 
       return { token, user };
     },
+
+    //select a recipe
     selectRecipe: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
@@ -61,10 +68,14 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    //create a recipe
     createRecipe: async (parent, { input }) => {
       const recipe = await Recipe.create(input);
       return recipe;
     },
+
+    //remove a recipe
     removeRecipe: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
@@ -76,35 +87,12 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    //update recipe
     updateRecipe: async (parent, { input }) => {
       const recipe = await Recipe.findOneAndUpdate({ _id: input._id }, input, { new: true });
       return recipe;
     },
-    deleteRecipe: async (parent, { _id }) => {
-      const recipe = await Recipe.findOneAndDelete({ _id });
-      return recipe;
-    },
-    createPost: async (parent, { body }, context) => {
-      if (context.user) {
-        const post = await Post.create({
-          body,
-          username: context.user.username,
-        });
-        return post;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-   
-    deletePost: async (parent, { postId }, context) => {
-        if (context.user) {
-          const deletedPost = await Post.findOneAndDelete({
-            _id: postId,
-            username: context.user.username,
-          });
-          return deletedPost ? 'Post successfully deleted!' : 'Post not found or you are not authorized to delete it.';
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      },
   
       createComment: async (parent, { postId, body }, context) => {
         if (context.user) {
@@ -172,4 +160,3 @@ const resolvers = {
 
 
 
-module.exports = resolvers
