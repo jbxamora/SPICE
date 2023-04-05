@@ -1,17 +1,19 @@
-import Navbar from './components/NavBar'
-import './App.css'
-import { BrowserRouter } from 'react-router-dom'
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 
-import React from 'react';
-import Auth from './components/Auth';
+import Navbar from './components/NavBar'
+import Auth from "./components/Auth";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar />
-      <Auth />
-    </BrowserRouter>
-  )
-}
+      <Routes>
+        <Route path="/signup" element={<Auth />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
