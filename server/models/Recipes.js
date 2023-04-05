@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reactions");
-const commentSchema = require("./Comments");
-
+const CommentSchema = require("./Comments");
 
 const RecipeSchema = new Schema(
   {
@@ -27,7 +26,7 @@ const RecipeSchema = new Schema(
 
     reactions: [reactionSchema],
 
-    comments: [commentSchema],
+    comments: [CommentSchema],
   },
   {
     toJSON: {
