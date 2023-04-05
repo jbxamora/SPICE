@@ -1,6 +1,6 @@
 # SPICE
 
-SPICE is a MERN stack recipe blog application that allows users to create, read, update, and delete recipes. The acronym SPICE stands for "Simple Platform for Interesting Culinary Experiences", and the application is designed to provide an easy-to-use platform for users to share and discover new recipes.
+SPICE is a MERN stack recipe blog application that allows users to create, read, update, and delete recipes. The acronym SPICE stands for "Submit, Personalize, Improve, Create, Enjoy", and the application is designed to provide an easy-to-use platform for users to share and discover new recipes.
 
 ## Requirements
 
