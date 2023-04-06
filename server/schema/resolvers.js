@@ -127,28 +127,28 @@ const resolvers = {
         throw new AuthenticationError('You need to be logged in!');
       },
   
-      likePost: async (parent, { postId }, context) => {
+      likeRecipe: async (parent, { recipeId }, context) => {
         if (context.user) {
-          const post = await Post.findById(postId);
+          const recipe = await recipe.findById(recipeId);
   
-          if (!post) {
-            throw new UserInputError('Post not found!');
+          if (!recipe) {
+            throw new UserInputError('Recipe not found!');
           }
   
-          if (post.likes.find((like) => like.username === context.user.username)) {
+          if (recipe.likes.find((like) => like.username === context.user.username)) {
             // Post already liked, unlike it
-            post.likes = post.likes.filter((like) => like.username !== context.user.username);
+            recipe.likes = recipe.likes.filter((like) => like.username !== context.user.username);
           } else {
-            // Not liked, like post
-            post.likes.push({
+            // Not liked, like recipe
+            recipe.likes.push({
               username: context.user.username,
               createdAt: new Date().toISOString(),
             });
           }
   
-          const updatedPost = await post.save().populate('comments');
+          const updatedRecipe = await recipe.save().populate('comments');
   
-          return updatedPost;
+          return updatedRecipe;
         }
         throw new AuthenticationError('You need to be logged in!');
       },
