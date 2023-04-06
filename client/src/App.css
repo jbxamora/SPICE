@@ -41,3 +41,12 @@
 .read-the-docs {
   color: #888;
 }
+:host ::ng-deep .ql-editor {
+  resize: vertical;
+  overflow-y: scroll;
+}
+
+:host ::ng-deep .ql-container {
+  resize: vertical;
+  overflow-y: scroll;
+}

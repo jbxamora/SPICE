@@ -14,7 +14,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10 px-4">
+    <div className="container w-45 mx-auto mt-10 px-4">
       <h2 className="text-3xl font-bold mb-6">Create a Post</h2>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-4">
@@ -28,6 +28,7 @@ const CreatePost = () => {
             onChange={(e) => setTitle(e.target.value)}
             className="w-full p-4 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
             required
+            style={{ minHeight: "4rem" }}
           />
         </div>
         <div className="mb-4">
@@ -39,14 +40,16 @@ const CreatePost = () => {
             value={content}
             onChange={setContent}
             theme="snow"
-            className="text-lg"
-            style={{ minHeight: "25rem" }}
+            className="text-lg mt-auto px-3 py-4"
+            style={{ minHeight: "25rem",
+        className:"h-44" }}
           />
         </div>
+
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-3 rounded-md text-lg hover:bg-blue-700"
-        >
+          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-md text-lg hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+          >
           Submit
         </button>
       </form>

@@ -68,6 +68,15 @@ button:focus-visible {
   color: transparent;
 }
 
+:host ::ng-deep .ql-editor {
+  resize: vertical;
+  overflow-y: scroll;
+}
+
+:host ::ng-deep .ql-container {
+  resize: vertical;
+  overflow-y: scroll;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
