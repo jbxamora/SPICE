@@ -1,6 +1,9 @@
+@import 'react-quill/dist/quill.snow.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -9,7 +12,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0f0f0f;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -59,6 +62,21 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.gradient-text {
+  @apply bg-gradient-to-r from-red-500 via-red-600 to-red-700;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+:host ::ng-deep .ql-editor {
+  resize: vertical;
+  overflow-y: scroll;
+}
+
+:host ::ng-deep .ql-container {
+  resize: vertical;
+  overflow-y: scroll;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
