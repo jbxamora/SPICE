@@ -1,13 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     extend: {},
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
   important: true,
 }
