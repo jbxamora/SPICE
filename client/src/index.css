@@ -26,4 +26,11 @@ body {
   color:#e2e8f0;
 }
 
+ body {
+  background: linear-gradient(
+    -53.47deg,
+    rgba(255, 255, 255, 0) -341.94%,
+    #14101d 95.11%
+  );
+}
 

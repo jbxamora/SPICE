@@ -12,7 +12,7 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg mb-8 border border-cyan-300">
+    <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
       {imageUrl && (
         <img
           src={imageUrl}
@@ -21,8 +21,8 @@ const PostCard = ({ post }) => {
         />
       )}{" "}
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">{getSnippet(content)}</p>
+        <div className="font-bold text-white text-xl mb-2">{title}</div>
+        <p className="text-gray-400 text-base">{getSnippet(content)}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
         {/* Add any relevant tags here */}
