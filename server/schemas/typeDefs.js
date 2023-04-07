@@ -52,7 +52,6 @@ type User {
     _id: String!
     image: String
     name: String
-    ingredients: [IngredientInput]
     steps: [String]
     totalTime: Int
     serves: Int
@@ -62,7 +61,7 @@ type User {
     _id: String!
     image: String
     name: String
-    ingredients: [IngredientInput]
+
     steps: [String]
     totalTime: Int
     serves: Int
@@ -78,11 +77,15 @@ type User {
    
   
   type Query {
-    users: [User]
-    user(username: String!): User
-    recipes: [Recipe!]!
-    recipe(recipeId: ID!): Recipe
+    me: User
+    getRecipes: [Recipe!]!
+    getOneRecipe(_id: ID!): Recipe # add this line to define the resolver
+    getRecipesByIds(_id: [ID!]!): [Recipe!]!
+    getComments: [Comment!]!
+    getOneComment(postId: ID!): Comment
+    getReactionsByRecipeId(recipeId: ID!): [Reaction!]!
   }
+
    type Mutation {
     login(email: String!, password: String!): Auth
     createUser(username: String!, email: String!, password: String!): Auth
@@ -97,6 +100,8 @@ type User {
     createComment(postId: String, body: String): Post
     deleteComment(postId: String, commentId: String): Post
     likePost(postId: String!): Post
+    createReaction(reactionInput: ReactionInput): Reaction
+    removeReaction(reactionId: ID!): Boolean
    }
 `;
 

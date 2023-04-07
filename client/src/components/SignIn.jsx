@@ -1,6 +1,52 @@
-import React from "react";
+import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
 
-const SignIn = () => {
+import Auth from '../utils/auth';
+
+const SignIn = (props) => {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+//update state baded on form input changes
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({ 
+      ...formState, 
+      [name]: value 
+    });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
+
+    try {
+      const { data } = await login({
+        variables: {...formState}
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    setFormState({
+      username: '',
+      email: '',
+      password: '',
+    });
+  };
   return (
     <div className="flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md bg-[#020617] rounded-xl shadow-md shadow-amber-600/80 p-8 space-y-8">
