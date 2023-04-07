@@ -79,7 +79,7 @@ type User {
   type Query {
     me: User
     getRecipes: [Recipe!]!
-    getOneRecipe(_id: ID!): Recipe # add this line to define the resolver
+    getOneRecipe(_id: ID!): Recipe 
     getRecipesByIds(_id: [ID!]!): [Recipe!]!
     getComments: [Comment!]!
     getOneComment(postId: ID!): Comment
