@@ -13,19 +13,19 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     getRecipes: async (parent, args) => {
-      return Recipe.find().sort({ createdAt: -1 });
+      return Recipes.find().sort({ createdAt: -1 });
     },
     getOneRecipe: async (parent, { _id }) => {
-      return Recipe.findOne({ _id });
+      return Recipes.findOne({ _id });
     },
     getRecipesByIds: async (parent, { _id }) => {
-      return Recipe.find({ _id: { $in: _id } }).sort({ createdAt: -1 });
+      return Recipes.find({ _id: { $in: _id } }).sort({ createdAt: -1 });
     },
-    getPosts: async () => {
-      return Post.find().sort({ createdAt: -1 });
+    getComments: async () => {
+      return Comments.find().sort({ createdAt: -1 });
     },
-    getPost: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId });
+    getOneComment: async (parent, { postId }) => {
+      return Comments.findOne({ _id: postId });
     },
     getReactionsByRecipeId: async (parent, { recipeId }) => {
         return Reactions.find({ recipe: recipeId }).populate('user');
@@ -76,7 +76,7 @@ const resolvers = {
 
     //create a recipe
     createRecipe: async (parent, { input }) => {
-      const recipe = await Recipe.create(input);
+      const recipe = await Recipes.create(input);
       return recipe;
     },
 
@@ -95,7 +95,7 @@ const resolvers = {
 
     //update recipe
     updateRecipe: async (parent, { input }) => {
-      const recipe = await Recipe.findOneAndUpdate({ _id: input._id }, input, { new: true });
+      const recipe = await Recipes.findOneAndUpdate({ _id: input._id }, input, { new: true });
       return recipe;
     },
   
@@ -160,7 +160,7 @@ const resolvers = {
         }
   
         return reaction;
-    },
+    }
     },
   };
   

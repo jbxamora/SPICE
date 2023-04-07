@@ -28,7 +28,7 @@ type User {
 
   type Comment {
     id: ID!
-    body: String!
+    commentText: String!
     username: String!
     createdAt: String!
   }
@@ -39,7 +39,13 @@ type User {
     createdAt: String!
     username: String!
   }
-
+  type Post {
+    id: ID!
+    body: String!
+    username: String!
+    createdAt: String!
+    comments: [Comment]!
+  }
 
    
   input RecipeInput {
