@@ -68,28 +68,32 @@ const CreatePost = () => {
               value={content}
               onChange={setContent}
               theme="snow"
-              className="text-lg mt-auto px-3 py-4"
+              className="text-lg mt-auto px-3 py-4 w-full"
               style={{ minHeight: "25rem", className: "h-44" }}
               modules={{ toolbar: toolbarOptions }}
             />
           ) : (
             <PostPreview content={content} />
           )}
+            
+          <div className="flex justify-center">
+            <button
+              type="button"
+              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700"
+              onClick={() => setPreview(!preview)}
+            >
+              {preview ? "Hide" : "Show"} Preview
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-center">
           <button
-            type="button"
-            className="bg-gray-600 text-white px-6 py-3 rounded-md text-lg hover:bg-gray-700 ml-4"
-            onClick={() => setPreview(!preview)}
+            type="submit"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-md text-lg hover:bg-violet-800 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
           >
-            {preview ? "Hide" : "Show"} Preview
+            Submit
           </button>
         </div>
-
-        <button
-          type="submit"
-          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-md text-lg hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
-        >
-          Submit
-        </button>
       </form>
     </div>
   );
