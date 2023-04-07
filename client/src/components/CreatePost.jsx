@@ -25,7 +25,7 @@ const CreatePost = () => {
     [{ color: [] }, { background: [] }], // dropdown with defaults from theme
     [{ font: [] }],
     [{ align: [] }],
-
+    
     ["clean"], // remove formatting button
   ];
 
@@ -68,18 +68,18 @@ const CreatePost = () => {
               value={content}
               onChange={setContent}
               theme="snow"
-              className="text-lg mt-auto px-3 py-4 w-full"
+              className="text-lg mt-auto px-3 py-4"
               style={{ minHeight: "25rem", className: "h-44" }}
               modules={{ toolbar: toolbarOptions }}
             />
           ) : (
             <PostPreview content={content} />
           )}
-            
+
           <div className="flex justify-center">
             <button
               type="button"
-              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700"
+              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400"
               onClick={() => setPreview(!preview)}
             >
               {preview ? "Hide" : "Show"} Preview
