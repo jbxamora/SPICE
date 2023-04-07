@@ -38,7 +38,7 @@ const PostCard = ({ post }) => {
           alt={`Avatar of ${author.name}`}
         /> */}
         <div className="text-sm">
-          <p className="text-gray-900 leading-none">Author Name</p>
+          <p className="text-white leading-none">Author Name</p>
           <p className="text-gray-600">{date}</p>
         </div>
       </div>

@@ -38,10 +38,10 @@ const CreatePost = () => {
 
   return (
     <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
-      {!preview && <h2 className="flex justify-center text-3xl font-bold mb-6">Create a Post</h2>}
+      {!preview && <h2 className="flex justify-center text-white text-3xl font-bold mb-6">Create a Post</h2>}
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-4">
-          <label htmlFor="title" className="flex justify-center text-sm font-bold mb-2">
+          <label htmlFor="title" className="block text-sm font-bold text-white mb-2">
             Title
           </label>
           {!preview ? (
@@ -50,16 +50,16 @@ const CreatePost = () => {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-4 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               required
               style={{ minHeight: "4rem" }}
             />
           ) : (
-            <h3 className="text-xl font-semibold">{title}</h3>
+            <h3 className="flex justify-center text-white text-xl font-semibold">{title}</h3>
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="content" className="block text-sm font-bold mb-2">
+          <label htmlFor="content" className="block text-white text-sm font-bold mb-2">
             Content
           </label>
           {!preview ? (
@@ -68,8 +68,8 @@ const CreatePost = () => {
               value={content}
               onChange={setContent}
               theme="snow"
-              className="text-lg mt-auto px-3 py-4 w-full"
-              style={{ minHeight: "25rem", className: "h-44" }}
+              className="text-lg mt-auto px-3 py-4"
+              style={{ minHeight: "25rem", className: "h-44 text-white" }}
               modules={{ toolbar: toolbarOptions }}
             />
           ) : (
@@ -79,7 +79,7 @@ const CreatePost = () => {
           <div className="flex justify-center">
             <button
               type="button"
-              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700"
+              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400"
               onClick={() => setPreview(!preview)}
             >
               {preview ? "Hide" : "Show"} Preview

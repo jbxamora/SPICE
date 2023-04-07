@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { logo } from "../../assets";
 import { Link } from "react-router-dom";
-
+// add search functionality
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
