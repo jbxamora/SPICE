@@ -6,6 +6,7 @@ import Navbar from "./components/NavBar";
 import CreatePost from "./pages/CreatePost";
 import Auth from "./pages/Auth";
 import PostsList from "./components/PostList";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/signup" element={<Auth />} />
         <Route path="/create" element={<CreatePost />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };
