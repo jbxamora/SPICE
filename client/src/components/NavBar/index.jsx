@@ -49,19 +49,19 @@ const Navbar = () => {
   };
 
   // Conditional Render of SearchBar
-const renderSearchBar = () => {
-  if (location.pathname === "/home") {
-    return (
-      <div className="search-container hidden lg:block mr-[420px]">
-        <input
-          type="search"
-          placeholder={searchPlaceholders[placeholderIndex]}
-          className="search-input"
-        />
-      </div>
-    );
-  }
-};
+  const renderSearchBar = () => {
+    if (location.pathname === "/home") {
+      return (
+        <div className="search-container hidden lg:block mr-[420px]">
+          <input
+            type="search"
+            placeholder={searchPlaceholders[placeholderIndex]}
+            className="search-input"
+          />
+        </div>
+      );
+    }
+  };
 
   const handleMobileNavLinkClick = () => {
     setIsOpen(false);
@@ -132,7 +132,6 @@ const renderSearchBar = () => {
       </div>
     </nav>
   );
-
 };
 
 export default Navbar;

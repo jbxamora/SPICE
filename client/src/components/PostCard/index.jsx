@@ -12,7 +12,7 @@ const PostCard = ({ post }) => {
     return content;
   };
 
-  const handleReactionClick = () => {}
+  const handleReactionClick = () => {};
 
   return (
     <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">

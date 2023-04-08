@@ -1,16 +1,16 @@
-import { 
-    pizza,
-     feast, 
-     cake,
-    desert,
-    salmon,
-    salad,
-    cruterie,
-    chickensand,
-    kabob,
-    breakfast,
-    pankeke,
-    salad2
+import {
+  pizza,
+  feast,
+  cake,
+  desert,
+  salmon,
+  salad,
+  cruterie,
+  chickensand,
+  kabob,
+  breakfast,
+  pankeke,
+  salad2,
 } from "../assets";
 
 export const dummyPosts = [
@@ -108,7 +108,6 @@ export const potentialFriends = [
   },
 ];
 
-
 export const searchPlaceholders = [
   "Search recipes...",
   "Find ingredients...",
@@ -128,11 +127,10 @@ export const searchPlaceholders = [
 ];
 
 export const Images = [
-    cruterie,
-    chickensand,
-    kabob,
-    breakfast,
-    pankeke,
-    salad2
-
-]
+  cruterie,
+  chickensand,
+  kabob,
+  breakfast,
+  pankeke,
+  salad2,
+];

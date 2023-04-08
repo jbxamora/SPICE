@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const SignUp = () => {
   const randomImage = Images[Math.floor(Math.random() * Images.length)];
 
-
   return (
     <section className="bg-transparent min-h-screen flex items-center justify-center">
       <div className="flex rounded-2xl shadow-lg max-w-3xl p-5 items-center bg-white dark:bg-gray-800">
@@ -97,9 +96,9 @@ const SignUp = () => {
           </button>
 
           <div className="mt-3 text-xs flex justify-between items-center text-gray-900 dark:text-white">
-            <Link 
-            to='/signin'
-            className = "bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-blue-500"
+            <Link
+              to="/signin"
+              className="bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-blue-500"
             >
               Already have an account?
             </Link>

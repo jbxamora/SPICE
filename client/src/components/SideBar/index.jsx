@@ -63,5 +63,4 @@ const SideBar = ({ savedPosts }) => {
   );
 };
 
-
 export default SideBar;

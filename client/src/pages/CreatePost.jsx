@@ -38,10 +38,17 @@ const CreatePost = () => {
 
   return (
     <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
-      {!preview && <h2 className="flex justify-center text-white text-3xl font-bold mb-6">Create a Post</h2>}
+      {!preview && (
+        <h2 className="flex justify-center text-white text-3xl font-bold mb-6">
+          Create a Post
+        </h2>
+      )}
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-bold text-white mb-2">
+          <label
+            htmlFor="title"
+            className="block text-sm font-bold text-white mb-2"
+          >
             Title
           </label>
           {!preview ? (
@@ -55,11 +62,16 @@ const CreatePost = () => {
               style={{ minHeight: "4rem" }}
             />
           ) : (
-            <h3 className="flex justify-center text-white text-xl font-semibold">{title}</h3>
+            <h3 className="flex justify-center text-white text-xl font-semibold">
+              {title}
+            </h3>
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="content" className="block text-white text-sm font-bold mb-2">
+          <label
+            htmlFor="content"
+            className="block text-white text-sm font-bold mb-2"
+          >
             Content
           </label>
           {!preview ? (

@@ -3,7 +3,6 @@ import PostCard from "../PostCard";
 import SideBar from "../SideBar";
 import { dummySavedPosts, potentialFriends } from "../../constants/constants";
 
-
 const PostsList = ({ posts, savedPosts }) => {
   return (
     <div className="container w-full mx-auto mt-8 px-4">
@@ -25,4 +24,3 @@ const PostsList = ({ posts, savedPosts }) => {
 };
 
 export default PostsList;
-
