@@ -1,4 +1,17 @@
-import { pizza, feast, cake, desert, salmon, salad } from "../assets";
+import { 
+    pizza,
+     feast, 
+     cake,
+    desert,
+    salmon,
+    salad,
+    cruterie,
+    chickensand,
+    kabob,
+    breakfast,
+    pankeke,
+    salad2
+} from "../assets";
 
 export const dummyPosts = [
   {
@@ -75,4 +88,12 @@ export const searchPlaceholders = [
   "Satisfy your taste buds...",
 ];
 
+export const Images = [
+    cruterie,
+    chickensand,
+    kabob,
+    breakfast,
+    pankeke,
+    salad2
 
+]
