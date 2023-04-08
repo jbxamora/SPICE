@@ -1,7 +1,8 @@
 import React from "react";
 import PostCard from "../PostCard";
 import SideBar from "../SideBar";
-import { dummySavedPosts } from "../../constants/constants";
+import { dummySavedPosts, potentialFriends } from "../../constants/constants";
+
 
 const PostsList = ({ posts, savedPosts }) => {
   return (
@@ -17,7 +18,7 @@ const PostsList = ({ posts, savedPosts }) => {
             ))}
           </div>
         </div>
-        <SideBar savedPosts={dummySavedPosts} />
+        <SideBar savedPosts={dummySavedPosts} friends={potentialFriends} />
       </div>
     </div>
   );

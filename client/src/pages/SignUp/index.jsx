@@ -1,50 +1,88 @@
 import React, { useState } from "react";
 import { Images } from "../../constants/constants";
-import SignIn from "../SignIn";
+import { Link } from "react-router-dom";
 
-const SignUp = ({}) => {
-
-  const [showSignIn, setShowSignIn] = useState(false);
+const SignUp = () => {
   const randomImage = Images[Math.floor(Math.random() * Images.length)];
 
-  const handleSignInClick = () => {
-    setShowSignIn(true);
-  };
 
-  if (showSignIn) {
-    return <SignIn />;
-  }
   return (
     <section className="bg-transparent min-h-screen flex items-center justify-center">
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
-        <div className="md:w-1/2 px-8 md:px-16">
-          <h2 className="font-bold text-2xl text-[#002D74]">Sign Up</h2>
-          <p className="text-xs mt-4 text-[#002D74]">
-            Create your account to get started
+      <div className="flex rounded-2xl shadow-lg max-w-3xl p-5 items-center bg-white dark:bg-gray-800">
+        <div className="md:w-1/2 px-8 md:px-16 space-y-6">
+          <h2 className="text-xl font-bold text-center text-gray-900 dark:text-white">
+            Sign Up
+          </h2>
+          <p className="text-md text-center text-gray-900 dark:text-white">
+            Join The Community!
           </p>
-          <form className="flex flex-col gap-4">
-            <input
-              className="p-2 mt-8 rounded-xl border"
-              type="text"
-              name="username"
-              placeholder="Username"
-            />
-            <input
-              className="p-2 mt-2 rounded-xl border"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-            <div className="relative mt-2">
+          <form className="space-y-6">
+            <div>
+              <label
+                htmlFor="name"
+                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Name
+              </label>
               <input
-                className="p-2 rounded-xl border w-full"
-                type="password"
-                name="password"
-                placeholder="Password"
+                id="name"
+                type="name"
+                name="name"
+                placeholder="Nacho Cheese"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                required
               />
             </div>
-            <button className="bg-[#002D74] rounded-xl text-white py-2 mt-2 hover:scale-105 duration-300">
-              Register
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="name@company.com"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="username"
+                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Username
+              </label>
+              <input
+                id="username"
+                type="username"
+                name="username"
+                placeholder="GrillMaster900"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                required
+              />
+            </div>
+            <button className="bg-blue-500 rounded-lg text-white py-2 w-full transition-colors duration-200 hover:bg-blue-600">
+              Create Account
             </button>
           </form>
 
@@ -54,14 +92,17 @@ const SignUp = ({}) => {
             <hr className="border-gray-400" />
           </div>
 
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
-            Sign up with Google
+          <button className="bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-blue-500">
+            Sign Up with Google
           </button>
 
-          <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
-            <a href="#" onClick={handleSignInClick}>
-              Already have an account? Sign In
-            </a>
+          <div className="mt-3 text-xs flex justify-between items-center text-gray-900 dark:text-white">
+            <Link 
+            to='/signin'
+            className = "bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-blue-500"
+            >
+              Already have an account?
+            </Link>
           </div>
         </div>
 
