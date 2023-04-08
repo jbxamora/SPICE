@@ -1,9 +1,9 @@
+// see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import { LOGIN_USER } from '../../utils/mutations';
 
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 
 const SignIn = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -22,15 +22,6 @@ const SignIn = (props) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
-
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
-
     try {
       const { data } = await login({
         variables: {...formState}
@@ -47,6 +38,9 @@ const SignIn = (props) => {
       password: '',
     });
   };
+
+ 
+ 
   return (
     <div className="flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md bg-[#020617] rounded-xl shadow-md shadow-amber-600/80 p-8 space-y-8">
@@ -55,7 +49,7 @@ const SignIn = (props) => {
             Sign In
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6"noValidate onSubmit={handleFormSubmit} {...validated && { validated }}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -63,12 +57,13 @@ const SignIn = (props) => {
                 Email address
               </label>
               <input
-                id="email-address"
+                // id="email-address"
                 name="email"
                 type="email"
-                autoComplete="email"
+                onChange={handleChange }
+                // autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-white rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
@@ -77,12 +72,13 @@ const SignIn = (props) => {
                 Password
               </label>
               <input
-                id="password"
+                // id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
+                onChange={handleChange}
+                // autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-white rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-500 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
