@@ -15,6 +15,7 @@ type User {
    name: String
    imgUrl: String
    createdAt: String
+   instructions: String!
    recipeCreator: User!
    reactions: [Reaction!]!
    comments: [Comment!]!

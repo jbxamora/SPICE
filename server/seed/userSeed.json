@@ -1,0 +1,44 @@
+[
+    {
+      "username": "SquishMEEEE",
+      
+      "password": "password01",
+
+      "savedRecipes": ["cake", "donuts", "pizza"]
+    },
+    {
+      "username": "BiteMe",
+      
+      "password": "password02",
+
+      "savedRecipes": ["apple pie", "donuts", "pizza"]
+    },
+    {
+      "username": "CoolGirlCoder",
+      
+      "password": "password03",
+
+      "savedRecipes": ["Spicy chicken", "meatballs", "pizza"]
+    },
+    {
+      "username": "AndyPandy",
+      
+      "password": "password04",
+
+      "savedRecipes": ["apple pie", "donuts", "homemade grape juice"]
+    },
+    {
+      "username": "CinnamonRoll",
+    
+      "password": "password05",
+
+      "savedRecipes": ["Chili", "French Fries", "pizza"]
+    },
+    {
+      "username": "HappyCoder",
+   
+      "password": "password06",
+
+      "savedRecipes": ["cornbread", "Peach cobbler", "fruit salad"]
+    },
+]
