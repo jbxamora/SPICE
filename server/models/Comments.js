@@ -19,7 +19,7 @@ const CommentSchema = new Schema({
   },
 });
 
-// const Comment= model("Comment", CommentSchema);
+const Comment= model("Comment", CommentSchema);
 
 
-module.exports= CommentSchema;
+module.exports= Comment;

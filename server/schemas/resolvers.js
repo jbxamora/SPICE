@@ -103,7 +103,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-<<<<<<< HEAD
     // Delete a comment
     deleteComment: async (parent, { id }, context) => {
       if (context.user) {
@@ -156,12 +155,6 @@ const resolvers = {
 
 module.exports = resolvers;
 
-=======
-  };
-  
-module.exports = resolvers;
-  
->>>>>>> fffdd0ac956df062e91d6caf5cb65581eb1b8753
 
 
 
