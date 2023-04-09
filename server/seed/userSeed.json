@@ -4,12 +4,16 @@
       
       "password": "password01",
 
+      "email":"ftftfyt@gmail.com",
+
       "savedRecipes": ["cake", "donuts", "pizza"]
     },
     {
       "username": "BiteMe",
       
       "password": "password02",
+
+      "email":"ftftfyt@gmail.com",
 
       "savedRecipes": ["apple pie", "donuts", "pizza"]
     },
@@ -18,12 +22,16 @@
       
       "password": "password03",
 
+      "email":"ftftfyt@gmail.com",
+
       "savedRecipes": ["Spicy chicken", "meatballs", "pizza"]
     },
     {
       "username": "AndyPandy",
       
       "password": "password04",
+
+      "email":"ftftfyt@gmail.com",
 
       "savedRecipes": ["apple pie", "donuts", "homemade grape juice"]
     },
@@ -32,6 +40,8 @@
     
       "password": "password05",
 
+      "email":"ftftfyt@gmail.com",
+
       "savedRecipes": ["Chili", "French Fries", "pizza"]
     },
     {
@@ -39,6 +49,8 @@
    
       "password": "password06",
 
+      "email":"ftftfyt@gmail.com",
+
       "savedRecipes": ["cornbread", "Peach cobbler", "fruit salad"]
-    },
+    }
 ]
