@@ -1,56 +1,68 @@
 [
-    {
-      "username": "SquishMEEEE",
-      
-      "password": "password01",
-
-      "email":"ftftfyt@gmail.com",
-
-      "savedRecipes": ["cake", "donuts", "pizza"]
-    },
-    {
-      "username": "BiteMe",
-      
-      "password": "password02",
-
-      "email":"ftftfyt@gmail.com",
-
-      "savedRecipes": ["apple pie", "donuts", "pizza"]
-    },
-    {
-      "username": "CoolGirlCoder",
-      
-      "password": "password03",
-
-      "email":"ftftfyt@gmail.com",
-
-      "savedRecipes": ["Spicy chicken", "meatballs", "pizza"]
-    },
-    {
-      "username": "AndyPandy",
-      
-      "password": "password04",
-
-      "email":"ftftfyt@gmail.com",
-
-      "savedRecipes": ["apple pie", "donuts", "homemade grape juice"]
-    },
-    {
-      "username": "CinnamonRoll",
-    
-      "password": "password05",
-
-      "email":"ftftfyt@gmail.com",
-
-      "savedRecipes": ["Chili", "French Fries", "pizza"]
-    },
-    {
-      "username": "HappyCoder",
-   
-      "password": "password06",
-
-      "email":"ftftfyt@gmail.com",
-
-      "savedRecipes": ["cornbread", "Peach cobbler", "fruit salad"]
-    }
+  {
+    "name": "Patty Sparks",
+    "username": "SquishMEEEE",
+    "password": "password01",
+    "email": "ftftfyt@gmail.com",
+    "savedRecipes": [
+      "cake",
+      "donuts",
+      "pizza"
+    ]
+  },
+  {
+    "name":"Bindy Tea",
+    "username": "BiteMe",
+    "password": "password02",
+    "email": "ftftfyt@gmail.com",
+    "savedRecipes": [
+      "apple pie",
+      "donuts",
+      "pizza"
+    ]
+  },
+  {
+    "name":"Anna Wild",
+    "username": "CoolGirlCoder",
+    "password": "password03",
+    "email": "ftftfyt@gmail.com",
+    "savedRecipes": [
+      "Spicy chicken",
+      "meatballs",
+      "pizza"
+    ]
+  },
+  {
+    "name":"James Bond",
+    "username": "AndyPandy",
+    "password": "password04",
+    "email": "ftftfyt@gmail.com",
+    "savedRecipes": [
+      "apple pie",
+      "donuts",
+      "homemade grape juice"
+    ]
+  },
+  {
+    "name":"Nia Smith",
+    "username": "CinnamonRoll",
+    "password": "password05",
+    "email": "ftftfyt@gmail.com",
+    "savedRecipes": [
+      "Chili",
+      "French Fries",
+      "pizza"
+    ]
+  },
+  {
+    "name":"Pocket Jones",
+    "username": "HappyCoder",
+    "password": "password06",
+    "email": "ftftfyt@gmail.com",
+    "savedRecipes": [
+      "cornbread",
+      "Peach cobbler",
+      "fruit salad"
+    ]
+  }
 ]
