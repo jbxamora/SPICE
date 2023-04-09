@@ -24,44 +24,39 @@ const resolvers = {
     getComments: async () => {
       return Comments.find().sort({ createdAt: -1 });
     },
-    getOneComment: async (parent, { postId }) => {
-      return Comments.findOne({ _id: postId });
-    },
     getReactionsByRecipeId: async (parent, { recipeId }) => {
-        return Reactions.find({ recipe: recipeId }).populate('user');
-      },
+      return Reactions.find({ recipe: recipeId }).populate('user');
     },
-  
+  },
+
 
   //Define mutation resolvers
-  
   Mutation: {
-    //Create a new user
-    createUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    // Create a new user
+    addUser: async (parent, { name, username, email, password }) => {
+      const user = await User.create({ name, username, email, password });
       const token = signToken(user);
       return { token, user };
     },
-    //login a user
+    // Login a user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
+  
       if (!user) {
         throw new AuthenticationError('No user found with this email address');
       }
-
+  
       const correctPw = await user.isCorrectPassword(password);
-
+  
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-
+  
       const token = signToken(user);
-
+  
       return { token, user };
     },
-
-    //select a recipe
+    // Select a recipe
     selectRecipe: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
@@ -73,14 +68,12 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
-    //create a recipe
+    // Create a recipe
     createRecipe: async (parent, { input }) => {
       const recipe = await Recipes.create(input);
       return recipe;
     },
-
-    //remove a recipe
+    // Remove a recipe
     removeRecipe: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
@@ -92,86 +85,76 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
-    //update recipe
+    // Update a recipe
     updateRecipe: async (parent, { input }) => {
       const recipe = await Recipes.findOneAndUpdate({ _id: input._id }, input, { new: true });
       return recipe;
     },
-  
-      createComment: async (parent, { postId, body }, context) => {
-        if (context.user) {
-          const user = await User.findOne({ username: context.user.username });
-          const newComment = new Comment({
-            body,
-            username: context.user.username,
-            createdAt: new Date().toISOString(),
-          });
-  
-          const updatedPost = await Post.findOneAndUpdate(
-            { _id: postId },
-            { $push: { comments: newComment } },
-            { new: true }
-          ).populate('comments');
-  
-          return updatedPost;
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      },
-  
-      deleteComment: async (parent, { postId, commentId }, context) => {
-        if (context.user) {
-          const updatedPost = await Post.findOneAndUpdate(
-            { _id: postId },
-            { $pull: { comments: { _id: commentId, username: context.user.username } } },
-            { new: true }
-          ).populate('comments');
-  
-          return updatedPost;
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      },
-      createReaction: async (parent, { input }, context) => {
-        const userId = getUserId(context);
-        if (!userId) {
-          throw new AuthenticationError('You need to be logged in to create a reaction!');
-        }
-  
-        const { recipe, type } = input;
-        const existingReaction = await Reactions.findOne({ user: userId, recipe });
-        if (existingReaction) {
-          throw new Error('You have already reacted to this recipe!');
-        }
-  
-        const reaction = await Reactions.create({ user: userId, recipe, type });
-  
-        return reaction;
-      },
-      // Remove a reaction for a recipe
-      removeReaction: async (parent, { recipeId }, context) => {
-        const userId = getUserId(context);
-        if (!userId) {
-          throw new AuthenticationError('You need to be logged in to remove a reaction!');
-        }
-  
-        const reaction = await Reactions.findOneAndDelete({ user: userId, recipe: recipeId });
-        if (!reaction) {
-          throw new Error('You have not reacted to this recipe yet!');
-        }
-  
-        return reaction;
-    }
+    // Create a comment
+    createComment: async (parent, { commentText, username, recipeId }, context) => {
+      if (context.user) {
+        const comment = await Comments.create({
+          commentText,
+          username,
+          recipeId,
+          user: context.user._id
+        });
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
-  };
-  
-  
-  
-  
-  
-  
-  
-  module.exports = resolvers;
-  
+    // Delete a comment
+    deleteComment: async (parent, { id }, context) => {
+      if (context.user) {
+        const comment = await Comments.findOneAndDelete({ _id: id, user: context.user._id });
+        if (!comment) {
+          throw new Error('You are not authorized to delete this comment!');
+        }
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    // Create a reaction for a recipe
+    createReaction: async (parent, { input }, context) => {
+      if (context.user) {
+        const { recipeId, type } = input;
+        const reaction = await Reactions.create({ user: context.user._id, recipe: recipeId, type });
+        return reaction;
+      }
+      throw new AuthenticationError('You need to be logged in to create a reaction!');
+    },
+    removeReaction: async (parent, { recipeId }, context) => {
+      if (context.user) {
+        const reaction = await Reactions.findOneAndDelete({
+          recipeId: recipeId,
+          userId: context.user._id
+        });
+    
+        if (reaction) {
+          // Update the recipe's reaction count
+          const recipe = await Recipes.findById(recipeId);
+          recipe.reactionCount--;
+          await recipe.save();
+    
+          // Publish the updated recipe to the subscription
+          pubsub.publish(RECIPE_UPDATED, { recipeUpdated: recipe });
+    
+          return true;
+        } else {
+          throw new ApolloError("You have not reacted to this recipe");
+        }
+      } else {
+        throw new AuthenticationError("You must be logged in to remove a reaction");
+      }
+    }
+  }
+}
+
+
+
+
+module.exports = resolvers;
+
 
 
 
