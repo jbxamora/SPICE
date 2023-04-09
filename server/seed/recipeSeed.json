@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Pizza",
+        "ingredients": [
+            "Pizza dough",
+            "cheese",
+            "marinara sauce",
+            "fresh herbs"
+        ],
+        "instructions": "Put toppings on Pizza dough and bake for 20 min",
+        "imgUrl": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2021-07-Chicken-Alfredo-Pizza%2FChicken-Alfredo-Pizza-KitchnKitchn2970-1_01"
+    },
+    {
+        "name": "PB and J",
+        "ingredients": [
+            "Sliced Bread",
+            "Peanut butter",
+            "Jelly"
+        ],
+        "instructions": "Spread peanut butter on one slice of bread, spread jelly on another slice of bread. Put the two slices together.Enjoy!",
+        "imgUrl": "https://www.peanutbutter.com/wp-content/uploads/2022/03/Web_500_Classic-Peanut-Butter-Jelly-Sandwich.png"
+    },
+    {
+        "name": "Curried sausages",
+        "ingredients": [
+            "1 tbsp olive oil",
+            "800g thin beef sausages",
+            " 1 large brown onion, thinly sliced",
+            " 2 carrots, peeled, thinly sliced",
+            "2 garlic cloves, crushed",
+            "1 tbsp KEEN'S Traditional Curry Powder",
+            " 2 tbsp fruit chutney",
+            " 2 cups Massel chicken style liquid stock",
+            "1 cup frozen peas",
+            "Steamed rice, to serve",
+            " Parsley leaves, to serve"
+        ],
+        "instructions": "Cook sausages, in batches, turning, for 5 to 6 minutes or until browned all over.dd onion, carrot and garlic. Cook, stirring, for 5 minutes or until onion has softened. Add curry powder. Cook, stirring, for 30 seconds or until fragrant. Add fruit chutney and stock. Return sausages to pan. Cover, bring to the boil. Reduce heat to medium-low. Simmer, uncovered, for 25 minutes or until sausages are cooked through and sauce thickens.Stir in peas. Season. Cook for 1 to 2 minutes or until heated through. Serve.",
+        "imgUrl": "https://img.taste.com.au/FXY-dJCV/w643-h428-cfill-q90/taste/2016/11/curried-sausages-72753-1.jpeg"
+    },
+    {
+        "name": "Hot Egg Toast",
+        "ingredients": [
+            "bread, toasted",
+            " ½ avocado, mashed",
+            "salt, to taste",
+            "  pepper, to taste",
+            "1 egg, fried to preference",
+            "  ½ teaspoon Sriracha"
+        ],
+        "instructions": "Mash half of an avocado.Add salt and pepper,to taste. Mix until well combined.Spread the mashed avocado evenly across toast.Top with the fried egg, and drizzle with Sriracha!",
+        "imgUrl": "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/f0af687391a44cd19e36e181bcf4bde4/BFV20878_Avocado_Toast_9_Ways_FB1080x1080.jpg?resize=1000:*&output-format=auto&output-quality=auto"
+    },
+    {
+        "name": "Fruit salad",
+        "ingredients": [
+            "grapes",
+            "honeydew melon",
+            "papaya",
+            "strawberries",
+            "blueberries",
+            "kiwi",
+            "mint"
+        ],
+        "instructions": "Cut up all of the fruit and mix together in a bowl",
+        "imgUrl": "https://images.themodernproper.com/billowy-turkey/production/posts/2022/FruitSalad_Shot4_20.jpg?w=1200&h=630&q=82&fm=jpg&fit=crop&dm=1654019861&s=36d5cdd1b9c33cf2f81e2d9871f7754e"
+    }
+]

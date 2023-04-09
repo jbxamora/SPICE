@@ -12,7 +12,9 @@ const UserSchema = new Schema(
       required: true,
       minlength: 6,
     },
-    recipes: [{
+    //This recipes does not reference a users created recipes, the created recipes are referenced using the 
+    //object id in recipe
+    savedRecipes: [{
       type: String,
     }],
   },
