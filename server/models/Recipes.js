@@ -16,6 +16,11 @@ const RecipeSchema = new Schema(
       },
     ],
 
+    instructions: {
+      type: String,
+        required: true,
+    },
+
     imgUrl: { type: String },
 
     recipeCreator: {
@@ -26,7 +31,12 @@ const RecipeSchema = new Schema(
 
     reactions: [reactionSchema],
 
-    comments: [CommentSchema],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ]
   },
   {
     toJSON: {
