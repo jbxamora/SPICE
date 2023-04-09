@@ -1,6 +1,3 @@
-// const notFoundMiddleware = require('./middleware/not-found');
-
-
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
@@ -17,8 +14,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-//middleware
-// app.use(notFoundMiddleware)
 
 const server = new ApolloServer({
   typeDefs,

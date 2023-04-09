@@ -39,15 +39,7 @@ type User {
     createdAt: String!
     username: String!
   }
-  type Post {
-    id: ID!
-    body: String!
-    username: String!
-    createdAt: String!
-    comments: [Comment]!
-  }
 
-   
   input RecipeInput {
     _id: String!
     image: String
@@ -82,7 +74,6 @@ type User {
     getOneRecipe(_id: ID!): Recipe 
     getRecipesByIds(_id: [ID!]!): [Recipe!]!
     getComments: [Comment!]!
-    getOneComment(postId: ID!): Comment
     getReactionsByRecipeId(recipeId: ID!): [Reaction!]!
   }
 
@@ -95,11 +86,10 @@ type User {
     updateRecipe(input: UpdateRecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
 
-    createPost(body: String!): Post
-    deletePost(postId: ID!): String
-    createComment(postId: String, body: String): Post
-    deleteComment(postId: String, commentId: String): Post
-    likePost(postId: String!): Post
+
+    createComment(commentText: String!, username: String!, createdAt: String!): Comment!
+    deleteComment(id: ID!): Comment!
+
     createReaction(reactionInput: ReactionInput): Reaction
     removeReaction(reactionId: ID!): Boolean
    }

@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
+import { Alert } from 'react-bootstrap'
 import Auth from '../../utils/auth';
 
 const SignUp = () => {
-  const [userFormData,setUserFormData] = useState({
-    username: '', 
-    email: '', 
-    password: ''})
-  
-  const [addUser, {error, data}] = useMutation(ADD_USER)
-      // global state and useNavigate
-  
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+  const [addUser,{error, data}] = useMutation(ADD_USER);
+  // set state for form validation
   const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -47,7 +47,7 @@ const SignUp = () => {
       email: '',
       password: '',
     });
-    setValidated(true);
+    
   };
   return (
     <div className="flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
@@ -55,6 +55,10 @@ const SignUp = () => {
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-white">Create Account</h2>
         </div>
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your signup!
+          </Alert>
+
         <form className="mt-8 space-y-6" noValidate onSubmit={handleFormSubmit} {...validated && { validated }}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
