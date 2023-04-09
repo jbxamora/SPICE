@@ -1,20 +1,13 @@
+const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 
-
-
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
-
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -28,10 +21,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {

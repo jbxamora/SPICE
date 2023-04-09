@@ -8,7 +8,7 @@ type User {
     username: String!
     email: String!
     recipeCount: Int
-    selectedRecipeIds: [ID]
+    savedRecipes: [ID]
 }
 
 type Recipe {
@@ -17,10 +17,11 @@ type Recipe {
     imgUrl: String
     createdAt: String
     instructions: String!
-    recipeCreator: User!
-    reactions: [Reaction!]!
-    comments: [Comment!]!
-    reactionCount: Int!
+    recipeCreator: User
+    reactions: [Reaction!]
+    comments: [Comment!]
+    ingredients: [String]
+    reactionCount: Int
 }
 
 type Auth {
@@ -29,7 +30,7 @@ type Auth {
 }
 
 type Comment {
-    id: ID!
+    _id: ID!
     commentText: String!
     username: String!
     createdAt: String!
@@ -76,6 +77,7 @@ type Query {
     getRecipesByIds(_id: [ID!]!): [Recipe!]!
     getComments: [Comment!]!
     getReactionsByRecipeId(recipeId: ID!): [Reaction!]!
+    recipe(_id: ID!): Recipe
 }
 
 type Mutation {
@@ -87,7 +89,7 @@ type Mutation {
     updateRecipe(input: UpdateRecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
     createComment(commentText: String!, username: String!, createdAt: String!): Comment!
-    deleteComment(id: ID!): Comment!
+    deleteComment(_id: ID!): Comment!
     createReaction(reactionInput: ReactionInput): Reaction
     removeReaction(reactionId: ID!): Boolean
 }
