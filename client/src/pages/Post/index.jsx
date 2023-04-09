@@ -1,31 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { dummyPosts } from "./constants/constants";
+import Navbar from "../../components/NavBar"
+import Footer from "../../components/Footer";
+import PostCard from "../../components/PostCard";
 
-import Navbar from "./components/NavBar";
-import CreatePost from "./pages/CreatePost";
-import PostsList from "./components/PostList";
-import Footer from "./components/Footer";
-import LandingPage from "./pages/Landing";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import Post from "./pages/Post";
+const Post = () => {
+  const post = {
+    title: "This is the post title",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris volutpat lacinia enim, vel laoreet purus aliquet eu. In euismod, felis eget rhoncus dictum, sapien mi congue lorem, id faucibus elit eros eget lorem. Nullam eleifend velit eu nulla interdum auctor.",
+    imageUrl: "https://picsum.photos/800/400",
+    author: {
+      name: "John Doe",
+      avatarUrl: "https://i.pravatar.cc/150?img=3",
+    },
+    date: "April 8, 2023",
+  };
 
-const App = () => {
   return (
-    <Router>
+    <div className="bg-[#1f1f1f] text-white min-h-screen">
       <Navbar />
-      <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path="/home" element={<PostsList posts={dummyPosts} />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/create" element={<CreatePost />} />
-        <Route path="/post/:id" element={<Post />} />
-      </Routes>
+      <main className="max-w-4xl mx-auto py-20">
+        <PostCard post={post} />
+      </main>
       <Footer />
-    </Router>
+    </div>
   );
 };
 
-export default App;
+export default Post;
