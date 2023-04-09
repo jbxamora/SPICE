@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Images } from "../../constants/constants";
 import { Link } from "react-router-dom";
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
+
+import Auth from '../../utils/auth';
 
 const SignIn = () => {
   const randomImage = Images[Math.floor(Math.random() * Images.length)];
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
+  };
   return (
     <section className="bg-transparent min-h-screen flex items-center justify-center">
       <div className="flex rounded-2xl shadow-lg max-w-3xl p-5 items-center bg-white dark:bg-gray-800">
@@ -15,7 +51,7 @@ const SignIn = () => {
           <p className="text-md text-center text-gray-900 dark:text-white">
             Login
           </p>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleFormSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -29,6 +65,8 @@ const SignIn = () => {
                 name="email"
                 placeholder="name@company.com"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                value={formState.email}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -45,6 +83,8 @@ const SignIn = () => {
                 name="password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                value={formState.password}
+                onChange={handleChange}
                 required
               />
             </div>
