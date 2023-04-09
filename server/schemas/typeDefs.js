@@ -40,20 +40,11 @@ type User {
     createdAt: String!
     username: String!
   }
-  type Post {
-    id: ID!
-    body: String!
-    username: String!
-    createdAt: String!
-    comments: [Comment]!
-  }
 
-   
   input RecipeInput {
     _id: String!
     image: String
     name: String
-    ingredients: [IngredientInput]
     steps: [String]
     totalTime: Int
     serves: Int
@@ -63,7 +54,7 @@ type User {
     _id: String!
     image: String
     name: String
-    ingredients: [IngredientInput]
+
     steps: [String]
     totalTime: Int
     serves: Int
@@ -79,11 +70,14 @@ type User {
    
   
   type Query {
-    users: [User]
-    user(username: String!): User
-    recipes: [Recipe!]!
-    recipe(recipeId: ID!): Recipe
+    me: User
+    getRecipes: [Recipe!]!
+    getOneRecipe(_id: ID!): Recipe 
+    getRecipesByIds(_id: [ID!]!): [Recipe!]!
+    getComments: [Comment!]!
+    getReactionsByRecipeId(recipeId: ID!): [Reaction!]!
   }
+
    type Mutation {
     login(email: String!, password: String!): Auth
     createUser(username: String!, email: String!, password: String!): Auth
@@ -93,11 +87,12 @@ type User {
     updateRecipe(input: UpdateRecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
 
-    createPost(body: String!): Post
-    deletePost(postId: ID!): String
-    createComment(postId: String, body: String): Post
-    deleteComment(postId: String, commentId: String): Post
-    likePost(postId: String!): Post
+
+    createComment(commentText: String!, username: String!, createdAt: String!): Comment!
+    deleteComment(id: ID!): Comment!
+
+    createReaction(reactionInput: ReactionInput): Reaction
+    removeReaction(reactionId: ID!): Boolean
    }
 `;
 
