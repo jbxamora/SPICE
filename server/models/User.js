@@ -7,6 +7,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+
     username: {
       type: String,
       required: true,
@@ -18,8 +19,12 @@ const UserSchema = new Schema(
       required: true,
       minlength: 6,
     },
+    email: {
+      type: String,
+      required: true,
+    },
     //This recipes does not reference a users created recipes, the created recipes are referenced using the 
-    //object id in recipe
+    //object id in recipe model
     savedRecipes: [{
       type: String,
     }],
@@ -47,8 +52,8 @@ UserSchema.pre("save", async function (next) {
 
 
 UserSchema.methods.isCorrectPassword = async function (password) {
-    return bcrypt.compare(password, this.password);
-  };
+  return bcrypt.compare(password, this.password);
+};
 
 const User = model("User", UserSchema);
 
