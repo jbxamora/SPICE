@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 
 const PostPreview = ({ content }) => {
   return (
-    <div className="post-preview">
+    <div className="post-preview mx-auto ">
       <ReactQuill
         value={content}
         readOnly

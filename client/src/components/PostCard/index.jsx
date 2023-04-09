@@ -1,4 +1,5 @@
 import React from "react";
+import { reaction } from "../../assets";
 
 const PostCard = ({ post }) => {
   const { title, content, imageUrl, author, date } = post;
@@ -11,8 +12,10 @@ const PostCard = ({ post }) => {
     return content;
   };
 
+  const handleReactionClick = () => {};
+
   return (
-    <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg mb-8 border border-cyan-300">
+    <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
       {imageUrl && (
         <img
           src={imageUrl}
@@ -21,8 +24,8 @@ const PostCard = ({ post }) => {
         />
       )}{" "}
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">{getSnippet(content)}</p>
+        <div className="font-bold text-white text-xl mb-2">{title}</div>
+        <p className="text-gray-400 text-base">{getSnippet(content)}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
         {/* Add any relevant tags here */}
@@ -31,14 +34,18 @@ const PostCard = ({ post }) => {
         </span>
       </div>
       <div className="px-6 py-4 flex items-center">
+        <button onClick={handleReactionClick}>
+          <img src={reaction} alt="Reaction" className="h-[25px]" />
+        </button>
+
         {/* Uncomment the following line and replace with the actual author's image URL */}
         {/* <img
-          className="w-10 h-10 rounded-full mr-4"
-          src={author.avatarUrl}
-          alt={`Avatar of ${author.name}`}
-        /> */}
+    className="w-10 h-10 rounded-full mr-4"
+    src={author.avatarUrl}
+    alt={`Avatar of ${author.name}`}
+  /> */}
         <div className="text-sm">
-          <p className="text-gray-900 leading-none">Author Name</p>
+          <p className="text-white leading-none">Author Name</p>
           <p className="text-gray-600">{date}</p>
         </div>
       </div>
