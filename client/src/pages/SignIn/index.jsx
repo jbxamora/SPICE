@@ -31,6 +31,7 @@ const SignIn = () => {
       });
 
       Auth.login(data.login.token);
+      console.log("logged in successfully")
     } catch (e) {
       console.error(e);
     }

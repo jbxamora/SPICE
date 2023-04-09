@@ -134,28 +134,25 @@ const resolvers = {
     // Create a reaction for a recipe
     createReaction: async (parent, { reactionInput }, context) => {
       if (context.user) {
-        const { recipeId, reactionBody, type } = reactionInput;;
-        const reaction = await reactionSchema.create({ user: context.user._id, recipe: recipeId, type });
+        const { recipeId, reactionBody } = reactionInput;
+        const reaction = await Recipes.findOneAndUpdate(
+          { _id: recipeId },
+          { $push: { reactions: { reactionBody, username: context.user.username } } },
+          { new: true }
+        );
         return reaction;
       }
       throw new AuthenticationError('You need to be logged in to create a reaction!');
     },
-    removeReaction: async (parent, { recipeId }, context) => {
+    removeReaction: async (parent, { reactionId }, context) => {
       if (context.user) {
-        const reaction = await reactionSchema.findOneAndDelete({
-          recipeId: recipeId,
-          userId: context.user._id
-        });
-    
-        if (reaction) {
-          // Update the recipe's reaction count
-          const recipe = await Recipes.findById(recipeId);
-          recipe.reactionCount--;
-          await recipe.save();
-    
-          // Publish the updated recipe to the subscription
-          pubsub.publish(RECIPE_UPDATED, { recipeUpdated: recipe });
-    
+        const recipe = await Recipes.findOneAndUpdate(
+          { "reactions.reactionId": reactionId, "reactions.username": context.user.username },
+          { $pull: { reactions: { reactionId } } },
+          { new: true }
+        );
+
+        if (recipe) {
           return true;
         } else {
           throw new ApolloError("You have not reacted to this recipe");
@@ -163,15 +160,8 @@ const resolvers = {
       } else {
         throw new AuthenticationError("You must be logged in to remove a reaction");
       }
-    }
-  }
-}
-
-
-
+    },
+  },
+};
 
 module.exports = resolvers;
-
-
-
-
