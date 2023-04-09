@@ -1,11 +1,28 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Recipes, Reactions, Comments } = require('../models');
+const { User, Recipes, reactionSchema, Comments } = require('../models');
 const { signToken } = require('../utils/auth');
+const { PubSub } = require('graphql-subscriptions');
+const pubsub = new PubSub();
+const RECIPE_UPDATED = "RECIPE_UPDATED";
+
 
 const resolvers = {
   Query: {
 
     //Define query resolvers
+    recipe: async (parent, { _id }, context) => {
+      const recipe = await Recipes.findById(_id)
+        .populate('recipeCreator')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'commentAuthor',
+          },
+        })
+        .populate('reactions');
+      return recipe;
+    },
+  
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('selectedRecipeIds');
@@ -25,7 +42,7 @@ const resolvers = {
       return Comments.find().sort({ createdAt: -1 });
     },
     getReactionsByRecipeId: async (parent, { recipeId }) => {
-      return Reactions.find({ recipe: recipeId }).populate('user');
+      return reactionSchema.find({ recipe: recipeId }).populate('user');
     },
   },
 
@@ -90,13 +107,13 @@ const resolvers = {
       const recipe = await Recipes.findOneAndUpdate({ _id: input._id }, input, { new: true });
       return recipe;
     },
-    // Create a comment
-    createComment: async (parent, { commentText, username, recipeId }, context) => {
+    //create comment
+    createComment: async (parent, { commentText, username, createdAt }, context) => {
       if (context.user) {
         const comment = await Comments.create({
           commentText,
           username,
-          recipeId,
+          createdAt,
           user: context.user._id
         });
         return comment;
@@ -115,17 +132,17 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // Create a reaction for a recipe
-    createReaction: async (parent, { input }, context) => {
+    createReaction: async (parent, { reactionInput }, context) => {
       if (context.user) {
-        const { recipeId, type } = input;
-        const reaction = await Reactions.create({ user: context.user._id, recipe: recipeId, type });
+        const { recipeId, reactionBody, type } = reactionInput;;
+        const reaction = await reactionSchema.create({ user: context.user._id, recipe: recipeId, type });
         return reaction;
       }
       throw new AuthenticationError('You need to be logged in to create a reaction!');
     },
     removeReaction: async (parent, { recipeId }, context) => {
       if (context.user) {
-        const reaction = await Reactions.findOneAndDelete({
+        const reaction = await reactionSchema.findOneAndDelete({
           recipeId: recipeId,
           userId: context.user._id
         });
