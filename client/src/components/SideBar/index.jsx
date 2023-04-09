@@ -3,9 +3,9 @@ import { potentialFriends } from "../../constants/constants";
 
 const SideBar = ({ savedPosts }) => {
   return (
-    <div className="hidden md:block sticky top-16 md:w-[500px] h-auto lg:w-[500px] px-4 ml-4">
-      <h2 className="text-xl text-[#d7dade] font-bold mb-4">Saved Dishes</h2>
-      <ul className="bg-gray-300 border border-gray-900 rounded-2xl shadow-2xl p-4 mb-8">
+    <div className="hidden lg:block sticky top-16 lg:w-[500px] h-auto px-4 ml-4">
+      <h2 className="text-xl text-[#d7dade] text-center font-bold mb-4">Saved Dishes</h2>
+      <ul className="bg-gray-300 border border-gray-900 rounded-2xl shadow-lg shadow-black p-4 mb-8">
         {savedPosts.map((post) => (
           <li key={post.id} className="mb-2">
             <a
@@ -18,15 +18,15 @@ const SideBar = ({ savedPosts }) => {
         ))}
       </ul>
 
-      <div className="hidden md:block top-16 mt-8">
-        <h2 className="text-xl text-[#d7dade] font-bold mb-4">
+      <div className="hidden lg:block top-16 mt-8">
+        <h2 className="text-xl text-[#d7dade] text-justify font-bold mb-4">
           Potential Friends
         </h2>
         <div className="grid grid-cols-1 gap-4">
           {potentialFriends.map((friend) => (
             <div
               key={friend.id}
-              className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              className="w-full max-w-sm bg-transparent border border-cyan-200 rounded-lg shadow-lg shadow-black py-2 dark:bg-gray-800 dark:border-gray-700"
             >
               <div className="flex flex-col items-center pb-10">
                 <img
@@ -34,7 +34,7 @@ const SideBar = ({ savedPosts }) => {
                   src={friend.image}
                   alt={`${friend.name} image`}
                 />
-                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                <h5 className="mb-1 text-xl font-medium text-gray-200 dark:text-white">
                   {friend.name}
                 </h5>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
