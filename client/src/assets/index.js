@@ -1,4 +1,6 @@
 import logo from './logo.png';
+
+// Can remove the rest of these images after cloudinary is integrated.
 import pizza from './pizza.jpg';
 import feast from './feast.jpg';
 import cake from './cake.jpg';

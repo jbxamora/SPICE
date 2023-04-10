@@ -44,7 +44,7 @@ const SignIn = () => {
   };
   return (
     <section className="bg-transparent min-h-screen flex items-center justify-center">
-      <div className="flex rounded-2xl shadow-lg max-w-3xl p-5 items-center bg-white dark:bg-gray-800">
+      <div className="flex rounded-2xl shadow-black shadow-lg max-w-3xl p-5 items-center bg-white dark:bg-gray-800">
         <div className="md:w-1/2 px-8 md:px-16 space-y-6">
           <h2 className="text-xl text-center font-bold text-gray-900 dark:text-white">
             Welcome Back!
