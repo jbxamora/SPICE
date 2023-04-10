@@ -1,114 +1,62 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import PostPreview from "../components/PostPreview";
+
 
 const CreatePost = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [preview, setPreview] = useState(false);
 
-  const toolbarOptions = [
-    ["bold", "italic", "underline", "strike"], // toggled buttons
-    ["blockquote", "code-block"],
-    ["image"],
-
-    [{ header: 1 }, { header: 2 }], // custom button values
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ script: "sub" }, { script: "super" }], // superscript/subscript
-    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-    [{ direction: "rtl" }], // text direction
-
-    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    [{ font: [] }],
-    [{ align: [] }],
-
-    ["clean"], // remove formatting button
-  ];
+  const [newItem, setNewItem] = useState("")
+  const [ingredients, setIngredientsList] = useSate([])
+  const randID = () => {
+    return Math.floor(Math.random() * (100 - 1) + 1)
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log("Title:", title);
-    console.log("Content:", content);
+    e.preventDefault()
+
+    setIngredientsList(currentIngredients => {
+      return [...currentIngredients, {
+        id: randID(),
+        title: newItem,
+        complete: false
+      },
+      ]
+    })
+
+    setNewItem("")
   };
 
-  return (
-    <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
-      {!preview && (
-        <h2 className="flex justify-center text-white text-3xl font-bold mb-6">
-          Create a Post
-        </h2>
-      )}
-      <form onSubmit={handleSubmit} className="w-full">
-        <div className="mb-4">
-          <label
-            htmlFor="title"
-            className="block text-sm font-bold text-white mb-2"
-          >
-            Title
-          </label>
-          {!preview ? (
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-              required
-              style={{ minHeight: "4rem" }}
-            />
-          ) : (
-            <h3 className="flex justify-center text-white text-xl font-semibold">
-              {title}
-            </h3>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="content"
-            className="block text-white text-sm font-bold mb-2"
-          >
-            Content
-          </label>
-          {!preview ? (
-            <ReactQuill
-              id="content"
-              value={content}
-              onChange={setContent}
-              theme="snow"
-              className="text-lg mt-auto px-3 py-4"
-              style={{ minHeight: "25rem", className: "h-44 text-white" }}
-              modules={{ toolbar: toolbarOptions }}
-            />
-          ) : (
-            <PostPreview content={content} />
-          )}
 
-          <div className="flex justify-center">
-            <button
-              type="button"
-              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400"
-              onClick={() => setPreview(!preview)}
-            >
-              {preview ? "Hide" : "Show"} Preview
-            </button>
-          </div>
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="item">Ingredients</label>
+          <input
+            value={newItem}
+            onChange={e => setNewItem(e.target.value)}
+            type="text"
+            id="item"
+          />
         </div>
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-md text-lg hover:bg-violet-800 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
-          >
-            Submit
-          </button>
-        </div>
+        <button className="btn">Add</button>
       </form>
-    </div>
+      <h1>Ingredients List</h1>
+      <ul className="list">
+        {ingredients.map(i => {
+          return (
+          <li key={i.id}>
+            <label>
+              <input type="checkbox" checked={i.complete}/>
+              {i.title}
+            </label>
+          </li>
+          )
+        })}
+      </ul>
+    </>
   );
-};
+
+}
 
 export default CreatePost;
