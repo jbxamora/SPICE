@@ -8,7 +8,7 @@ type User {
     username: String!
     email: String!
     recipeCount: Int
-    savedRecipes: [ID]
+    savedRecipes: [Recipe]
 }
 
 type Recipe {
@@ -16,10 +16,10 @@ type Recipe {
     name: String
     imgUrl: String
     createdAt: String
-    instructions: String!
+    instructions: String
     recipeCreator: User
-    reactions: [Reaction!]
-    comments: [Comment!]
+    reactions: [Reaction]
+    comments: [Comment]
     ingredients: [String]
     reactionCount: Int
 }
@@ -72,11 +72,11 @@ input CommentInput {
 
 type Query {
     me: User
-    getRecipes: [Recipe!]!
+    getRecipes: [Recipe]
     getOneRecipe(_id: ID!): Recipe
-    getRecipesByIds(_id: [ID!]!): [Recipe!]!
-    getComments: [Comment!]!
-    getReactionsByRecipeId(recipeId: ID!): [Reaction!]!
+    getRecipesByIds(_id: [ID]!): [Recipe]
+    getComments: [Comment]
+    getReactionsByRecipeId(recipeId: ID!): [Reaction]
     recipe(_id: ID!): Recipe
 }
 
