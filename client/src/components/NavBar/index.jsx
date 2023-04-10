@@ -4,22 +4,28 @@ import { Link, useLocation } from "react-router-dom";
 import { searchPlaceholders } from "../../constants/constants";
 
 const Navbar = () => {
+  // State to manage the mobile navigation menu
   const [isOpen, setIsOpen] = useState(false);
+
+  // State to manage the search bar placeholder
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
+
+  // Access the current location to conditionally render components
   const location = useLocation();
 
-  // Rotate search placeholders every 15 seconds
   useEffect(() => {
+    // Rotate search bar placeholder text every 15 seconds
     const interval = setInterval(() => {
       setPlaceholderIndex(
         (prevIndex) => (prevIndex + 1) % searchPlaceholders.length
       );
     }, 15000); // 15 seconds
 
+    // Clean up the interval when the component is unmounted
     return () => clearInterval(interval);
   }, []);
 
-  // Conditional render of the Sign IN/UP buttons based on the authentication state
+  // Function to conditionally render the authentication buttons
   const renderAuthButton = () => {
     // replace this with the actual authentication state.
     const isLoggedIn = false;
@@ -49,7 +55,7 @@ const Navbar = () => {
     }
   };
 
-  // Conditional render of the search bar based on the current page
+  // Function to conditionally render the search bar
   const renderSearchBar = () => {
     if (location.pathname === "/home") {
       return (
@@ -64,6 +70,10 @@ const Navbar = () => {
     }
   };
 
+  // Function to handle the closing of mobile navigation menu when a link is clicked
+  const handleMobileNavLinkClick = () => {
+    setIsOpen(false);
+  };
   return (
     <nav className="bg-[#020617] text-white fixed w-full top-0 left-0 z-50">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-3">
