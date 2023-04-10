@@ -106,7 +106,6 @@ export const dummySavedPosts = [
   },
 ];
 
-
 export const potentialFriends = [
   {
     id: 1,
@@ -158,20 +157,19 @@ export const postIngredients = {
     "1 teaspoon vanilla extract",
   ],
   2: [
-      "2 cups all-purpose flour",
-      "1 teaspoon baking powder",
-      "1/2 teaspoon baking soda",
-      "1/2 teaspoon salt",
-      "1/2 cup unsalted butter, softened",
-      "1 cup granulated sugar",
-      "2 large eggs",
-      "1/2 cup milk",
-      "1 teaspoon vanilla extract"
-    ],
+    "2 cups all-purpose flour",
+    "1 teaspoon baking powder",
+    "1/2 teaspoon baking soda",
+    "1/2 teaspoon salt",
+    "1/2 cup unsalted butter, softened",
+    "1 cup granulated sugar",
+    "2 large eggs",
+    "1/2 cup milk",
+    "1 teaspoon vanilla extract",
+  ],
   3: ["Ingredient 7", "Ingredient 8", "Ingredient 9"],
   // ...
 };
-
 
 export const searchPlaceholders = [
   "Search recipes...",

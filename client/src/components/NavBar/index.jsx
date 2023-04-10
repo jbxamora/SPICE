@@ -8,6 +8,7 @@ const Navbar = () => {
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const location = useLocation();
 
+  // Rotate search placeholders every 15 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setPlaceholderIndex(
@@ -18,7 +19,7 @@ const Navbar = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Conditional Render of Sign IN/UP Buttons
+  // Conditional render of the Sign IN/UP buttons based on the authentication state
   const renderAuthButton = () => {
     // replace this with the actual authentication state.
     const isLoggedIn = false;
@@ -48,7 +49,7 @@ const Navbar = () => {
     }
   };
 
-  // Conditional Render of SearchBar
+  // Conditional render of the search bar based on the current page
   const renderSearchBar = () => {
     if (location.pathname === "/home") {
       return (
@@ -61,10 +62,6 @@ const Navbar = () => {
         </div>
       );
     }
-  };
-
-  const handleMobileNavLinkClick = () => {
-    setIsOpen(false);
   };
 
   return (
