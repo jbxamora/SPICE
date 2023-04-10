@@ -1,23 +1,8 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { reaction } from "../../assets";
 
-const PostCard = ({ post }) => {
+const FullPost = ({ post }) => {
   const { title, content, imageUrl, author, date } = post;
-  const { pathname } = useLocation();
-
-  const isExpanded = pathname === `/post/1`;
-
-  const getSnippet = (content) => {
-    if (isExpanded) {
-      return content;
-    }
-    const maxLength = 100;
-    if (content.length > maxLength) {
-      return content.substring(0, maxLength) + "...";
-    }
-    return content;
-  };
 
   const handleReactionClick = () => {''};
 
@@ -29,10 +14,10 @@ const PostCard = ({ post }) => {
           alt={title}
           className="w-full h-80 object-cover rounded-t-lg"
         />
-      )}{" "}
+      )}
       <div className="px-6 py-4">
-        <div className="font-bold text-white text-xl mb-2">{title}</div>
-        <p className="text-gray-400 text-base">{getSnippet(content)}</p>
+        <div className="font-bold text-white text-2xl mb-2">{title}</div>
+        <p className="text-gray-400 text-lg">{content}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
         {/* Add any relevant tags here */}
@@ -60,4 +45,4 @@ const PostCard = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default FullPost;
