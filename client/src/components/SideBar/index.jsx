@@ -1,19 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { potentialFriends } from "../../constants/constants";
 
 const SideBar = ({ savedPosts }) => {
   return (
     <div className="hidden lg:block sticky top-16 lg:w-[500px] h-auto px-4 ml-4">
-      <h2 className="text-xl text-[#d7dade] text-center font-bold mb-4">Saved Dishes</h2>
+      <h2 className="text-xl text-[#d7dade] text-center font-bold mb-4">
+        Saved Dishes
+      </h2>
       <ul className="bg-gray-300 border border-gray-900 rounded-2xl shadow-lg shadow-black p-4 mb-8">
         {savedPosts.map((post) => (
           <li key={post.id} className="mb-2">
-            <a
-              href={`/posts/${post.id}`}
+            <Link
+              to={`/post/${post.id}`}
               className="text-[#002D74] hover:text-[#234F9D] transition-colors duration-300"
             >
               {post.title}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,17 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { reaction } from "../../assets";
+import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
   const { title, content, imageUrl, author, date } = post;
-  const { pathname } = useLocation();
-
-  const isExpanded = pathname === `/post/1`;
 
   const getSnippet = (content) => {
-    if (isExpanded) {
-      return content;
-    }
     const maxLength = 100;
     if (content.length > maxLength) {
       return content.substring(0, maxLength) + "...";
@@ -31,7 +25,9 @@ const PostCard = ({ post }) => {
         />
       )}{" "}
       <div className="px-6 py-4">
-        <div className="font-bold text-white text-xl mb-2">{title}</div>
+        <div className="font-bold text-white text-xl mb-2">
+          <Link to={`/post/${post.id}`}>{title}</Link>
+        </div>
         <p className="text-gray-400 text-base">{getSnippet(content)}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
@@ -45,11 +41,10 @@ const PostCard = ({ post }) => {
           <img src={reaction} alt="Reaction" className="h-[25px]" />
         </button>
 
-        {/* Uncomment the following line and replace with the actual author's image URL */}
-        {/* <img
+       {/* <img
     className="w-10 h-10 rounded-full mr-4"
     src={author.avatarUrl}
-    alt={`Avatar of ${author.name}`}
+    alt={`Avatar of ${author.name}`} 
   /> */}
         <div className="text-sm">
           <p className="text-white leading-none">Author Name</p>

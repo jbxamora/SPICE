@@ -15,60 +15,91 @@ import {
 
 export const dummyPosts = [
   {
-    id: 1,
+    id: "1",
     title: "Easy & Delicious Family Style Meal",
     imageUrl: feast,
     content: "This is the first post content.",
+    author: {
+      name: "John Doe",
+      avatarUrl: "https://i.pravatar.cc/150?img=3",
+    },
+    date: "April 7, 2023",
   },
   {
-    id: 2,
+    id: "2",
     title: "Ready To Level Up Your Baking?",
     imageUrl: cake,
     content: "This is the second post content.",
+    author: {
+      name: "Jane Smith",
+      avatarUrl: "https://i.pravatar.cc/150?img=5",
+    },
+    date: "April 6, 2023",
   },
   {
-    id: 3,
+    id: "3",
     title: "Minimal Ingredients, Amazing Pizza!",
     imageUrl: pizza,
     content: "This is the third post content.",
+    author: {
+      name: "Tom Brown",
+      avatarUrl: "https://i.pravatar.cc/150?img=7",
+    },
+    date: "April 5, 2023",
   },
   {
-    id: 4,
-    title: "Tried Making A Michellin Desert",
+    id: "4",
+    title: "Tried Making A Michelin Desert",
     imageUrl: desert,
-    content: "This is the third post content.",
+    content: "This is the fourth post content.",
+    author: {
+      name: "Alice Johnson",
+      avatarUrl: "https://i.pravatar.cc/150?img=9",
+    },
+    date: "April 4, 2023",
   },
   {
-    id: 5,
+    id: "5",
     title: "Caught Then Prepared Fresh Fish!",
     imageUrl: salmon,
-    content: "This is the third post content.",
+    content: "This is the fifth post content.",
+    author: {
+      name: "Charlie Green",
+      avatarUrl: "https://i.pravatar.cc/150?img=11",
+    },
+    date: "April 3, 2023",
   },
   {
-    id: 6,
+    id: "6",
     title: "Low Calorie High Protein Tofu Salad",
     imageUrl: salad,
-    content: "This is the third post content.",
+    content: "This is the sixth post content.",
+    author: {
+      name: "Emily White",
+      avatarUrl: "https://i.pravatar.cc/150?img=13",
+    },
+    date: "April 2, 2023",
   },
 ];
 
 export const dummySavedPosts = [
   {
-    id: 4,
-    title: "Tried Making A Michellin Desert",
+    id: "4",
+    title: "Tried Making A Michelin Desert",
     Url: "https://via.placeholder.com/150",
   },
   {
-    id: 5,
+    id: "5",
     title: "Caught Then Prepared Fresh Fish!",
     Url: "https://via.placeholder.com/150",
   },
   {
-    id: 6,
+    id: "6",
     title: "Low Calorie High Protein Tofu Salad",
     Url: "https://via.placeholder.com/150",
   },
 ];
+
 
 export const potentialFriends = [
   {
