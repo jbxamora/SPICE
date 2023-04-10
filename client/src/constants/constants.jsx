@@ -20,7 +20,6 @@ export const dummyPosts = [
     imageUrl: feast,
     content:
       "Nothing brings a family together quite like a delicious home-cooked meal. In today's blog post, we'll share our favorite easy and delicious family style meal ideas that will make your family dinners unforgettable. Whether you're planning a weekly dinner or a special occasion, these recipes are sure to please everyone at the table...",
-
     author: {
       name: "John Doe",
       avatarUrl: "https://i.pravatar.cc/150?img=3",
@@ -147,8 +146,28 @@ export const potentialFriends = [
 ];
 
 export const postIngredients = {
-  1: ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
-  2: ["Ingredient 4", "Ingredient 5", "Ingredient 6"],
+  1: [
+    "2 cups all-purpose flour",
+    "1 teaspoon baking powder",
+    "1/2 teaspoon baking soda",
+    "1/2 teaspoon salt",
+    "1/2 cup unsalted butter, softened",
+    "1 cup granulated sugar",
+    "2 large eggs",
+    "1/2 cup milk",
+    "1 teaspoon vanilla extract",
+  ],
+  2: [
+      "2 cups all-purpose flour",
+      "1 teaspoon baking powder",
+      "1/2 teaspoon baking soda",
+      "1/2 teaspoon salt",
+      "1/2 cup unsalted butter, softened",
+      "1 cup granulated sugar",
+      "2 large eggs",
+      "1/2 cup milk",
+      "1 teaspoon vanilla extract"
+    ],
   3: ["Ingredient 7", "Ingredient 8", "Ingredient 9"],
   // ...
 };
