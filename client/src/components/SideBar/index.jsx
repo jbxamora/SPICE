@@ -8,12 +8,12 @@ const SideBar = ({ savedPosts }) => {
       <h2 className="text-xl text-[#d7dade] text-center font-bold mb-4">
         Saved Dishes
       </h2>
-      <ul className="bg-gray-300 border border-gray-900 rounded-2xl shadow-lg shadow-black p-4 mb-8">
+      <ul className="bg-transparant border border-cyan-400 rounded-2xl shadow-lg shadow-black p-4 mb-8">
         {savedPosts.map((post) => (
           <li key={post.id} className="mb-2">
             <Link
               to={`/post/${post.id}`}
-              className="text-[#002D74] hover:text-[#234F9D] transition-colors duration-300"
+              className="text-white hover:text-[#234F9D] transition-colors duration-300"
             >
               {post.title}
             </Link>
@@ -21,15 +21,15 @@ const SideBar = ({ savedPosts }) => {
         ))}
       </ul>
 
-      <div className="hidden lg:block top-16 mt-8">
-        <h2 className="text-xl text-[#d7dade] text-justify font-bold mb-4">
+      <div className="hidden text-center ml-10 lg:block top-16 mt-8">
+        <h2 className="text-xl text-[#d7dade] text-fixed font-bold mr-10 mb-4">
           Potential Friends
         </h2>
         <div className="grid grid-cols-1 gap-4">
           {potentialFriends.map((friend) => (
             <div
               key={friend.id}
-              className="w-full max-w-sm bg-transparent border border-cyan-200 rounded-lg shadow-lg shadow-black py-2 dark:bg-gray-800 dark:border-gray-700"
+              className="w-full max-w-sm bg-transparent border border-cyan-400 rounded-lg shadow-lg shadow-black py-2 dark:bg-gray-800 dark:border-gray-700"
             >
               <div className="flex flex-col items-center pb-10">
                 <img

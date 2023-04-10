@@ -16,7 +16,7 @@ const PostCard = ({ post }) => {
   const handleReactionClick = () => {''};
 
   return (
-    <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
+    <div className="max-w-4xl w-full mx-auto rounded-lg overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
       {imageUrl && (
         <img
           src={imageUrl}
@@ -25,7 +25,7 @@ const PostCard = ({ post }) => {
         />
       )}{" "}
       <div className="px-6 py-4">
-        <div className="font-bold text-white text-xl mb-2">
+        <div className="font-bold text-white text-xl mb-2 hover:text-[#23979d] transition-colors duration-300">
           <Link to={`/post/${post.id}`}>{title}</Link>
         </div>
         <p className="text-gray-400 text-base">{getSnippet(content)}</p>
@@ -41,11 +41,11 @@ const PostCard = ({ post }) => {
           <img src={reaction} alt="Reaction" className="h-[25px]" />
         </button>
 
-       <img
-    className="w-10 h-10 rounded-full mr-4"
-    src={author.avatarUrl}
-    alt={`Avatar of ${author.name}`} 
-  />
+        <img
+          className="w-10 h-10 rounded-full mr-4"
+          src={author.avatarUrl}
+          alt={`Avatar of ${author.name}`}
+        />
         <div className="text-sm">
           <p className="text-white leading-none">{author.name}</p>
           <p className="text-gray-600">{date}</p>

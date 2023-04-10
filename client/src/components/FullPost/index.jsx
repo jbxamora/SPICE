@@ -8,7 +8,7 @@ const FullPost = ({ post }) => {
   const handleReactionClick = () => {''};
 
   return (
-    <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
+    <div className="max-w-4xl w-full mx-auto rounded-lg overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
       {imageUrl && (
         <img
           src={imageUrl}
