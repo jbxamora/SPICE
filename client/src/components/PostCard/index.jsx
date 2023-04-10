@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react"
 import { reaction } from "../../assets";
 
 const PostCard = ({ post }) => {
@@ -12,9 +13,28 @@ const PostCard = ({ post }) => {
     return content;
   };
 
-  const handleReactionClick = () => {};
+  const [newItem, setNewItem] = useState("")
+  const [ingredients, setIngredientsList] = useSate([])
+
+  const handleReactionClick = () => { };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    setIngredientsList((currentIngredients) => {
+      return [...currentIngredients, {
+        // id: 
+        title: newItem,
+        complete: false
+      },
+      ]
+    })
+
+    setNewItem("")
+  };
+
 
   return (
+
     <div className="max-w-4xl w-full mx-auto rounded overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
       {imageUrl && (
         <img
@@ -39,18 +59,48 @@ const PostCard = ({ post }) => {
         </button>
 
         {/* Uncomment the following line and replace with the actual author's image URL */}
-        {/* <img
-    className="w-10 h-10 rounded-full mr-4"
-    src={author.avatarUrl}
-    alt={`Avatar of ${author.name}`}
-  /> */}
+        {
+          //   <img
+          //   className="w-10 h-10 rounded-full mr-4"
+          //   src={author.avatarUrl}
+          //   alt={`Avatar of ${author.name}`}
+          // />
+        }
         <div className="text-sm">
           <p className="text-white leading-none">Author Name</p>
           <p className="text-gray-600">{date}</p>
         </div>
+      </div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="item">Add Ingredients</label>
+            <input
+              value={newItem}
+              onChange={e => setNewItem(e.target.value)}
+              type="text" id="item"
+            />
+          </div>
+          <button className="btn">Add</button>
+        </form>
+        <h2 className="header">Ingredients List</h2>
+        <ul className="item-list">
+          {ingredients.map(i => {
+            return (
+              <li key={i.id}>
+                <label>
+                  <input type="checkbox" checked={i.complete} />
+                  {i.title}
+                </label>
+                <button className="btn">Delete</button>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </div>
   );
 };
 
 export default PostCard;
+
