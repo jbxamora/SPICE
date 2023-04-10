@@ -18,7 +18,9 @@ export const dummyPosts = [
     id: "1",
     title: "Easy & Delicious Family Style Meal",
     imageUrl: feast,
-    content: "This is the first post content.",
+    content:
+      "Nothing brings a family together quite like a delicious home-cooked meal. In today's blog post, we'll share our favorite easy and delicious family style meal ideas that will make your family dinners unforgettable. Whether you're planning a weekly dinner or a special occasion, these recipes are sure to please everyone at the table...",
+
     author: {
       name: "John Doe",
       avatarUrl: "https://i.pravatar.cc/150?img=3",
@@ -29,7 +31,8 @@ export const dummyPosts = [
     id: "2",
     title: "Ready To Level Up Your Baking?",
     imageUrl: cake,
-    content: "This is the second post content.",
+    content:
+      "Baking can be an incredibly rewarding hobby, but it can also be challenging if you're just starting out. If you're ready to level up your baking skills, look no further! In this post, we'll share some of our favorite baking tips and tricks, as well as some delicious recipes to help you take your baking to the next level...",
     author: {
       name: "Jane Smith",
       avatarUrl: "https://i.pravatar.cc/150?img=5",
@@ -40,7 +43,8 @@ export const dummyPosts = [
     id: "3",
     title: "Minimal Ingredients, Amazing Pizza!",
     imageUrl: pizza,
-    content: "This is the third post content.",
+    content:
+      "Who says you need a long list of ingredients to make a delicious pizza at home? With just a few simple ingredients and a little creativity, you can create amazing pizzas that will impress your family and friends. In this blog post, we'll share our favorite minimal ingredient pizza recipes, as well as some tips for making the perfect pizza dough...",
     author: {
       name: "Tom Brown",
       avatarUrl: "https://i.pravatar.cc/150?img=7",
@@ -51,7 +55,8 @@ export const dummyPosts = [
     id: "4",
     title: "Tried Making A Michelin Desert",
     imageUrl: desert,
-    content: "This is the fourth post content.",
+    content:
+      "Have you ever wanted to recreate a Michelin-starred dessert in your own kitchen? Today, we'll guide you through the process of making an exquisite dessert that's worthy of the finest restaurants. Get ready to wow your dinner guests with a dessert that's as beautiful as it is delicious...",
     author: {
       name: "Alice Johnson",
       avatarUrl: "https://i.pravatar.cc/150?img=9",
@@ -62,7 +67,8 @@ export const dummyPosts = [
     id: "5",
     title: "Caught Then Prepared Fresh Fish!",
     imageUrl: salmon,
-    content: "This is the fifth post content.",
+    content:
+      "There's nothing quite like the taste of freshly caught fish. In this blog post, we'll share our experience of catching, cleaning, and preparing fresh fish, as well as some delicious recipes to help you make the most of your catch. Whether you're an experienced angler or just starting out, these tips and recipes will help you enjoy the freshest, most flavorful fish possible...",
     author: {
       name: "Charlie Green",
       avatarUrl: "https://i.pravatar.cc/150?img=11",
@@ -73,7 +79,8 @@ export const dummyPosts = [
     id: "6",
     title: "Low Calorie High Protein Tofu Salad",
     imageUrl: salad,
-    content: "This is the sixth post content.",
+    content:
+      "Looking for a healthy, satisfying meal that won't weigh you down? This low-calorie, high-protein tofu salad is just what you need! Packed with fresh veggies, flavorful herbs, and a zesty dressing, this salad is as delicious as it is nutritious. In this blog post, we'll share our favorite tofu salad recipe and tips for customizing it to suit your tastes...",
     author: {
       name: "Emily White",
       avatarUrl: "https://i.pravatar.cc/150?img=13",
@@ -138,6 +145,14 @@ export const potentialFriends = [
       "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?fit=crop&w=500&h=500",
   },
 ];
+
+export const postIngredients = {
+  1: ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
+  2: ["Ingredient 4", "Ingredient 5", "Ingredient 6"],
+  3: ["Ingredient 7", "Ingredient 8", "Ingredient 9"],
+  // ...
+};
+
 
 export const searchPlaceholders = [
   "Search recipes...",
