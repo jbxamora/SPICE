@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const PostCard = ({ post }) => {
   const { title, content, imageUrl, author, date } = post;
 
+  // Truncate the content if it's too long and add '...' at the end
   const getSnippet = (content) => {
     const maxLength = 100;
     if (content.length > maxLength) {
@@ -13,8 +14,11 @@ const PostCard = ({ post }) => {
     return content;
   };
 
-  const handleReactionClick = () => {''};
+  const handleReactionClick = () => {
+    "";
+  };
 
+  // Render the PostCard component
   return (
     <div className="max-w-4xl w-full mx-auto rounded-lg overflow-hidden shadow-lg shadow-black mb-8 border border-cyan-300">
       {imageUrl && (
@@ -23,7 +27,7 @@ const PostCard = ({ post }) => {
           alt={title}
           className="w-full h-80 object-cover rounded-t-lg"
         />
-      )}{" "}
+      )}
       <div className="px-6 py-4">
         <div className="font-bold text-white text-xl mb-2 hover:text-[#23979d] transition-colors duration-300">
           <Link to={`/post/${post.id}`}>{title}</Link>
