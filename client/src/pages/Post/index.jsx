@@ -4,11 +4,13 @@ import Navbar from "../../components/NavBar";
 import FullPost from "../../components/FullPost";
 import { postIngredients, dummyPosts } from "../../constants/constants";
 import IngredientsCard from "../../components/IngredientCard";
+import Comments from "../../components/Comments";
 
 const Post = () => {
   const { id } = useParams();
   const post = dummyPosts.find((post) => post.id === id);
   const ingredients = postIngredients[id];
+
 
   if (!post) {
     return (
@@ -28,6 +30,7 @@ const Post = () => {
         <div className="flex justify-between">
           <div className="flex-grow">
             <FullPost post={post} />
+            <Comments postId={id} /> 
           </div>
           {ingredients && <IngredientsCard ingredients={ingredients} />}
         </div>

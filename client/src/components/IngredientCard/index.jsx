@@ -18,7 +18,7 @@ const IngredientsCard = ({ ingredients }) => {
     <div className="relative">
       <button
         onClick={showDropdown ? handleHideDropdown : handleShowDropdown}
-        className={`text-white bg-blue-600 p-2 rounded mb-2 fixed ml-11 ${
+        className={`text-white bg-transparent shadow-lg shadow-black border border-cyan-400 p-2 rounded mb-2 fixed ml-11 ${
           hideDropdown ? "hidden" : ""
         }`}
       >

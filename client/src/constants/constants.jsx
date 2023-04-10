@@ -199,3 +199,60 @@ export const Images = [
   pankeke,
   salad2,
 ];
+
+export const dummyComments = {
+  1: [
+    {
+      id: 1,
+      content: "This is the first comment",
+      author: "John Doe",
+      date: "April 10, 2023",
+      replies: [
+        {
+          id: 2,
+          content: "This is a reply to the first comment",
+          author: "Jane Smith",
+          date: "April 11, 2023",
+          replies: [
+            {
+              id: 3,
+              content: "This is a reply to the reply to the first comment",
+              author: "Bob Johnson",
+              date: "April 12, 2023",
+              replies: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 4,
+      content: "This is the second comment",
+      author: "Alice Green",
+      date: "April 13, 2023",
+      replies: [],
+    },
+    {
+      id: 5,
+      content: "This is the third comment",
+      author: "Charlie Brown",
+      date: "April 14, 2023",
+      replies: [
+        {
+          id: 6,
+          content: "This is a reply to the third comment",
+          author: "Emily White",
+          date: "April 15, 2023",
+          replies: [],
+        },
+        {
+          id: 7,
+          content: "This is another reply to the third comment",
+          author: "Tom Grey",
+          date: "April 16, 2023",
+          replies: [],
+        },
+      ],
+    },
+  ],
+};
