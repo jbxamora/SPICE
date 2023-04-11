@@ -2,94 +2,94 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
-    _id: ID!
-    name: String!
-    username: String!
-    email: String!
-    password: String
-    recipeCount: Int
-    savedRecipes: [ID]
-}
+	_id: ID!
+	name: String!
+	username: String!
+	email: String!
+	password: String
+	recipeCount: Int
+	savedRecipes: [ID]
+  }
 
   type Recipe {
-    _id: ID!
-    name: String
-    imgUrl: String
-    createdAt: String
-    instructions: String
-    recipeCreator: User
-    reactions: [Reaction]
-    comments: [Comment]
-    ingredients: [String]
-    reactionCount: Int
+	_id: ID!
+	name: String
+	imgUrl: String
+	createdAt: String
+	instructions: String
+	recipeCreator: User
+	reactions: [Reaction]
+	comments: [Comment]
+	ingredients: [String]
+	reactionCount: Int
   }
 
   type Auth {
-    token: ID!
-    user: User
+	token: ID!
+	user: User
   }
 
   type Comment {
-    _id: ID!
-    commentText: String!
-    username: String!
-    createdAt: String!
+	_id: ID!
+	commentText: String!
+	username: String!
+	createdAt: String!
   }
 
   type Reaction {
-    reactionId: ID!
-    reactionBody: String
-    createdAt: String!
-    username: String!
+	reactionId: ID!
+	reactionBody: String
+	createdAt: String!
+	username: String!
   }
 
   input RecipeInput {
-    name: String
-    imgUrl: String
-    instructions: String!
-    ingredients: [String]
+	name: String
+	imgUrl: String
+	instructions: String!
+	ingredients: [String]
   }
 
   input UpdateRecipeInput {
-    _id: String!
-    name: String
-    imgUrl: String
-    instructions: String!
-    ingredients: [String]
+	_id: String!
+	name: String
+	imgUrl: String
+	instructions: String!
+	ingredients: [String]
   }
 
   input ReactionInput {
-    reactionBody: String!
+	reactionBody: String!
   }
 
   input CommentInput {
-    commentText: String!
+	commentText: String!
   }
 
   type Query {
-    me: User
-    user(userId:ID!): User
-    getAllUsers: [User]
-    getRecipes: [Recipe]
-    getOneRecipe(_id: ID!): Recipe
-    getRecipesByIds(_id: [ID!]): [Recipe]
-    getComments: [Comment]
-    getReactionsByRecipeId(recipeId: ID!): [Reaction]
-    recipe(_id: ID!): Recipe
+	me: User
+	user(userId:ID!): User
+	getAllUsers: [User]
+	getRecipes: [Recipe]
+	getOneRecipe(_id: ID!): Recipe
+	getRecipesByIds(_id: [ID!]): [Recipe]
+	getComments: [Comment]
+	getReactionsByRecipeId(recipeId: ID!): [Reaction]
+	recipe(_id: ID!): Recipe
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(name: String!, username: String!, email: String!, password: String!): Auth
-    selectRecipe(_id: String!): User
-    createRecipe(input: RecipeInput!): Recipe
-    removeRecipe(_id: ID!): Recipe
-    updateRecipe(input: UpdateRecipeInput!): Recipe
-    deleteRecipe(_id: ID!): Recipe
-    createComment(commentText: String!, username: String!, createdAt: String!): Comment!
-    deleteComment(_id: ID!): Comment!
-    createReaction(reactionInput: ReactionInput): Reaction
-    removeReaction(reactionId: ID!): Boolean
+	login(email: String!, password: String!): Auth
+	addUser(name: String!, username: String!, email: String!, password: String!): Auth
+	selectRecipe(_id: String!): User
+	createRecipe(input: RecipeInput!): Recipe
+	removeRecipe(_id: ID!): Recipe
+	updateRecipe(input: UpdateRecipeInput!): Recipe
+	deleteRecipe(_id: ID!): Recipe
+	createComment(commentText: String!, username: String!, createdAt: String!): Comment!
+	deleteComment(_id: ID!): Comment!
+	createReaction(reactionInput: ReactionInput): Reaction
+	removeReaction(reactionId: ID!): Boolean
   }
 `;
 

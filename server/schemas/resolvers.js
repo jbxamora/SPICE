@@ -94,6 +94,7 @@ const resolvers = {
     },
     // Create a recipe
     createRecipe: async (parent, { input }, context) => {
+      console.log(97, input)
       const recipe = await Recipes.create({...input,recipeCreator: context.user._id })
       console.log(recipe)
       return recipe;

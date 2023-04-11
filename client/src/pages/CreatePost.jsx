@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import { useMutation } from '@apollo/client';
-// import { CREATE_RECIPE } from '../../utils/mutations';
+import { useMutation } from '@apollo/client';
+import { CREATE_RECIPE } from '../utils/mutations';
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imgurl, setImgurl] = useState("");
+  const [imgUrl, setImgurl] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [createRecipe, { error, data }] = useMutation(CREATE_RECIPE);
 
   const toolbarOptions = [
     ["bold", "italic", "underline"], // toggled buttons
@@ -31,9 +32,17 @@ const CreatePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
+
+    const { data } = createRecipe({
+      name: title,
+      ingredients: ingredients,
+      instructions: content,
+      imgUrl: imgUrl,
+    })
+    
     console.log("Title:", title);
     console.log("Content:", content);
-    console.log("imgUrl:", imgurl);
+    console.log("imgUrl:", imgUrl);
     console.log("Ingredients:", ingredients);
   };
 
@@ -105,7 +114,7 @@ const CreatePost = () => {
           <input
             type="text"
             id="title"
-            value={imgurl}
+            value={imgUrl}
             onChange={(e) => setImgurl(e.target.value)}
             className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
             required
