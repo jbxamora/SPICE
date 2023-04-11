@@ -32,7 +32,7 @@ const Navbar = () => {
       return (
         <button
           onClick={Auth.logout}
-          className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
+          className="text-gray-300 hover:text-white hover:bg-gray-700 font-thefont block px-3 py-2 rounded-md text-base font-medium"
         >
           Logout
         </button>
