@@ -1,239 +1,140 @@
-// recipe model needs: name, ingredients, instructions, imgurl, recipe creator
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+const CreatePost = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [ingredients, setIngredients] = useState([]);
 
-// Questions:
-// 1. delete or keep checkbox?
-// 2. split this out into different components?
-//    * recipe name form
-//    * instructions form
-//    * add ingredients form
+  const toolbarOptions = [
+    ["bold", "italic", "underline"], // toggled buttons
+    ["blockquote"],
+    ["image"],
 
-const CreatPost = () => {
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
 
-// useState's for ingredients, recipes and instructions
-  // input box for adding new ingredients
-  const [newItem, setNewItem] = useState("")
-  // this adds new ingredients to the ingredients list
-  const [ingredients, setIngredients] = useState([])
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
 
-  // input box for adding recipe name
-  const [newRecipe, setNewRecipe] = useState("")
-  // adds recipe name
-  const [recipeName, setRecipeName] = useState([])
+    [{ font: [] }],
+    [{ align: [] }],
 
-  // input box for adding instructions for recipe
-  const [newInstructions, setNewInstructions] = useState("")
-  // adds instructions
-  const [instruct, setInstruct] = useState([])
+  ];
 
-// functions for adding recipe name, instructions and ingredients
-  // add recipe name 
-  function addRecipe(e) {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log("Title:", title);
+    console.log("Content:", content);
+    console.log("Ingredients:", ingredients);
+  };
 
-    setRecipeName(addRecipe => {
-      return [
-        ...addRecipe, 
-        {
-          id: crypto.randomUUID(),
-          title: newRecipe,
-        }
-      ]
-    })
+   const handleAddIngredient = () => {
+     setIngredients([...ingredients, ""]);
+   };
 
-    setNewRecipe("")
-  }
+   const handleUpdateIngredient = (index, value) => {
+     const updatedIngredients = ingredients.map((ingredient, i) => {
+       return i === index ? value : ingredient;
+     });
+     setIngredients(updatedIngredients);
+   };
 
-  // add instructions to recipe 
-  function addInstructions(e) {
-    e.preventDefault()
-
-    setInstruct(addInstruct => {
-      return [
-        ...addInstruct,
-        {
-          id: crypto.randomUUID,
-          title: newInstructions,
-        }
-      ]
-    })
-
-    setNewInstructions("")
-  }
+   const handleRemoveIngredient = (index) => {
+     const updatedIngredients = ingredients.filter((_, i) => i !== index);
+     setIngredients(updatedIngredients);
+   };
 
 
-  // Add ingredients 
-  function addIngredient(e) {
-    e.preventDefault()
-
-    // create array of ingredients to add ingredients list
-    setIngredients(addItem => {
-      return [
-        ...addItem,
-        {
-          id: crypto.randomUUID(),
-          title: newItem,
-          state: false
-        }
-      ]
-    })
-
-    setNewItem("")
-  }
-
-  // checkbox might not be needed
-  // // Updates ingredients checked state
-  // function changeState(id, state) {
-  //   setIngredients(itemList => {
-  //     return itemList.map(item => {
-  //       if (item.id === id) {
-  //         return { ...item, state }
-  //       }
-  //       // this return is needed or else the page will be blank (I don't know why)
-  //       return item;
-  //     })
-  //   })
-  // }
-
-// delete functions for recipe, instructions and ingredients
-  // Delete Recipe Name
-  function deleteRecipeName(id) {
-    setRecipeName(itemList => {
-      return itemList.filter(item => item.id !== id)
-    })
-  }
-
-  // Delete instructions
-  function deleteInstructions(id) {
-    setInstruct(itemList => {
-      return itemList.filter(item => item.id !== id)
-    })
-  }
-
-  // Delete item from the ingredients list
-  function deleteIngredients(id) {
-    setIngredients(itemList => {
-      return itemList.filter(item => item.id !== id)
-    })
-  }
-
-
-// HTML return elements  
   return (
-    <>
-      {/* This form is to add a recipe name */}
-      <div>
-        <form onSubmit={addRecipe}>
-          <div>
-            <label>Recipe Name</label>
-            <input 
-              value={newRecipe}
-              // getting value of input and setting it as the new value and putting into newRecipe
-              onChange={e => setNewRecipe(e.target.value)} 
-              type="text" 
-              id="recipe" 
-            />
-          </div>
-          <button>Add</button>
-        </form>
-      </div>
-
-      {/* This form is to add recipe instructions */}
-      <div>
-        <form onSubmit={addInstructions}>
-          <div>
-            <label>Recipe Instructions</label>
-            <input 
-              value={newInstructions}
-              onChange={e => setNewInstructions(e.target.value)}
-              type="textarea" 
-              id="instruction" 
-            />
-          </div>
-          <button>Add</button>
-        </form>
-      </div>
-
-
-      {/* This form is the add new ingredients */}
-      <form onSubmit={addIngredient}>
-        <div>
-          <label>Add Ingredients</label>
+    <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
+      <h2 className="flex justify-center text-white text-3xl font-bold mb-6">
+        Create a Post
+      </h2>
+      <form onSubmit={handleSubmit} className="w-full">
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block text-sm font-bold text-white mb-2"
+          >
+            Title
+          </label>
           <input
-            value={newItem}
-            // getting value of input and setting it as the new value and putting into newItem
-            onChange={e => setNewItem(e.target.value)}
             type="text"
-            id="item"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            required
+            style={{ minHeight: "4rem" }}
           />
         </div>
-        <button>Add</button>
+        <div className="mb-4">
+          <label
+            htmlFor="content"
+            className="block text-white text-sm font-bold mb-2"
+          >
+            Content
+          </label>
+          <ReactQuill
+            id="content"
+            value={content}
+            onChange={setContent}
+            theme="snow"
+            className="text-lg mt-auto px-3 py-4"
+            style={{ minHeight: "25rem", className: "h-44 text-white" }}
+            modules={{ toolbar: toolbarOptions }}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="ingredients"
+            className="block text-white text-sm font-bold mb-2"
+          >
+            Ingredients
+          </label>
+          {ingredients.map((ingredient, index) => (
+            <div key={index} className="flex items-center mb-2">
+              <input
+                type="text"
+                value={ingredient}
+                onChange={(e) => handleUpdateIngredient(index, e.target.value)}
+                className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                style={{ minHeight: '2rem' }}
+              />
+              <button
+                type="button"
+                className="ml-2 text-red-500 hover:text-red-700"
+                onClick={() => handleRemoveIngredient(index)}
+              >
+                &times;
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            className="text-white bg-blue-500 px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            onClick={handleAddIngredient}
+          >
+            Add Ingredient
+          </button>
+        </div>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-md text-lg hover:bg-violet-800 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+          >
+            Submit
+          </button>
+        </div>
       </form>
-
-      <h3>Create new Recipe</h3>
-      <ul>
-        {/* adds recipe name */}
-        {recipeName.map(i => {
-          return (
-            <li key={i.id}>
-              <h2>Recipe Name:</h2>
-              <label>{i.title}</label>
-              <button 
-                onClick={() => deleteRecipeName(i.id)} 
-              >
-                Delete
-              </button>
-            </li>
-          )
-        })}
-
-        {/* adds instructions */}
-        {instruct.map(i => {
-          return (
-            <li key={i.id}>
-              <h2>Instructions:</h2>
-              <label>{i.title}</label>
-              <button 
-                onClick={() => deleteInstructions(i.id)} 
-              >
-                Delete
-              </button>
-          </li>
-          )
-        })}
-
-
-        {/* adds ingredients from the ingredients array */}
-        {ingredients.length > 0 && <h2>Ingredients List:</h2> }
-        {ingredients.map(i => {
-          return (
-            <li key={i.id}>
-              <label>
-                {/* <input 
-                  type="checkbox" 
-                  checked={i.state}
-                  // This function handles if the checkbox has been checked or not
-                  onChange={e => changeState(i.id, e.target.checked)} 
-                /> */}
-                {i.title}
-              </label>
-              <button 
-                // Note - function call to deleteIngredients function or it won't work
-                onClick={() => deleteIngredients(i.id)} 
-              >
-                Delete
-              </button>
-            </li>
-          )
-        })}
-      </ul>
-      <button>Create Recipe</button>
-    </>
-  )
+    </div>
+  );
 };
 
-export default CreatPost;
 
+export default CreatePost;
