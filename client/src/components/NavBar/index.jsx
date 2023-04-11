@@ -79,10 +79,10 @@ const Navbar = () => {
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
+            <img src={logo} alt="logo" className="w-10 h-10 object-contain" />
             <Link
               to="/"
-              className="text-2xl font-bold gradient-text cursor-pointer ml-4"
+              className="text-3xl font-thefont gradient-text cursor-pointer ml-4"
             >
               SPICE
             </Link>

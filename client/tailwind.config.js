@@ -8,8 +8,11 @@ export default {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/hero.jpg')",
+        "hero-pattern": "url('/src/assets/spice2.jpeg')",
       },
+      fontFamily: {
+        thefont: ["Alice", "serif"]
+      }
     },
   },
   variants: {
