@@ -8,10 +8,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-            <div className="text-2xl font-bold gradient-text">SPICE</div>
-            <p className="text-sm mt-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              hendrerit mi metus, ac vestibulum tortor mollis ut.
+            <div className="text-2xl font-thefont gradient-text">SPICE</div>
+            <p className="text-sm mt-4 font-thefont">
+           SPICE - a community-driven recipe sharing website! Share your favorite recipes and discover new ones from people around the world.
             </p>
           </div>
           <div>
@@ -98,7 +97,7 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 focus:outline-none"
+                className="bg-gradient-to-r from-red-600 to-yellow-500 hover:from-yellow-800 hover:to-red-600 ... text-white py-2 px-4 rounded focus:outline-none"
               >
                 Subscribe
               </button>
