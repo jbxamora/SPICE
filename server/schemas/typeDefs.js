@@ -82,7 +82,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(name: String!, username: String!, email: String!, password: String!): Auth
     selectRecipe(_id: String!): User
-    createRecipe(input: RecipeInput!): Recipe
+    createRecipe(input: RecipeInput): Recipe
     removeRecipe(_id: ID!): Recipe
     updateRecipe(input: UpdateRecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe

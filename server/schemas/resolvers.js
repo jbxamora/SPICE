@@ -94,9 +94,17 @@ const resolvers = {
     },
     // Create a recipe
     createRecipe: async (parent, { input }, context) => {
-      const recipe = await Recipes.create({...input,recipeCreator: context.user._id })
-      console.log(recipe)
-      return recipe;
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+    
+      const recipe = await Recipes.create({ ...input, recipeCreator: context.user._id });
+    
+      // Populate the recipeCreator field
+      const populatedRecipe = await Recipes.populate(recipe, { path: 'recipeCreator' });
+    
+      console.log(26, populatedRecipe);
+      return populatedRecipe;
     },
     // Remove a recipe
     removeRecipe: async (parent, { _id }, context) => {

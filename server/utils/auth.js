@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');   //verifies JWTs 
 
 const secret = 'mysecretssshhhhhhh'; //used to sign and verify JWTs
-const expiration = '2h';
+const expiration = '24h';
 
 module.exports = {
   authMiddleware: function ({ req }) {
@@ -21,7 +21,7 @@ module.exports = {
     } catch {
       console.log('Invalid token');
     }
-
+    console.log('User object:', req.user);
     return req;
   },
   // receives an object wtih user's email, username, and id and generates a JWT
