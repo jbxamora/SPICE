@@ -1,118 +1,239 @@
+// recipe model needs: name, ingredients, instructions, imgurl, recipe creator
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import PostPreview from "../components/PostPreview";
-import Auth from '../utils/auth'
 
-const token = Auth.loggedIn() ? Auth.getToken() : null
-const CreatePost = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [preview, setPreview] = useState(false);
 
-  const toolbarOptions = [
-    ["bold", "italic", "underline", "strike"], // toggled buttons
-    ["blockquote", "code-block"],
-    ["image"],
+// Questions:
+// 1. delete or keep checkbox?
+// 2. split this out into different components?
+//    * recipe name form
+//    * instructions form
+//    * add ingredients form
 
-    [{ header: 1 }, { header: 2 }], // custom button values
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ script: "sub" }, { script: "super" }], // superscript/subscript
-    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-    [{ direction: "rtl" }], // text direction
+const CreatPost = () => {
 
-    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+// useState's for ingredients, recipes and instructions
+  // input box for adding new ingredients
+  const [newItem, setNewItem] = useState("")
+  // this adds new ingredients to the ingredients list
+  const [ingredients, setIngredients] = useState([])
 
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    [{ font: [] }],
-    [{ align: [] }],
+  // input box for adding recipe name
+  const [newRecipe, setNewRecipe] = useState("")
+  // adds recipe name
+  const [recipeName, setRecipeName] = useState([])
 
-    ["clean"], // remove formatting button
-  ];
+  // input box for adding instructions for recipe
+  const [newInstructions, setNewInstructions] = useState("")
+  // adds instructions
+  const [instruct, setInstruct] = useState([])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log("Title:", title);
-    console.log("Content:", content);
-  };
-  if (!token) {
-    return <div> <h1 className="text-white">You must be logged in to view this page.</h1></div>;
+// functions for adding recipe name, instructions and ingredients
+  // add recipe name 
+  function addRecipe(e) {
+    e.preventDefault()
+
+    setRecipeName(addRecipe => {
+      return [
+        ...addRecipe, 
+        {
+          id: crypto.randomUUID(),
+          title: newRecipe,
+        }
+      ]
+    })
+
+    setNewRecipe("")
   }
-  return (
-    <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
-      {!preview && (
-        <h2 className="flex justify-center text-white text-3xl font-bold mb-6">
-          Create a Post
-        </h2>
-      )}
-      <form onSubmit={handleSubmit} className="w-full">
-        <div className="mb-4">
-          <label
-            htmlFor="title"
-            className="block text-sm font-bold text-white mb-2"
-          >
-            Title
-          </label>
-          {!preview ? (
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-              required
-              style={{ minHeight: "4rem" }}
-            />
-          ) : (
-            <h3 className="flex justify-center text-white text-xl font-semibold">
-              {title}
-            </h3>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="content"
-            className="block text-white text-sm font-bold mb-2"
-          >
-            Content
-          </label>
-          {!preview ? (
-            <ReactQuill
-              id="content"
-              value={content}
-              onChange={setContent}
-              theme="snow"
-              className="text-lg mt-auto px-3 py-4"
-              style={{ minHeight: "25rem", className: "h-44 text-white" }}
-              modules={{ toolbar: toolbarOptions }}
-            />
-          ) : (
-            <PostPreview content={content} />
-          )}
 
-          <div className="flex justify-center">
-            <button
-              type="button"
-              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white px-6 py-3 rounded-md text-lg active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400"
-              onClick={() => setPreview(!preview)}
-            >
-              {preview ? "Hide" : "Show"} Preview
-            </button>
+  // add instructions to recipe 
+  function addInstructions(e) {
+    e.preventDefault()
+
+    setInstruct(addInstruct => {
+      return [
+        ...addInstruct,
+        {
+          id: crypto.randomUUID,
+          title: newInstructions,
+        }
+      ]
+    })
+
+    setNewInstructions("")
+  }
+
+
+  // Add ingredients 
+  function addIngredient(e) {
+    e.preventDefault()
+
+    // create array of ingredients to add ingredients list
+    setIngredients(addItem => {
+      return [
+        ...addItem,
+        {
+          id: crypto.randomUUID(),
+          title: newItem,
+          state: false
+        }
+      ]
+    })
+
+    setNewItem("")
+  }
+
+  // checkbox might not be needed
+  // // Updates ingredients checked state
+  // function changeState(id, state) {
+  //   setIngredients(itemList => {
+  //     return itemList.map(item => {
+  //       if (item.id === id) {
+  //         return { ...item, state }
+  //       }
+  //       // this return is needed or else the page will be blank (I don't know why)
+  //       return item;
+  //     })
+  //   })
+  // }
+
+// delete functions for recipe, instructions and ingredients
+  // Delete Recipe Name
+  function deleteRecipeName(id) {
+    setRecipeName(itemList => {
+      return itemList.filter(item => item.id !== id)
+    })
+  }
+
+  // Delete instructions
+  function deleteInstructions(id) {
+    setInstruct(itemList => {
+      return itemList.filter(item => item.id !== id)
+    })
+  }
+
+  // Delete item from the ingredients list
+  function deleteIngredients(id) {
+    setIngredients(itemList => {
+      return itemList.filter(item => item.id !== id)
+    })
+  }
+
+
+// HTML return elements  
+  return (
+    <>
+      {/* This form is to add a recipe name */}
+      <div>
+        <form onSubmit={addRecipe}>
+          <div>
+            <label>Recipe Name</label>
+            <input 
+              value={newRecipe}
+              // getting value of input and setting it as the new value and putting into newRecipe
+              onChange={e => setNewRecipe(e.target.value)} 
+              type="text" 
+              id="recipe" 
+            />
           </div>
+          <button>Add</button>
+        </form>
+      </div>
+
+      {/* This form is to add recipe instructions */}
+      <div>
+        <form onSubmit={addInstructions}>
+          <div>
+            <label>Recipe Instructions</label>
+            <input 
+              value={newInstructions}
+              onChange={e => setNewInstructions(e.target.value)}
+              type="textarea" 
+              id="instruction" 
+            />
+          </div>
+          <button>Add</button>
+        </form>
+      </div>
+
+
+      {/* This form is the add new ingredients */}
+      <form onSubmit={addIngredient}>
+        <div>
+          <label>Add Ingredients</label>
+          <input
+            value={newItem}
+            // getting value of input and setting it as the new value and putting into newItem
+            onChange={e => setNewItem(e.target.value)}
+            type="text"
+            id="item"
+          />
         </div>
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-md text-lg hover:bg-violet-800 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
-          >
-            Submit
-          </button>
-        </div>
+        <button>Add</button>
       </form>
-    </div>
-  );
+
+      <h3>Create new Recipe</h3>
+      <ul>
+        {/* adds recipe name */}
+        {recipeName.map(i => {
+          return (
+            <li key={i.id}>
+              <h2>Recipe Name:</h2>
+              <label>{i.title}</label>
+              <button 
+                onClick={() => deleteRecipeName(i.id)} 
+              >
+                Delete
+              </button>
+            </li>
+          )
+        })}
+
+        {/* adds instructions */}
+        {instruct.map(i => {
+          return (
+            <li key={i.id}>
+              <h2>Instructions:</h2>
+              <label>{i.title}</label>
+              <button 
+                onClick={() => deleteInstructions(i.id)} 
+              >
+                Delete
+              </button>
+          </li>
+          )
+        })}
+
+
+        {/* adds ingredients from the ingredients array */}
+        {ingredients.length > 0 && <h2>Ingredients List:</h2> }
+        {ingredients.map(i => {
+          return (
+            <li key={i.id}>
+              <label>
+                {/* <input 
+                  type="checkbox" 
+                  checked={i.state}
+                  // This function handles if the checkbox has been checked or not
+                  onChange={e => changeState(i.id, e.target.checked)} 
+                /> */}
+                {i.title}
+              </label>
+              <button 
+                // Note - function call to deleteIngredients function or it won't work
+                onClick={() => deleteIngredients(i.id)} 
+              >
+                Delete
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+      <button>Create Recipe</button>
+    </>
+  )
 };
 
-export default CreatePost;
+export default CreatPost;
+

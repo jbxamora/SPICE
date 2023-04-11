@@ -8,18 +8,18 @@ const typeDefs = gql`
     email: String!
     password: String
     recipeCount: Int
-    savedRecipes: [Recipe]
-  }
+    savedRecipes: [ID]
+}
 
   type Recipe {
     _id: ID!
     name: String
     imgUrl: String
     createdAt: String
-    instructions: String!
+    instructions: String
     recipeCreator: User
-    reactions: [Reaction!]
-    comments: [Comment!]
+    reactions: [Reaction]
+    comments: [Comment]
     ingredients: [String]
     reactionCount: Int
   }
