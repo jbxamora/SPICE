@@ -23,10 +23,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    //This recipes does not reference a users created recipes, the created recipes are referenced using the 
-    //object id in recipe model
+ 
     savedRecipes: [{
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Recipe"
     }],
   },
   {
@@ -38,9 +38,9 @@ const UserSchema = new Schema(
 );
 
 UserSchema.virtual("recipeCount").get(function () {
-  return this.recipes.length;
+  return this.savedRecipes.length;
 });
-
+// set up pre-save middleware to create password
 UserSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
@@ -50,7 +50,7 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-
+// compare the incoming password with the hashed password
 UserSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };

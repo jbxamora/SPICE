@@ -26,7 +26,7 @@ module.exports = {
   },
   // receives an object wtih user's email, username, and id and generates a JWT
   signToken: function ({ email, username, _id }) {
-    const payload = { email, username, _id };
+    const payload = { email, username, _id };//context object
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

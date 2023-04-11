@@ -5,7 +5,7 @@ const RecipeSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
 
     ingredients: [
@@ -25,7 +25,6 @@ const RecipeSchema = new Schema(
     recipeCreator: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
 
     reactions: [reactionSchema],

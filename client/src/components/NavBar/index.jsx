@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { logo } from "../../assets";
 import { Link, useLocation } from "react-router-dom";
 import { searchPlaceholders } from "../../constants/constants";
+import Auth from "../../utils/auth";
 
 const Navbar = () => {
   // State to manage the mobile navigation menu
@@ -27,14 +28,14 @@ const Navbar = () => {
 
   // Function to conditionally render the authentication buttons
   const renderAuthButton = () => {
-    // replace this with the actual authentication state.
-    const isLoggedIn = false;
-
-    if (isLoggedIn) {
+    if (Auth.loggedIn()) {
       return (
-        <span className="text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
-          User Name
-        </span>
+        <button
+          onClick={Auth.logout}
+          className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
+        >
+          Logout
+        </button>
       );
     } else {
       return location.pathname === "/signup" ? (
@@ -74,6 +75,7 @@ const Navbar = () => {
   const handleMobileNavLinkClick = () => {
     setIsOpen(false);
   };
+
   return (
     <nav className="bg-[#020617] text-white fixed w-full top-0 left-0 z-50">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-3">

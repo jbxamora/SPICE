@@ -236,3 +236,4 @@ const CreatPost = () => {
 };
 
 export default CreatPost;
+
