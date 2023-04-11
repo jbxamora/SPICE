@@ -1,5 +1,5 @@
 const { AuthenticationError, ApolloError } = require('apollo-server-express');
-const { User, Recipes, reactionSchema, Comment } = require('../models');
+const { User, Recipe, reactionSchema, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
 const { PubSub } = require('graphql-subscriptions');
 const pubsub = new PubSub();
@@ -12,7 +12,7 @@ const resolvers = {
 
     //Define query resolvers
     recipe: async (parent, { _id }, context) => {
-      const recipe = await Recipes.findById(_id)
+      const recipe = await Recipe.findById(_id)
         .populate('recipeCreator')
         .populate({
           path: 'comments',
@@ -36,14 +36,14 @@ const resolvers = {
     getAllUsers: async (parent, args) => {
       return User.find().sort({ createdAt: -1 });
     },
-    getRecipes: async (parent, args) => {
-      return Recipes.find().sort({ createdAt: -1 });
+    getRecipe: async (parent, args) => {
+      return Recipe.find().sort({ createdAt: -1 });
     },
     getOneRecipe: async (parent, { _id }) => {
-      return Recipes.findOne({ _id });
+      return Recipe.findOne({ _id });
     },
-    getRecipesByIds: async (parent, { _id }) => {
-      return Recipes.find({ _id: { $in: _id } }).sort({ createdAt: -1 });
+    getRecipeByIds: async (parent, { _id }) => {
+      return Recipe.find({ _id: { $in: _id } }).sort({ createdAt: -1 });
     },
     getComments: async () => {
       return Comment.find().sort({ createdAt: -1 });
@@ -95,7 +95,7 @@ const resolvers = {
     // Create a recipe
     createRecipe: async (parent, { input }, context) => {
       console.log(97, input)
-      const recipe = await Recipes.create({...input,recipeCreator: context.user._id })
+      const recipe = await Recipe.create({...input})
       console.log(recipe)
       return recipe;
     },
@@ -113,7 +113,7 @@ const resolvers = {
     },
     // Update a recipe
     updateRecipe: async (parent, { input }) => {
-      const recipe = await Recipes.findOneAndUpdate({ _id: input._id }, input, { new: true });
+      const recipe = await Recipe.findOneAndUpdate({ _id: input._id }, input, { new: true });
       return recipe;
     },
     //create comment
@@ -148,7 +148,7 @@ const resolvers = {
       
       if (context.user) {
         const { recipeId, reactionBody } = reactionInput;
-        const reaction = await Recipes.findOneAndUpdate(
+        const reaction = await Recipe.findOneAndUpdate(
           { _id: recipeId },
           { $push: { reactions: { reactionBody, username: context.user.username } } },
           { new: true }
@@ -159,7 +159,7 @@ const resolvers = {
     },
     removeReaction: async (parent, { reactionId }, context) => {
       if (context.user) {
-        const recipe = await Recipes.findOneAndUpdate(
+        const recipe = await Recipe.findOneAndUpdate(
           { "reactions.reactionId": reactionId, "reactions.username": context.user.username },
           { $pull: { reactions: { reactionId } } },
           { new: true }
