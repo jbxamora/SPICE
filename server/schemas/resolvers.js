@@ -93,9 +93,9 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // Create a recipe
-    createRecipe: async (parent, { input }, context) => {
+    createRecipe: async (parent, { name, ingredients, instructions, imgUrl }, context) => {
       console.log(97, input)
-      const recipe = await Recipe.create({...input})
+      const recipe = await Recipe.create({name, ingredients, instructions, imgUrl})
       console.log(recipe)
       return recipe;
     },

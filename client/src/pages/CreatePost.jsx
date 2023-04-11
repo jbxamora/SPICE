@@ -33,12 +33,12 @@ const CreatePost = () => {
     e.preventDefault();
     // Handle form submission logic here
 
-    const { data } = createRecipe({input:{
+    const { data } = createRecipe({
       name: title,
       ingredients: ingredients,
       instructions: content,
       imgUrl: imgUrl,
-    }})
+    })
     
     console.log("Title:", title);
     console.log("Content:", content);
