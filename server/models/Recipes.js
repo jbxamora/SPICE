@@ -25,7 +25,6 @@ const RecipeSchema = new Schema(
     recipeCreator: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
 
     reactions: [reactionSchema],

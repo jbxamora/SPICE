@@ -3,11 +3,12 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type User {
     _id: ID!
-    name: String
+    name: String!
     username: String!
     email: String!
+    password: String
     recipeCount: Int
-    savedRecipes: [ID]
+    savedRecipes: [Recipe]
   }
 
   type Recipe {
@@ -37,7 +38,7 @@ const typeDefs = gql`
 
   type Reaction {
     reactionId: ID!
-    reactionBody: String!
+    reactionBody: String
     createdAt: String!
     username: String!
   }
@@ -67,11 +68,13 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    getRecipes: [Recipe!]!
+    user(userId:ID!): User
+    getAllUsers: [User]
+    getRecipes: [Recipe]
     getOneRecipe(_id: ID!): Recipe
-    getRecipesByIds(_id: [ID!]!): [Recipe!]!
-    getComments: [Comment!]!
-    getReactionsByRecipeId(recipeId: ID!): [Reaction!]!
+    getRecipesByIds(_id: [ID!]): [Recipe]
+    getComments: [Comment]
+    getReactionsByRecipeId(recipeId: ID!): [Reaction]
     recipe(_id: ID!): Recipe
   }
 

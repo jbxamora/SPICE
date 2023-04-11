@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import PostPreview from "../components/PostPreview";
+import Auth from '../utils/auth'
 
+const token = Auth.loggedIn() ? Auth.getToken() : null
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -35,7 +37,9 @@ const CreatePost = () => {
     console.log("Title:", title);
     console.log("Content:", content);
   };
-
+  if (!token) {
+    return <div> <h1 className="text-white">You must be logged in to view this page.</h1></div>;
+  }
   return (
     <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
       {!preview && (

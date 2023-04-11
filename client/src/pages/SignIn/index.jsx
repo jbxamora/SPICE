@@ -52,6 +52,11 @@ const SignIn = () => {
           <p className="text-md text-center text-gray-900 dark:text-white">
             Login
           </p>
+          {error && (
+            <div className="text-red-500 text-center">
+              Something went wrong with your login credentials
+            </div>
+          )}
           <form className="space-y-6" onSubmit={handleFormSubmit}>
             <div>
               <label
