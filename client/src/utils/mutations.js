@@ -26,3 +26,9 @@ export const ADD_USER = gql`
   }
 `;
 
+export const CREATE_RECIPE = gql`
+  mutation createRecipe($name:String!,$ingredients: [String!], $instructions: String!, $imgurl: String!) {
+    createRecipe(name: $name, ingredients: [$ingredients], instructions: $instructions, imgurl: $imgurl)
+  }
+`;
+

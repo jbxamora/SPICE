@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+// import { useMutation } from '@apollo/client';
+// import { CREATE_RECIPE } from '../../utils/mutations';
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imgURL, setImgURL] = useState("");
+  const [imgurl, setImgurl] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
   const toolbarOptions = [
@@ -31,6 +33,7 @@ const CreatePost = () => {
     // Handle form submission logic here
     console.log("Title:", title);
     console.log("Content:", content);
+    console.log("imgUrl:", imgurl);
     console.log("Ingredients:", ingredients);
   };
 
@@ -94,7 +97,7 @@ const CreatePost = () => {
         {/* imgURL - START */}
         <div className="mb-4">
           <label
-            htmlFor="imgURL"
+            htmlFor="imgurl"
             className="block text-sm font-bold text-white mb-2"
           >
             imgURL
@@ -102,8 +105,8 @@ const CreatePost = () => {
           <input
             type="text"
             id="title"
-            value={imgURL}
-            onChange={(e) => setImgURL(e.target.value)}
+            value={imgurl}
+            onChange={(e) => setImgurl(e.target.value)}
             className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
             required
             style={{ minHeight: "4rem" }}
