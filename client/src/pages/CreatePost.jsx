@@ -5,6 +5,7 @@ import "react-quill/dist/quill.snow.css";
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [imgURL, setImgURL] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
   const toolbarOptions = [
@@ -90,6 +91,25 @@ const CreatePost = () => {
             modules={{ toolbar: toolbarOptions }}
           />
         </div>
+        {/* imgURL - START */}
+        <div className="mb-4">
+          <label
+            htmlFor="imgURL"
+            className="block text-sm font-bold text-white mb-2"
+          >
+            imgURL
+          </label>
+          <input
+            type="text"
+            id="title"
+            value={imgURL}
+            onChange={(e) => setImgURL(e.target.value)}
+            className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            required
+            style={{ minHeight: "4rem" }}
+          />
+        </div>
+        {/* imgURL - END */}
         <div className="mb-4">
           <label
             htmlFor="ingredients"
