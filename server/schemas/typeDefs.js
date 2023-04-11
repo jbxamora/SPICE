@@ -9,7 +9,7 @@ const typeDefs = gql`
     password: String
     recipeCount: Int
     savedRecipes: [ID]
-}
+  }
 
   type Recipe {
     _id: ID!

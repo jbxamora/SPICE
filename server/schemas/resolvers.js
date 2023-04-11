@@ -31,7 +31,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     user: async (parent, {userId})=> {
-      return User.findOne({_id: profileId});
+      return User.findOne({_id: userId});
     },
     getAllUsers: async (parent, args) => {
       return User.find().sort({ createdAt: -1 });
