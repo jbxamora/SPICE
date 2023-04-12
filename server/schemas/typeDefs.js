@@ -13,12 +13,12 @@ const typeDefs = gql`
   type Recipe {
     _id: ID
     name: String
-    ingredients: [String]
+    ingredients: [String!]!
     instructions: String
     imgUrl: String
     recipeAuthor: String
-    createdAt: String,
-    comments: [Comment]!,
+    createdAt: String
+    comments: [Comment]!
   }
 
   type Auth {
@@ -46,7 +46,7 @@ const typeDefs = gql`
     name: String
     imgUrl: String
     instructions: String!
-    ingredients: [String]
+    ingredients: [String!]!
   }
 
   input ReactionInput {
@@ -71,7 +71,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(name: String!, username: String!, email: String!, password: String!): Auth
     selectRecipe(_id: String!): User
-    createRecipe(name: String!, ingredients: String!, instructions: String!, imgUrl:String!): Recipe
+    addRecipe(name: String!, ingredients: [String!]!, instructions: String!, imgUrl: String): Recipe
     removeRecipe(recipeId: ID!): Recipe
     updateRecipe(input: UpdateRecipeInput!): Recipe
     deleteRecipe(recipeId: ID!): Recipe

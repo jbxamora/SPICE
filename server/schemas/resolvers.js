@@ -64,10 +64,13 @@ const resolvers = {
       return { token, user };
     },
     // Create a recipe
-    addThought: async (parent, { name, ingredients, instructions, imgUrl }, context) => {
+    addRecipe: async (parent, { name, ingredients, instructions, imgUrl }, context) => {
       if (context.user) {
-        const thought = await Recipe.create({
-          name, ingredients, instructions, imgUrl,
+        const recipe = await Recipe.create({
+          name, 
+          ingredients, 
+          instructions, 
+          imgUrl,
           recipeAuthor: context.user.username,
         });
 
@@ -82,10 +85,10 @@ const resolvers = {
     },
     
     // Create a comment
-    addComment: async (parent, { thoughtId, commentText }, context) => {
+    addComment: async (parent, { recipeId, commentText }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
+        return Recipe.findOneAndUpdate(
+          { _id: recipeId },
           {
             $addToSet: {
               comments: { commentText, commentAuthor: context.user.username },
@@ -102,11 +105,28 @@ const resolvers = {
     // Remove a recipe
     removeRecipe: async (parent, { recipeId }, context) => {
       if (context.user) {
-        const recipe = await Recipe.findOneAndUpdate(
-          { _id: recipeId },
-          { $pull: { recipes: recipe._id } })
-   
-        return recipe;
+        // Find the recipe
+        const recipe = await Recipe.findByIdAndDelete(recipeId);
+        
+        if (!recipe) {
+          throw new Error('Recipe not found');
+        }
+    
+        // Check if the logged-in user is the recipe author
+        if (recipe.recipeAuthor === context.user.username) {
+          // Remove the recipe from the user's recipes field
+          await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { recipes: recipe._id } }
+          );
+          
+          // Remove the recipe from the Recipe collection
+          await Recipe.findByIdAndDelete(recipeId);
+    
+          return recipe;
+        } else {
+          throw new AuthenticationError('You are not authorized to delete this recipe');
+        }
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -116,10 +136,10 @@ const resolvers = {
       return recipe;
     },
     //create comment
-    removeComment: async (parent, { thoughtId, commentId }, context) => {
+    removeComment: async (parent, { recipeId, commentId }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
+        return Recipe.findOneAndUpdate(
+          { _id: recipeId },
           {
             $pull: {
               comments: {

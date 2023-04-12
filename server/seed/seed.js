@@ -1,43 +1,25 @@
 const db = require('../config/connection');
-const { User, Recipe, Comment } = require('../models');
-const userSeeds = require('./userSeed.json');
-const recipeSeeds = require('./recipeSeed.json');
-const commentSeeds = require('./commentSeed.json');
-const mongoose = require('mongoose');
-
+const { User, Recipe } = require('../models');
+const userSeed = require('./userSeed.json');
+const recipeSeed = require('./recipeSeed.json');
 
 db.once('open', async () => {
   try {
     await Recipe.deleteMany({});
     await User.deleteMany({});
-    await Comment.deleteMany({});
 
-    await User.create(userSeeds);
+    await User.create(userSeed);
 
-    for (let i = 0; i < recipeSeeds.length; i++) {
-      const userIndex = i % userSeeds.length;
-      const { _id, recipeCreator } = await Recipe.create({
-        ...recipeSeeds[i],
-        recipeCreator: userSeeds[userIndex]._id,
-      });
+    for (let i = 0; i < recipeSeed.length; i++) {
+      const { _id, recipeAuthor } = await Recipe.create(recipeSeed[i]);
       const user = await User.findOneAndUpdate(
-        { username: recipeCreator },
+        { username: recipeAuthor },
         {
           $addToSet: {
-            selectedRecipeIds: _id, // Change 'recipes' to 'selectedRecipeIds'
+            recipes: _id,
           },
         }
       );
-    }
-
-    for (let i = 0; i < commentSeeds.length; i++) {
-      const userIndex = i % userSeeds.length;
-      const recipeIndex = i % recipeSeeds.length;
-      await Comment.create({
-        ...commentSeeds[i],
-        userId: userSeeds[userIndex]._id,
-        recipeId: recipeSeeds[recipeIndex]._id,
-      });
     }
   } catch (err) {
     console.error(err);

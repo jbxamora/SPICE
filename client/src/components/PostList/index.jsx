@@ -3,17 +3,18 @@ import PostCard from "../PostCard";
 import SideBar from "../SideBar";
 import { dummySavedPosts, potentialFriends } from "../../constants/constants";
 import { useQuery } from '@apollo/client';
-import { GET_RECIPE } from '../../utils/queries';
+import { QUERY_RECIPES } from '../../utils/queries';
 
 
 
 const PostsList = ({ posts, savedPosts }) => {
-  const { data, loading, error } = useQuery(GET_RECIPE);
+  
+  const { data, loading, error } = useQuery(QUERY_RECIPES);
   if (error) {
-    console.error("Error executing the GET_RECIPE query:", error);
+    console.error("Error executing the QUERY_RECIPES query:", error);
   }
-  const recipeData = data?.getRecipe || [];
-  console.log(recipeData)
+  const recipes = data?.recipes || [];
+  console.log(17, recipes)
 
   return (
     <div className="container w-full mx-auto mt-8 px-4">
@@ -29,8 +30,8 @@ const PostsList = ({ posts, savedPosts }) => {
           {/* Grid to display posts */}
           <div className="grid grid-cols-1 gap-8 place-items-center">
             {/* Iterate through the posts array and render a PostCard component for each post */}
-            {recipeData.map((recipe) => (
-              <PostCard key={recipe._id} recipe={recipe} />
+            {recipes.map((recipes) => (
+              <PostCard key={recipes._id} recipe={recipes} />
             ))}
           </div>
         </div>

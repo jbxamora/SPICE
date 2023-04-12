@@ -6,12 +6,12 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
     },
-    ingredients: [
+    ingredients: 
         {
-            type: String,
+            type: [String],
             required: true,
         },
-    ],
+    
     instructions: {
         type: String,
         required: true,
