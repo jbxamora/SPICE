@@ -24,35 +24,40 @@ const CreatePost = () => {
     [{ font: [] }],
     [{ align: [] }],
   ];
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    const { data } = createRecipe({
-      name: title,
-      ingredients: ingredients,
-      instructions: content,
-      imgUrl: imgUrl,
+    const { data } = await createRecipe({
+      variables: {
+        input: {
+          name: title,
+          ingredients: ingredients,
+          instructions: content,
+          imgUrl: imgUrl,
+        }
+      }
     })
-    
+
+    console.log(data);
     console.log("Title:", title);
     console.log("Content:", content);
     console.log("imgUrl:", imgUrl);
     console.log("Ingredients:", ingredients);
   };
-   const handleAddIngredient = () => {
-     setIngredients([...ingredients, ""]);
-   };
-   const handleUpdateIngredient = (index, value) => {
-     const updatedIngredients = ingredients.map((ingredient, i) => {
-       return i === index ? value : ingredient;
-     });
-     setIngredients(updatedIngredients);
-   };
-   const handleRemoveIngredient = (index) => {
-     const updatedIngredients = ingredients.filter((_, i) => i !== index);
-     setIngredients(updatedIngredients);
-   };
+  const handleAddIngredient = () => {
+    setIngredients([...ingredients, ""]);
+  };
+  const handleUpdateIngredient = (index, value) => {
+    const updatedIngredients = ingredients.map((ingredient, i) => {
+      return i === index ? value : ingredient;
+    });
+    setIngredients(updatedIngredients);
+  };
+  const handleRemoveIngredient = (index) => {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(updatedIngredients);
+  };
 
   return (
     <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
