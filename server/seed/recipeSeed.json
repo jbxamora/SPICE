@@ -1,5 +1,25 @@
 [
     {
+        "name": "Example Recipe",
+        "imgUrl": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2021-07-Chicken-Alfredo-Pizza%2FChicken-Alfredo-Pizza-KitchnKitchn2970-1_01",
+        "ingredients": [
+          "Flour",
+          "Sugar",
+          "Cocoa Powder",
+          "Baking Soda",
+          "Salt",
+          "Eggs",
+          "Buttermilk",
+          "Vegetable Oil",
+          "Vanilla Extract",
+          "Boiling Water"
+        ],
+        "instructions": "1. Preheat oven to 350°F (175°C)...\n2. Grease and flour two 9-inch cake pans...\n3. In a large bowl, combine all dry ingredients...",
+        "recipeCreatorId": "643577f7a81b615894f607cb"
+      },
+    
+    
+    {
         "name": "Pizza",
         "ingredients": [
             "Pizza dough",
@@ -8,7 +28,9 @@
             "fresh herbs"
         ],
         "instructions": "Put toppings on Pizza dough and bake for 20 min",
-        "imgUrl": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2021-07-Chicken-Alfredo-Pizza%2FChicken-Alfredo-Pizza-KitchnKitchn2970-1_01"
+        "imgUrl": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2021-07-Chicken-Alfredo-Pizza%2FChicken-Alfredo-Pizza-KitchnKitchn2970-1_01",
+        "recipeCreatorId": "6435740b630bec02619a76f8"
+    
     },
     {
         "name": "PB and J",
@@ -18,7 +40,8 @@
             "Jelly"
         ],
         "instructions": "Spread peanut butter on one slice of bread, spread jelly on another slice of bread. Put the two slices together.Enjoy!",
-        "imgUrl": "https://www.peanutbutter.com/wp-content/uploads/2022/03/Web_500_Classic-Peanut-Butter-Jelly-Sandwich.png"
+        "imgUrl": "https://www.peanutbutter.com/wp-content/uploads/2022/03/Web_500_Classic-Peanut-Butter-Jelly-Sandwich.png",
+        "recipeCreatorId": "643577f7a81b615894f607cc"
     },
     {
         "name": "Curried sausages",
@@ -36,7 +59,8 @@
             " Parsley leaves, to serve"
         ],
         "instructions": "Cook sausages, in batches, turning, for 5 to 6 minutes or until browned all over.dd onion, carrot and garlic. Cook, stirring, for 5 minutes or until onion has softened. Add curry powder. Cook, stirring, for 30 seconds or until fragrant. Add fruit chutney and stock. Return sausages to pan. Cover, bring to the boil. Reduce heat to medium-low. Simmer, uncovered, for 25 minutes or until sausages are cooked through and sauce thickens.Stir in peas. Season. Cook for 1 to 2 minutes or until heated through. Serve.",
-        "imgUrl": "https://img.taste.com.au/FXY-dJCV/w643-h428-cfill-q90/taste/2016/11/curried-sausages-72753-1.jpeg"
+        "imgUrl": "https://img.taste.com.au/FXY-dJCV/w643-h428-cfill-q90/taste/2016/11/curried-sausages-72753-1.jpeg",
+        "recipeCreatorId":"643577f7a81b615894f607cb"
     },
     {
         "name": "Hot Egg Toast",
@@ -49,7 +73,8 @@
             "  ½ teaspoon Sriracha"
         ],
         "instructions": "Mash half of an avocado.Add salt and pepper,to taste. Mix until well combined.Spread the mashed avocado evenly across toast.Top with the fried egg, and drizzle with Sriracha!",
-        "imgUrl": "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/f0af687391a44cd19e36e181bcf4bde4/BFV20878_Avocado_Toast_9_Ways_FB1080x1080.jpg?resize=1000:*&output-format=auto&output-quality=auto"
+        "imgUrl": "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/f0af687391a44cd19e36e181bcf4bde4/BFV20878_Avocado_Toast_9_Ways_FB1080x1080.jpg?resize=1000:*&output-format=auto&output-quality=auto",
+        "recipeCreatorId":"643577f7a81b615894f607d0"
     },
     {
         "name": "Fruit salad",
@@ -63,6 +88,7 @@
             "mint"
         ],
         "instructions": "Cut up all of the fruit and mix together in a bowl",
-        "imgUrl": "https://images.themodernproper.com/billowy-turkey/production/posts/2022/FruitSalad_Shot4_20.jpg?w=1200&h=630&q=82&fm=jpg&fit=crop&dm=1654019861&s=36d5cdd1b9c33cf2f81e2d9871f7754e"
+        "imgUrl": "https://images.themodernproper.com/billowy-turkey/production/posts/2022/FruitSalad_Shot4_20.jpg?w=1200&h=630&q=82&fm=jpg&fit=crop&dm=1654019861&s=36d5cdd1b9c33cf2f81e2d9871f7754e",
+        "recipeCreatorId":"643577f7a81b615894f607cf"
     }
 ]

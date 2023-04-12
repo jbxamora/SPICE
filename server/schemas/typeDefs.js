@@ -9,7 +9,7 @@ const typeDefs = gql`
     password: String
     recipeCount: Int
     savedRecipes: [ID]
-}
+  }
 
   type Recipe {
     _id: ID!
@@ -70,9 +70,9 @@ const typeDefs = gql`
     me: User
     user(userId:ID!): User
     getAllUsers: [User]
-    getRecipes: [Recipe]
+    getRecipe: [Recipe]
     getOneRecipe(_id: ID!): Recipe
-    getRecipesByIds(_id: [ID!]): [Recipe]
+    getRecipeByIds(_id: [ID!]): [Recipe]
     getComments: [Comment]
     getReactionsByRecipeId(recipeId: ID!): [Reaction]
     recipe(_id: ID!): Recipe
@@ -82,13 +82,13 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(name: String!, username: String!, email: String!, password: String!): Auth
     selectRecipe(_id: String!): User
-    createRecipe(input: RecipeInput!): Recipe
+    createRecipe(input: RecipeInput): Recipe
     removeRecipe(_id: ID!): Recipe
     updateRecipe(input: UpdateRecipeInput!): Recipe
     deleteRecipe(_id: ID!): Recipe
     createComment(commentText: String!, username: String!, createdAt: String!): Comment!
     deleteComment(_id: ID!): Comment!
-    createReaction(reactionInput: ReactionInput): Reaction
+    createReaction(reactionInput: ReactionInput): Recipe
     removeReaction(reactionId: ID!): Boolean
   }
 `;
