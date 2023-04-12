@@ -32,7 +32,7 @@ const Navbar = () => {
       return (
         <button
           onClick={Auth.logout}
-          className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
+          className="text-gray-300 hover:text-white hover:bg-gray-700 font-thefont block px-3 py-2 rounded-md text-base font-medium"
         >
           Logout
         </button>
@@ -41,14 +41,14 @@ const Navbar = () => {
       return location.pathname === "/signup" ? (
         <Link
           to="/signin"
-          className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
+          className="text-gray-300 hover:text-white hover:bg-gray-700 font-thefont block px-3 py-2 rounded-md text-base font-medium"
         >
           Log In
         </Link>
       ) : (
         <Link
           to="/signup"
-          className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
+          className="text-gray-300 hover:text-white hover:bg-gray-700 font-thefont block px-3 py-2 rounded-md text-base font-medium"
         >
           Sign Up
         </Link>
@@ -81,10 +81,10 @@ const Navbar = () => {
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
+            <img src={logo} alt="logo" className="w-10 h-10 object-contain" />
             <Link
               to="/"
-              className="text-2xl font-bold gradient-text cursor-pointer ml-4"
+              className="text-3xl font-thefont gradient-text cursor-pointer ml-4"
             >
               SPICE
             </Link>
@@ -95,23 +95,23 @@ const Navbar = () => {
             <div className="flex items-baseline space-x-4 ml-4">
               <Link
                 to="/home"
-                className="text-gray-300 hover:text-white px-4 py-2 rounded text-base font-medium transition-colors duration-200"
+                className="text-gray-300 hover:text-white px-4 py-2 rounded text-base font-thefont font-medium transition-colors duration-200"
               >
                 Home
               </Link>
               <Link
                 to="/create"
-                className="text-gray-300 hover:text-white px-4 py-2 rounded text-base font-medium transition-colors duration-200"
+                className="text-gray-300 hover:text-white px-4 py-2 rounded text-base font-thefont font-medium transition-colors duration-200"
               >
                 Create
               </Link>
               {renderAuthButton()}
             </div>
           </div>
-          <div className="-mr-2 flex md:hidden">
+          <div className="-mr-2  flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`inline-flex items-center justify-center p-2 rounded-md hamburger-btn ${
+              className={`inline-flex  items-center justify-center p-2 rounded-md hamburger-btn ${
                 isOpen ? "open" : ""
               } focus:outline-none`}
             >
