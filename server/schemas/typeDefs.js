@@ -15,11 +15,12 @@ const typeDefs = gql`
     _id: ID!
     name: String
     imgUrl: String
-    recipeCreator: User
+    createdAt: String
     instructions: String
-    ingredients: [String]
+    recipeCreator: User
     reactions: [Reaction]
     comments: [Comment]
+    ingredients: [String]
     reactionCount: Int
   }
 
@@ -69,9 +70,9 @@ const typeDefs = gql`
     me: User
     user(userId:ID!): User
     getAllUsers: [User]
-    getRecipes: [Recipe]
+    getRecipe: [Recipe]
     getOneRecipe(_id: ID!): Recipe
-    getRecipesByIds(_id: [ID!]): [Recipe]
+    getRecipeByIds(_id: [ID!]): [Recipe]
     getComments: [Comment]
     getReactionsByRecipeId(recipeId: ID!): [Reaction]
     recipe(_id: ID!): Recipe
@@ -87,7 +88,7 @@ const typeDefs = gql`
     deleteRecipe(_id: ID!): Recipe
     createComment(commentText: String!, username: String!, createdAt: String!): Comment!
     deleteComment(_id: ID!): Comment!
-    createReaction(reactionInput: ReactionInput): Reaction
+    createReaction(reactionInput: ReactionInput): Recipe
     removeReaction(reactionId: ID!): Boolean
   }
 `;

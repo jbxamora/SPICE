@@ -1,9 +1,18 @@
 import React from "react";
 import { reaction } from "../../assets";
 import { Link } from "react-router-dom";
+import { useQuery } from '@apollo/client';
+import { GET_RECIPE } from '../../utils/queries';
 
 const PostCard = ({ recipe }) => {
-  const { _id, name, imgUrl, instructions, ingredients } = recipe;
+  const { data, loading, error } = useQuery(GET_RECIPE);
+  if (error) {
+    console.error("Error executing the GET_RECIPE query:", error);
+  }
+  const recipeData = data?.getRecipe || [];
+  console.log(13, recipeData)
+  
+  const { _id, name, imgUrl, instructions, ingredients, recipeCreator} = recipe;
 
   const getSnippet = (content) => {
     const maxLength = 100;
@@ -37,7 +46,7 @@ const PostCard = ({ recipe }) => {
         <p className="text-gray-400 text-base">{getSnippet(instructions)}</p>
       </div>
       <div className="px-6 pt-4 pb-2">
-        {/* Add any relevant tags here */}
+      
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
           #example-tag
         </span>

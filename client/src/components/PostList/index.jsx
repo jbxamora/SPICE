@@ -12,7 +12,7 @@ const PostsList = ({ posts, savedPosts }) => {
   if (error) {
     console.error("Error executing the GET_RECIPE query:", error);
   }
-  const recipeData = data?.getRecipes || [];
+  const recipeData = data?.getRecipe || [];
   console.log(recipeData)
 
   return (

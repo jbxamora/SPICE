@@ -2,11 +2,13 @@ import { gql } from '@apollo/client';
 
 export const GET_RECIPE = gql`
   query {
-    getRecipes {
+    getRecipe {
       _id
       name
       imgUrl
-      recipeCreator
+      recipeCreator{
+        name
+      }
       instructions
       ingredients
     }
