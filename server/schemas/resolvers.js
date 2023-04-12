@@ -106,6 +106,22 @@ const resolvers = {
       console.log(26, populatedRecipe);
       return populatedRecipe;
     },
+
+    // createRecipe: async (parent, {
+    //   name,
+    //   imgUrl,
+    //   instructions,
+    //   ingredients
+    // }, context) => {
+    //   if (context.user){
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       {_id: context.user._id},
+    //       {$push: {createRecipe: {name, imgUrl, instructions, ingredients}}}
+    //     );
+    //     return updatedUser;
+    //   }
+    // },
+
     // Remove a recipe
     removeRecipe: async (parent, { _id }, context) => {
       if (context.user) {

@@ -15,12 +15,11 @@ const typeDefs = gql`
     _id: ID!
     name: String
     imgUrl: String
-    createdAt: String
-    instructions: String
     recipeCreator: User
+    instructions: String
+    ingredients: [String]
     reactions: [Reaction]
     comments: [Comment]
-    ingredients: [String]
     reactionCount: Int
   }
 

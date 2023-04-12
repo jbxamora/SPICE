@@ -6,6 +6,7 @@ export const GET_RECIPE = gql`
       _id
       name
       imgUrl
+      recipeCreator
       instructions
       ingredients
     }
