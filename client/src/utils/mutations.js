@@ -26,6 +26,11 @@ export const ADD_USER = gql`
   }
 `;
 
+export const CREATE_RECIPE = gql`
+  mutation createRecipe($input: RecipeInput) {
+    createRecipe(input: $input) {imgUrl}
+  }
+`;
 
 
 
