@@ -1,12 +1,14 @@
 const db = require('../config/connection');
-const { User, Recipes, Comment } = require('../models');
+const { User, Recipe, Comment } = require('../models');
 const userSeeds = require('./userSeed.json');
 const recipeSeeds = require('./recipeSeed.json');
 const commentSeeds = require('./commentSeed.json');
+const mongoose = require('mongoose');
+
 
 db.once('open', async () => {
   try {
-    await Recipes.deleteMany({});
+    await Recipe.deleteMany({});
     await User.deleteMany({});
     await Comment.deleteMany({});
 
@@ -14,7 +16,7 @@ db.once('open', async () => {
 
     for (let i = 0; i < recipeSeeds.length; i++) {
       const userIndex = i % userSeeds.length;
-      const { _id, recipeCreator } = await Recipes.create({
+      const { _id, recipeCreator } = await Recipe.create({
         ...recipeSeeds[i],
         recipeCreator: userSeeds[userIndex]._id,
       });

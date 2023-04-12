@@ -37,7 +37,7 @@ const resolvers = {
       return User.find().sort({ createdAt: -1 });
     },
     getRecipe: async (parent, args) => {
-      return Recipe.find().sort({ createdAt: -1 }).populate('User');
+      return Recipe.find().sort({ createdAt: -1 }).populate('recipeCreator');
     },
     getOneRecipe: async (parent, { _id }) => {
       return Recipe.findOne({ _id });
