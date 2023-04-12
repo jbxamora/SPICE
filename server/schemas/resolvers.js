@@ -1,50 +1,33 @@
 const { AuthenticationError, ApolloError } = require('apollo-server-express');
 const { User, Recipe, reactionSchema, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
-const { PubSub } = require('graphql-subscriptions');
-const pubsub = new PubSub();
-const RECIPE_UPDATED = "RECIPE_UPDATED";
 
 
 
 const resolvers = {
   Query: {
-
-    //Define query resolvers
-    recipe: async (parent, { _id }, context) => {
-      const recipe = await Recipe.findById(_id)
-        .populate('recipeCreator')
-        .populate({
-          path: 'comments',
-          populate: {
-            path: 'commentAuthor',
-          },
-        })
-        .populate('reactions');
-      return recipe;
+    users: async () => {
+      return User.find().populate('recipes');
     },
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate('recipes');
+    },
+      //Define query resolvers
+    recipes: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Recipe.find(params).sort({ createdAt: -1 });
+      },
+    recipe: async (parent, { recipeId }) => {
+        return Recipe.findOne({ _id: recipeId });
+      },
   
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('selectedRecipeIds');
+        return User.findOne({ _id: context.user._id }).populate('recipes');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    user: async (parent, {userId})=> {
-      return User.findOne({_id: userId});
-    },
-    getAllUsers: async (parent, args) => {
-      return User.find().sort({ createdAt: -1 });
-    },
-    getRecipe: async (parent, args) => {
-      return Recipe.find().sort({ createdAt: -1 }).populate('recipeCreator');
-    },
-    getOneRecipe: async (parent, { _id }) => {
-      return Recipe.findOne({ _id });
-    },
-    getRecipeByIds: async (parent, { _id }) => {
-      return Recipe.find({ _id: { $in: _id } }).sort({ createdAt: -1 });
-    },
+
     getComments: async () => {
       return Comment.find().sort({ createdAt: -1 });
     },
@@ -80,41 +63,50 @@ const resolvers = {
   
       return { token, user };
     },
-    // Select a recipe
-    selectRecipe: async (parent, { _id }, context) => {
+    // Create a recipe
+    addThought: async (parent, { name, ingredients, instructions, imgUrl }, context) => {
       if (context.user) {
-        const user = await User.findOneAndUpdate(
+        const thought = await Recipe.create({
+          name, ingredients, instructions, imgUrl,
+          recipeAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { selectedRecipeIds: _id } },
-          { new: true }
-        ).populate('selectedRecipeIds');
-        return user;
+          { $addToSet: { recipes: recipe._id } }
+        );
+
+        return recipe;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // Create a recipe
-    createRecipe: async (parent, { input }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('You need to be logged in!');
+    
+    // Create a comment
+    addComment: async (parent, { thoughtId, commentText }, context) => {
+      if (context.user) {
+        return Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          {
+            $addToSet: {
+              comments: { commentText, commentAuthor: context.user.username },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
       }
-    
-      const recipe = await Recipe.create({ ...input, recipeCreator: context.user._id });
-    
-      // Populate the recipeCreator field
-      const populatedRecipe = await Recipe.populate(recipe, { path: 'recipeCreator' });
-    
-      console.log(26, populatedRecipe);
-      return populatedRecipe;
+      throw new AuthenticationError('You need to be logged in!');
     },
     // Remove a recipe
-    removeRecipe: async (parent, { _id }, context) => {
+    removeRecipe: async (parent, { recipeId }, context) => {
       if (context.user) {
-        const user = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { selectedRecipeIds: _id } },
-          { new: true }
-        ).populate('selectedRecipeIds');
-        return user;
+        const recipe = await Recipe.findOneAndUpdate(
+          { _id: recipeId },
+          { $pull: { recipes: recipe._id } })
+   
+        return recipe;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -124,30 +116,24 @@ const resolvers = {
       return recipe;
     },
     //create comment
-    createComment: async (parent, { commentText, username, createdAt }, context) => {
+    removeComment: async (parent, { thoughtId, commentId }, context) => {
       if (context.user) {
-        const comment = await Comments.create({
-          commentText,
-          username,
-          createdAt,
-          user: context.user._id
-        });
-        return comment;
+        return Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          {
+            $pull: {
+              comments: {
+                _id: commentId,
+                commentAuthor: context.user.username,
+              },
+            },
+          },
+          { new: true }
+        );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // Delete a comment
-    deleteComment: async (parent, { id }, context) => {
-      if (context.user) {
-        const comment = await Comments.findOneAndDelete({ _id: id, user: context.user._id });
-        if (!comment) {
-          throw new Error('You are not authorized to delete this comment!');
-        }
-        return comment;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    // Create a reaction for a recipe
+
     createReaction: async (parent, { reactionInput }, context) => {
       if (!reactionInput.recipeId) {
         throw new Error('recipeId is required');

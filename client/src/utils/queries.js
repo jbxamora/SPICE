@@ -1,16 +1,27 @@
 import { gql } from '@apollo/client';
 
 export const GET_RECIPE = gql`
-  query {
-    getRecipe {
+  query user($username: String!) {
+    user(username: $username) {
       _id
-      name
-      imgUrl
-      recipeCreator{
-        name
+      username
+      email
+      recipes {
+        _id
+        recipeText
+        createdAt
       }
-      instructions
-      ingredients
+    }
+  }
+`;
+
+export const QUERY_THOUGHTS = gql`
+  query getThoughts {
+    thoughts {
+      _id
+      thoughtText
+      thoughtAuthor
+      createdAt
     }
   }
 `;

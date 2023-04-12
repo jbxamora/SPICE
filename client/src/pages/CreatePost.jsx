@@ -25,20 +25,26 @@ const CreatePost = () => {
     [{ align: [] }],
   ];
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    const { data } = createRecipe({
-      name: title,
-      ingredients: ingredients,
-      instructions: content,
-      imgUrl: imgUrl,
-    })
-    
-    console.log("Title:", title);
-    console.log("Content:", content);
-    console.log("imgUrl:", imgUrl);
-    console.log("Ingredients:", ingredients);
+    try {
+      const { data } = await createRecipe({
+        variables: {
+          name: title,
+          imgUrl: imgUrl,
+          instructions: content,
+          ingredients: ingredients,
+        },
+      });
+  
+      console.log("Title:", title);
+      console.log("Content:", content);
+      console.log("imgUrl:", imgUrl);
+      console.log("Ingredients:", ingredients);
+    } catch (err) {
+      console.error("Error creating recipe:", err);
+    }
   };
    const handleAddIngredient = () => {
      setIngredients([...ingredients, ""]);

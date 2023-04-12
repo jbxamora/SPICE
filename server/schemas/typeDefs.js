@@ -1,27 +1,24 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+
   type User {
-    _id: ID!
-    name: String!
-    username: String!
-    email: String!
+    _id: ID
+    username: String
+    email: String
     password: String
-    recipeCount: Int
-    savedRecipes: [ID]
+    recipe: [Recipe]!
   }
 
   type Recipe {
-    _id: ID!
+    _id: ID
     name: String
-    imgUrl: String
-    createdAt: String
-    instructions: String
-    recipeCreator: User
-    reactions: [Reaction]
-    comments: [Comment]
     ingredients: [String]
-    reactionCount: Int
+    instructions: String
+    imgUrl: String
+    recipeAuthor: String
+    createdAt: String,
+    comments: [Comment]!,
   }
 
   type Auth {
@@ -30,10 +27,10 @@ const typeDefs = gql`
   }
 
   type Comment {
-    _id: ID!
-    commentText: String!
-    username: String!
-    createdAt: String!
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String
   }
 
   type Reaction {
@@ -43,12 +40,6 @@ const typeDefs = gql`
     username: String!
   }
 
-  input RecipeInput {
-    name: String
-    imgUrl: String
-    instructions: String!
-    ingredients: [String]
-  }
 
   input UpdateRecipeInput {
     _id: String!
@@ -68,26 +59,24 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    user(userId:ID!): User
-    getAllUsers: [User]
-    getRecipe: [Recipe]
-    getOneRecipe(_id: ID!): Recipe
-    getRecipeByIds(_id: [ID!]): [Recipe]
+    user(username: String!): User
+    users: [User]
+    recipes(username: String): [Recipe]
+    recipe(recipeId: ID!): Recipe
     getComments: [Comment]
     getReactionsByRecipeId(recipeId: ID!): [Reaction]
-    recipe(_id: ID!): Recipe
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(name: String!, username: String!, email: String!, password: String!): Auth
     selectRecipe(_id: String!): User
-    createRecipe(input: RecipeInput): Recipe
-    removeRecipe(_id: ID!): Recipe
+    createRecipe(name: String!, ingredients: String!, instructions: String!, imgUrl:String!): Recipe
+    removeRecipe(recipeId: ID!): Recipe
     updateRecipe(input: UpdateRecipeInput!): Recipe
-    deleteRecipe(_id: ID!): Recipe
-    createComment(commentText: String!, username: String!, createdAt: String!): Comment!
-    deleteComment(_id: ID!): Comment!
+    deleteRecipe(recipeId: ID!): Recipe
+    addComment(recipeId: ID!, commentText: String!): Recipe
+    removeComment(recipeId: ID!, commentId: ID!): Recipe
     createReaction(reactionInput: ReactionInput): Recipe
     removeReaction(reactionId: ID!): Boolean
   }

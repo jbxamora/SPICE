@@ -1,7 +1,5 @@
 import { gql } from '@apollo/client';
 
-
-//why dont we have queries??
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -26,7 +24,17 @@ export const ADD_USER = gql`
   }
 `;
 
-
+export const CREATE_RECIPE = gql`
+  mutation createRecipe($name:String!,$imgUrl: String!, $instructions: String!, $ingredients: [String]) {
+    createRecipe(name: $name, imgUrl: $imgUrl, instructions: $instructions, ingredients: $ingredients) {
+      _id
+      name
+      imgUrl
+      instructions
+      ingredients
+    }
+  }
+`;
 
 
 
