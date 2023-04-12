@@ -9,7 +9,7 @@ const PostCard = ({ recipe }) => {
   if (error) {
     console.error("Error executing the QUERY_RECIPES query:", error);
   }
-  const recipeData = data?.getRecipe || [];
+  const recipeData = data?.addRecipes || [];
   console.log(13, recipeData)
   
   const { _id, name, imgUrl, instructions, ingredients, recipeAuthor,createdAt} = recipe;

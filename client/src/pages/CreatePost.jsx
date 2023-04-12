@@ -2,15 +2,40 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useMutation } from '@apollo/client';
-import { CREATE_RECIPE } from '../utils/mutations';
+import { ADD_RECIPE } from '../utils/mutations';
+import { QUERY_RECIPES, QUERY_ME } from '../utils/queries';
 
 const CreatePost = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [imgUrl, setImgurl] = useState("");
+  const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [createRecipe, { error, data }] = useMutation(CREATE_RECIPE);
+  const [instructions, setInstructions] = useState("");
+  const [imgUrl, setImgurl] = useState("");
 
+  const [addRecipes, { error, data }] = useMutation(ADD_RECIPE, {
+    update(cache, { data: { addRecipe } }) {
+      try {
+        const { recipes } = cache.readQuery({ query: QUERY_RECIPES })??{};
+
+        if (recipes){
+        cache.writeQuery({
+          query: QUERY_RECIPES,
+          data: { recipes: [addRecipe, ...recipes] },
+        });}
+      } catch (e) {
+        console.error(e);
+      }
+      // update me object's cache
+      const { meData } = cache.readQuery({ query: QUERY_ME })?.meData??{};
+      if (meData) {
+        const { me } = meData;
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: { ...me, recipes: [...me.recipes, addRecipe] } },
+      
+      });
+  };
+},
+  });
   const toolbarOptions = [
     ["bold", "italic", "underline"], // toggled buttons
     ["blockquote"],
@@ -24,41 +49,41 @@ const CreatePost = () => {
     [{ font: [] }],
     [{ align: [] }],
   ];
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
     try {
-      const { data } = await createRecipe({
+      const { data } = await addRecipes({
         variables: {
-          name: title,
+          name: name,
           imgUrl: imgUrl,
-          instructions: content,
+          instructions: instructions,
           ingredients: ingredients,
         },
       });
-  
-      console.log("Title:", title);
-      console.log("Content:", content);
+
+      console.log("Title:", name);
+      console.log("Content:", instructions);
       console.log("imgUrl:", imgUrl);
       console.log("Ingredients:", ingredients);
     } catch (err) {
       console.error("Error creating recipe:", err);
     }
   };
-   const handleAddIngredient = () => {
-     setIngredients([...ingredients, ""]);
-   };
-   const handleUpdateIngredient = (index, value) => {
-     const updatedIngredients = ingredients.map((ingredient, i) => {
-       return i === index ? value : ingredient;
-     });
-     setIngredients(updatedIngredients);
-   };
-   const handleRemoveIngredient = (index) => {
-     const updatedIngredients = ingredients.filter((_, i) => i !== index);
-     setIngredients(updatedIngredients);
-   };
+  const handleAddIngredient = () => {
+    setIngredients([...ingredients, ""]);
+  };
+  const handleUpdateIngredient = (index, value) => {
+    const updatedIngredients = ingredients.map((ingredient, i) => {
+      return i === index ? value : ingredient;
+    });
+    setIngredients(updatedIngredients);
+  };
+  const handleRemoveIngredient = (index) => {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(updatedIngredients);
+  };
 
   return (
     <div className="container w-full md:w-2/3 lg:w-1/2 mx-auto mt-10 px-4">
@@ -76,8 +101,8 @@ const CreatePost = () => {
           <input
             type="text"
             id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
             required
             style={{ minHeight: "4rem" }}
@@ -92,8 +117,8 @@ const CreatePost = () => {
           </label>
           <ReactQuill
             id="content"
-            value={content}
-            onChange={setContent}
+            value={instructions}
+            onChange={setInstructions}
             theme="snow"
             className="text-lg mt-auto px-3 py-4"
             style={{ minHeight: "25rem", className: "h-44 text-white" }}

@@ -16,7 +16,7 @@ export const GET_USER = gql`
 `;
 
 export const QUERY_RECIPES = gql`
-  query getRecipes {
+  query addRecipes {
     recipes {
       _id
       name
