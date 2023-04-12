@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useMutation } from '@apollo/client';
-import { CREATE_RECIPE } from '../utils/mutations';
+// import { useMutation } from '@apollo/client';
+// import { CREATE_RECIPE } from '../utils/mutations';
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imgUrl, setImgurl] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [createRecipe, { error, data }] = useMutation(CREATE_RECIPE);
+  // const [createRecipe, { error, data }] = useMutation(CREATE_RECIPE);
 
   const toolbarOptions = [
     ["bold", "italic", "underline"], // toggled buttons
@@ -24,7 +24,7 @@ const CreatePost = () => {
     [{ font: [] }],
     [{ align: [] }],
   ];
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -40,6 +40,7 @@ const CreatePost = () => {
     console.log("imgUrl:", imgUrl);
     console.log("Ingredients:", ingredients);
   };
+  
    const handleAddIngredient = () => {
      setIngredients([...ingredients, ""]);
    };
