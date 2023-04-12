@@ -45,7 +45,15 @@ class AuthService {
     // this will reload the page and reset the state of the application
     window.location.assign('/');
   }
+  
+  isAuthenticated() {
+  const token = this.getToken();
+  return token !== null && !this.isTokenExpired(token);
 }
+}
+
+
+
 const auth = new AuthService()
 
 export default auth;

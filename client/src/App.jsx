@@ -17,6 +17,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Post from "./pages/Post";
 
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -44,18 +45,18 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path="/home" element={<PostsList posts={dummyPosts} />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/create" element={<CreatePost />} />
-        <Route path="/post/:id" element={<Post />} />
-      </Routes>
-      <Footer />
-    </Router>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<LandingPage />} />
+          <Route path="/home" element={<PostsList posts={dummyPosts} />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/create" element={<CreatePost />} />
+          <Route path="/post/:id" element={<Post />} />
+        </Routes>
+        <Footer />
+      </Router>
     </ApolloProvider>
   );
 };

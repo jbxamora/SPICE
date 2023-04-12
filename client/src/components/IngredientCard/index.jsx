@@ -1,10 +1,29 @@
 import React, { useState } from "react";
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import {QUERY_SINGLE_RECIPE} from '../../utils/queries'
 
-// IngredientsCard component receives an array of ingredients as a prop
-const IngredientsCard = ({ ingredients }) => {
+const IngredientsCard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [hideDropdown, setHideDropdown] = useState(false);
+  
+  const { id } = useParams();
+  console.log(id);
+  const recipeId = id;
+  console.log(114,recipeId)
+  const { loading, data } = useQuery(QUERY_SINGLE_RECIPE, {
+    variables: { recipeId: recipeId },
+  });
 
+  const recipe = data?.recipe || {};
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log("Data:", data);
+
+  const ingredients = recipe.ingredients || [];
+  console.log("ingred", ingredients)
   // Function to hide the dropdown
   const handleHideDropdown = () => {
     setShowDropdown(false);

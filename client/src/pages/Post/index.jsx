@@ -2,22 +2,28 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/NavBar";
 import FullPost from "../../components/FullPost";
-import { postIngredients, dummyPosts } from "../../constants/constants";
 import IngredientsCard from "../../components/IngredientCard";
 import Comments from "../../components/Comments";
+import { useQuery } from '@apollo/client';
+import { QUERY_SINGLE_RECIPE } from '../../utils/queries';
 
 const Post = () => {
-  // Get the post ID from the URL parameters
+  // extract the postId value from the URL
   const { id } = useParams();
+  console.log(id);
+  const recipeId = id;
 
-  // Find the post from the list of dummyPosts
-  const post = dummyPosts.find((post) => post.id === id);
+  const { data, loading, error } = useQuery(QUERY_SINGLE_RECIPE, {
+    variables: { recipeId },
+  });
+  if (error){
+    console.error("Error getting recipe", error);
+  }
+  const recipe = data?.recipe || [];
+  console.log(19, recipe);
 
-  // Get the ingredients for the post from postIngredients
-  const ingredients = postIngredients[id];
-
-  // Display a "Post not found" message if the post is not found
-  if (!post) {
+  // Display a "Post not found" message if the recipe is not found
+  if (!recipe) {
     return (
       <div className="bg-[#1f1f1f] text-white min-h-screen">
         <Navbar />
@@ -35,15 +41,15 @@ const Post = () => {
       <main className="max-w-4xl mx-auto py-20">
         <div className="flex justify-between">
           <div className="flex-grow">
-            {/* Render the FullPost component with the post data */}
-            <FullPost post={post} />
+            {/* Render the FullPost component with the recipe data */}
+            <FullPost recipe={recipe} />
 
-            {/* Render the Comments component with the post ID */}
-            <Comments postId={id} />
+            {/* Render the Comments component with the recipe ID */}
+            <Comments recipeId={recipe._id} />
           </div>
 
-          {/* Render the IngredientsCard component with the ingredients data */}
-          {ingredients && <IngredientsCard ingredients={ingredients} />}
+          {/* Render the IngredientsCard component */}
+          <IngredientsCard />
         </div>
       </main>
     </div>
