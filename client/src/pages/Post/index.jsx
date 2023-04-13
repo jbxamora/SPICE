@@ -45,7 +45,7 @@ const Post = () => {
             <FullPost recipe={recipe} />
 
             {/* Render the Comments component with the recipe ID */}
-            {/* <Comments recipe={recipe} /> */}
+            <Comments recipe={recipe} />
              {/* <Comments postId={id}/> */}
           </div>
 

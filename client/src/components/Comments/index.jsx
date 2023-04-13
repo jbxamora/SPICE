@@ -1,40 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Comment from "../Comment";
-import { dummyComments } from "../../constants/constants";
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import {QUERY_SINGLE_RECIPE} from '../../utils/queries'
 
-// Comments component receives postId as a prop
-const Comments = ({ postId }) => {
-  console.log(postId,"comment")
-  // Get initial comments based on the postId or an empty array if no comments are found
-  
-  
-  const initialComments = dummyComments[1][0] || [];
-  console.log("dummy",initialComments.author)
-  // State to manage the comments
-  const [comments, setComments] = useState(initialComments);
+const Comments = () => {
+    
+  const { id } = useParams();
+  const recipeId = id;
 
-  // Function to add a new comment
+  const [allComments, setComments] = useState([]);
+
+  const { loading, data } = useQuery(QUERY_SINGLE_RECIPE, {
+    variables: { recipeId: recipeId },
+  });
+
+  useEffect(() => {
+    if (data) {
+      setComments(data.recipe.comments);
+    }
+  }, [data]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   const addComment = (newComment) => {
-    setComments([...comments, newComment]);
+    setComments([...allComments, newComment]);
   };
 
-  // Function to delete a comment by its ID
   const deleteComment = (commentId) => {
-    // Filter out the comment with the given ID
-    const updatedComments = comments.filter(
-      (comment) => comment.id !== commentId
+    const updatedComments = allComments.filter(
+      (comment) => comment._id !== commentId
     );
-    // Update the comments state
     setComments(updatedComments);
   };
 
-  // Render the Comments component
   return (
     <div className="space-y-4 bg-transparent border border-cyan-400 shadow-black shadow-xl p-4 rounded-lg">
-      {comments.map((comment) => (
-        // Render a Comment component for each comment in the comments array
+      {allComments.map((comment) => (
         <Comment
-          key={comment.id}
+          key={comment._id}
           comment={comment}
           addComment={addComment}
           deleteComment={deleteComment}
