@@ -71,7 +71,25 @@ export const DELETE_COMMENT = gql`
   }
 `;
 
-
+export const DELETE_RECIPE = gql`
+  mutation removeRecipe($recipeId: ID!) {
+  removeRecipe(recipeId: $recipeId) {
+    _id
+    name
+    ingredients
+    instructions
+    imgUrl
+    recipeAuthor
+    createdAt
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+    }
+  }
+}
+`;
 
 
 

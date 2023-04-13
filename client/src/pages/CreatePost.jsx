@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 import { QUERY_RECIPES, QUERY_ME } from '../utils/queries';
 
+
 const CreatePost = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");

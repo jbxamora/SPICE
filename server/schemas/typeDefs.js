@@ -75,6 +75,7 @@ const typeDefs = gql`
     removeComment(recipeId: ID, commentId: ID!): Recipe
     createReaction(reactionInput: ReactionInput): Recipe
     removeReaction(reactionId: ID!): Boolean
+    deleteRecipe(recipeId: ID!): Recipe
   }
 `;
 

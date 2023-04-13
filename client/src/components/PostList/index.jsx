@@ -15,7 +15,7 @@ const PostsList = ({ posts, savedPosts }) => {
   }
   const recipes = data?.recipes || [];
   console.log(17, recipes)
-
+  
   return (
     <div className="container w-full mx-auto mt-8 px-4">
       {/* Heading text */}
