@@ -4,8 +4,12 @@ import { dummyComments } from "../../constants/constants";
 
 // Comments component receives postId as a prop
 const Comments = ({ postId }) => {
+  console.log(postId,"comment")
   // Get initial comments based on the postId or an empty array if no comments are found
-  const initialComments = dummyComments[postId] || [];
+  
+  
+  const initialComments = dummyComments[1][0] || [];
+  console.log("dummy",initialComments.author)
   // State to manage the comments
   const [comments, setComments] = useState(initialComments);
 

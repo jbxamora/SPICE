@@ -2,17 +2,17 @@ import React from "react";
 import { reaction } from "../../assets";
 import { Link } from "react-router-dom";
 import { useQuery } from '@apollo/client';
-import { GET_RECIPE } from '../../utils/queries';
+import { QUERY_RECIPES } from '../../utils/queries';
 
 const PostCard = ({ recipe }) => {
-  const { data, loading, error } = useQuery(GET_RECIPE);
+  const { data, loading, error } = useQuery(QUERY_RECIPES);
   if (error) {
-    console.error("Error executing the GET_RECIPE query:", error);
+    console.error("Error executing the QUERY_RECIPES query:", error);
   }
-  const recipeData = data?.getRecipe || [];
+  const recipeData = data?.addRecipes || [];
   console.log(13, recipeData)
   
-  const { _id, name, imgUrl, instructions, ingredients, recipeCreator} = recipe;
+  const { _id, name, imgUrl, instructions, ingredients, recipeAuthor,createdAt} = recipe;
 
   const getSnippet = (content) => {
     const maxLength = 100;
@@ -56,15 +56,11 @@ const PostCard = ({ recipe }) => {
           <img src={reaction} alt="Reaction" className="h-[25px]" />
         </button>
 
-        {/* <img
-          className="w-10 h-10 rounded-full mr-4"
-          src={recipe.recipeCreator.avatarUrl}
-          alt={`Avatar of ${recipe.recipeCreator.name}`}
-        />
+
         <div className="text-sm">
-          <p className="text-white leading-none">{recipe.recipeCreator.name}</p>
-          <p className="text-gray-600">{recipe.createdAt}</p>
-        </div> */}
+          <p className="text-white leading-none">{recipeAuthor}</p>
+          <p className="text-gray-600">{createdAt}</p>
+        </div>
       </div>
     </div>
   );
