@@ -16,11 +16,10 @@ const IngredientsCard = () => {
   });
 
   const recipe = data?.recipe || {};
-
+ console.log(recipe, "ingredient")
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log("Data:", data);
 
   const ingredients = recipe.ingredients || [];
   console.log("ingred", ingredients)

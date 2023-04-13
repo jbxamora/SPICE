@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import Comment from "../Comment";
 import { dummyComments } from "../../constants/constants";
-import { useParams } from "react-router-dom";
 
 // Comments component receives postId as a prop
-
-const Comments = () => {
-  const { id } = useParams();
+const Comments = ({ postId }) => {
+  console.log(postId,"comment")
   // Get initial comments based on the postId or an empty array if no comments are found
-  const initialComments = dummyComments[id] || [];
+  
+  
+  const initialComments = dummyComments[1][0] || [];
+  console.log("dummy",initialComments.author)
   // State to manage the comments
   const [comments, setComments] = useState(initialComments);
 

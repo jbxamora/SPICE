@@ -12,15 +12,15 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('recipes');
     },
-      //Define query resolvers
+    //Define query resolvers
     recipes: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Recipe.find(params).sort({ createdAt: -1 });
-      },
+    },
     recipe: async (parent, { recipeId }) => {
-        return Recipe.findOne({ _id: recipeId });
-      },
-  
+      return Recipe.findOne({ _id: recipeId });
+    },
+
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('recipes');
@@ -48,28 +48,28 @@ const resolvers = {
     // Login a user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-  
+
       if (!user) {
         throw new AuthenticationError('No user found with this email address');
       }
-  
+
       const correctPw = await user.isCorrectPassword(password);
-  
+
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-  
+
       const token = signToken(user);
-  
+
       return { token, user };
     },
     // Create a recipe
     addRecipe: async (parent, { name, ingredients, instructions, imgUrl }, context) => {
       if (context.user) {
         const recipe = await Recipe.create({
-          name, 
-          ingredients, 
-          instructions, 
+          name,
+          ingredients,
+          instructions,
           imgUrl,
           recipeAuthor: context.user.username,
         });
@@ -83,7 +83,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
+
     // Create a comment
     addComment: async (parent, { recipeId, commentText }, context) => {
       if (context.user) {
@@ -107,11 +107,11 @@ const resolvers = {
       if (context.user) {
         // Find the recipe
         const recipe = await Recipe.findByIdAndDelete(recipeId);
-        
+
         if (!recipe) {
           throw new Error('Recipe not found');
         }
-    
+
         // Check if the logged-in user is the recipe author
         if (recipe.recipeAuthor === context.user.username) {
           // Remove the recipe from the user's recipes field
@@ -119,10 +119,10 @@ const resolvers = {
             { _id: context.user._id },
             { $pull: { recipes: recipe._id } }
           );
-          
+
           // Remove the recipe from the Recipe collection
           await Recipe.findByIdAndDelete(recipeId);
-    
+
           return recipe;
         } else {
           throw new AuthenticationError('You are not authorized to delete this recipe');
@@ -158,7 +158,7 @@ const resolvers = {
       if (!reactionInput.recipeId) {
         throw new Error('recipeId is required');
       }
-      
+
       if (context.user) {
         const { recipeId, reactionBody } = reactionInput;
         const reaction = await Recipe.findOneAndUpdate(
@@ -187,7 +187,47 @@ const resolvers = {
         throw new AuthenticationError("You must be logged in to remove a reaction");
       }
     },
+  saveRecipe: async (parent, {
+    recipeId,
+    name,
+    ingredients,
+    instructions,
+    imgUrl,
+  }, context) => {
+    if (context.user) {
+      const updatedUser = await User.findByIdAndUpdate(
+        { _id: context.user._id },
+        {
+          $push: {
+            savedRecipes: {
+              recipeId,
+              name,
+              ingredients,
+              instructions,
+              imgUrl,
+            }
+          }
+        },
+        { new: true }
+      );
+      return updatedUser;
+    }
+    throw new AuthenticationError('You need to be logged in!');
   },
+  removeSavedRecipe: async (parent, { recipeId }, context) => {
+    if (context.user) {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { savedRecipes: { recipeId } } },
+        { new: true }
+      );
+
+      return updatedUser;
+    }
+
+    throw new AuthenticationError('You need to be logged in!');
+  },
+},
 };
 
 module.exports = resolvers;

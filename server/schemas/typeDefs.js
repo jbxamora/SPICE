@@ -70,11 +70,11 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(name: String!, username: String!, email: String!, password: String!): Auth
-    selectRecipe(_id: String!): User
+    saveRecipe(recipeId: ID, name: String, ingredients: [String!], instructions: String, imgUrl: String,recipeAuthor: String,createdAt: String): User
+    removeSavedRecipe(recipeId: ID): User
     addRecipe(name: String!, ingredients: [String!]!, instructions: String!, imgUrl: String): Recipe
     removeRecipe(recipeId: ID!): Recipe
     updateRecipe(input: UpdateRecipeInput!): Recipe
-    deleteRecipe(recipeId: ID!): Recipe
     addComment(recipeId: ID!, commentText: String!): Recipe
     removeComment(recipeId: ID!, commentId: ID!): Recipe
     createReaction(reactionInput: ReactionInput): Recipe
