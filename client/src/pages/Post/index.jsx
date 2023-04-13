@@ -46,7 +46,7 @@ const Post = () => {
 
             {/* Render the Comments component with the recipe ID */}
             {/* <Comments recipe={recipe} /> */}
-             <Comments postId={id}/>
+             {/* <Comments postId={id}/> */}
           </div>
 
           {/* Render the IngredientsCard component */}
