@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Comment from "../Comment";
+import AddCommentForm from "../CommentForm";
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import {QUERY_SINGLE_RECIPE} from '../../utils/queries'
+import { QUERY_SINGLE_RECIPE } from '../../utils/queries';
 
 const Comments = () => {
-    
   const { id } = useParams();
   const recipeId = id;
 
@@ -16,7 +16,7 @@ const Comments = () => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && data.recipe) {
       setComments(data.recipe.comments);
     }
   }, [data]);
@@ -25,27 +25,18 @@ const Comments = () => {
     return <div>Loading...</div>;
   }
 
-  const addComment = (newComment) => {
-    setComments([...allComments, newComment]);
-  };
-
-  const deleteComment = (commentId) => {
-    const updatedComments = allComments.filter(
-      (comment) => comment._id !== commentId
-    );
-    setComments(updatedComments);
-  };
-
   return (
     <div className="space-y-4 bg-transparent border border-cyan-400 shadow-black shadow-xl p-4 rounded-lg">
-      {allComments.map((comment) => (
-        <Comment
-          key={comment._id}
-          comment={comment}
-          addComment={addComment}
-          deleteComment={deleteComment}
-        />
-      ))}
+      {allComments.length === 0 ? (
+        <div>
+          <p>No comments yet. Be the first to add a comment!</p>
+        </div>
+      ) : (
+        allComments.map((comment) => (
+          <Comment key={comment._id} comment={comment} />
+        ))
+      )}
+      <AddCommentForm showButton={allComments.length === 0} />
     </div>
   );
 };

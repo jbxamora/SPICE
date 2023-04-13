@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_COMMENT } from "../../utils/mutations";
 import { useParams } from 'react-router-dom';
 
-const AddCommentForm = () => {
+const AddCommentForm = ({ reply }) => {
   const { id } = useParams();
   const recipeId = id;
 
@@ -19,6 +19,7 @@ const AddCommentForm = () => {
           variables: {
             recipeId,
             commentText,
+            parentId: reply ? reply._id : null, // Set the parent ID if this is a reply comment
           },
         });
         setText("");
@@ -29,8 +30,10 @@ const AddCommentForm = () => {
     }
   };
 
+  const showButton = !submitted && (!reply || !reply.comments || reply.comments.length === 0); // Hide the button if there are comments
+
   if (submitted) {
-    return <p className="text-white">Thank you for your comment!</p>;
+    return;
   }
 
   return (
@@ -41,12 +44,14 @@ const AddCommentForm = () => {
         className="w-full p-2 bg-transparent text-white border border-cyan-400 rounded"
         rows="1"
       ></textarea>
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-      >
-        Add Comment
-      </button>
+      {showButton && (
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+        >
+          Add Comment
+        </button>
+      )}
       {error && <p className="text-red-500">Error adding comment.</p>}
     </form>
   );
