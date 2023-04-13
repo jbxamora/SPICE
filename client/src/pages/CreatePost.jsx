@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 import { QUERY_RECIPES, QUERY_ME } from '../utils/queries';
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
@@ -62,11 +64,14 @@ const CreatePost = () => {
           ingredients: ingredients,
         },
       });
-
+  
       console.log("Title:", name);
       console.log("Content:", instructions);
       console.log("imgUrl:", imgUrl);
       console.log("Ingredients:", ingredients);
+  
+      // Redirect to /home after successful submission
+      navigate("/home");
     } catch (err) {
       console.error("Error creating recipe:", err);
     }
