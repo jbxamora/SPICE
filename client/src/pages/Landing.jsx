@@ -13,34 +13,33 @@ const Landing = () => {
   };
 
   return (
-    <div className="bg-hero-pattern bg-cover text-white min-h-screen dark:bg-gray-900">
-      <div className="container mx-auto px-4 py-10">
-        <div className="bg-food-pattern bg-cover bg-center h-96 rounded-xl">
-          <div className="h-full w-full flex items-center justify-center">
-            {/* <h1 className="text-5xl font-bold gradient-text">SPICE</h1> */}
-          </div>
-        </div>
-
-        <div className="mt-60">
-          <div className="text-2xl">
-            Welcome to <span className="text-3xl font-thefont gradient-text">SPICE</span> , a community-driven recipe sharing website! Share your favorite recipes and discover new ones from people around the world. Whether you're a seasoned chef or a beginner in the kitchen, our platform is the perfect place to connect with other food lovers and explore new flavors. Join us today and let's share the joy of cooking together!
-          </div>
-
-        </div>
-        <div className="mt-20">
-          <button
-            onClick={handleSignUpClick}
-            className="py-2 px-10 rounded mr-4 bg-gradient-to-r from-red-600 to-yellow-500 hover:from-yellow-800 hover:to-red-600 ..."
-          >
-            Sign Up
-          </button>
-          <button
-            onClick={handleLogInClick}
-            className=" py-2 px-12 ml-6 rounded bg-gradient-to-r from-red-600 to-yellow-500 hover:from-yellow-800 hover:to-red-600 ..."
-          >
-            Log In
-          </button>
-        </div>
+    <div className="text-white h-screen dark:bg-gray-900 flex flex-col justify-center items-center relative overflow-hidden">
+      <div className="bg-hero-pattern absolute inset-0 z-0 bg-cover bg-center"></div>
+      <div className="max-w-xl text-center z-10">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          Welcome to <span className="font-thefon gradient-text">SPICE</span>
+        </h1>
+        <p className="text-xl md:text-2xl mb-10">
+          A community-driven recipe sharing website! Share your favorite recipes
+          and discover new ones from people around the world. Whether you're a
+          seasoned chef or a beginner in the kitchen, our platform is the
+          perfect place to connect with other food lovers and explore new
+          flavors. Join us today and let's share the joy of cooking together!
+        </p>
+      </div>
+      <div className="mt-4 z-10">
+        <button
+          onClick={handleSignUpClick}
+          className="animate-bounce py-3 px-8 md:px-12 rounded-full mr-4 bg-gradient-to-r from-red-600 to-yellow-500 hover:from-yellow-800 hover:to-red-600 transition duration-300 font-semibold text-lg"
+        >
+          Sign Up
+        </button>
+        <button
+          onClick={handleLogInClick}
+          className="animate-bounce py-3 px-8 md:px-12 rounded-full ml-4 bg-gradient-to-r from-red-600 to-yellow-500 hover:from-yellow-800 hover:to-red-600 transition duration-300 font-semibold text-lg"
+        >
+          Log In
+        </button>
       </div>
     </div>
   );

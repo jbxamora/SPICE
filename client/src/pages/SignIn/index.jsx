@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef, useCallback } from "react";
 import { Images } from "../../constants/constants";
 import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
@@ -7,19 +7,19 @@ import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 const SignIn = () => {
-  const randomImage = Images[Math.floor(Math.random() * Images.length)];
+  const randomImage = useRef(Images[Math.floor(Math.random() * Images.length)]);
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
+    setFormState((prevState) => ({
+      ...prevState,
       [name]: value,
-    });
-  };
+    }));
+  }, []);
 
   // submit form
   const handleFormSubmit = async (event) => {
@@ -125,7 +125,7 @@ const SignIn = () => {
         </div>
 
         <div className="md:block hidden w-1/2">
-          <img className="rounded-2xl" src={randomImage} />
+          <img className="rounded-2xl" src={randomImage.current} />
         </div>
       </div>
     </section>
