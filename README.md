@@ -31,7 +31,8 @@ Enjoy Exploring The Project!
 
 ## Screenshots
 
-![Screenshot 1](screenshot1.png)
+![Landing Page](![Screen Shot 2023-04-14 at 11 23 06 AM (2)](https://user-images.githubusercontent.com/113401054/232126773-fdb22b20-75c4-4d8c-8206-aca52000ea2d.png)
+)
 ![Screenshot 2](screenshot2.png)
 ![Screenshot 3](screenshot3.png)
 
