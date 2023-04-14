@@ -51,6 +51,8 @@ const CreatePost = () => {
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ font: [] }],
     [{ align: [] }],
+    ["clean"], 
+
   ];
 
   const handleSubmit = async (e) => {
@@ -65,7 +67,7 @@ const CreatePost = () => {
           ingredients: ingredients,
         },
       });
-  
+      
       console.log("Title:", name);
       console.log("Content:", instructions);
       console.log("imgUrl:", imgUrl);
