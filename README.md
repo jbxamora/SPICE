@@ -49,8 +49,8 @@ Enjoy Exploring The Project!
 - [TailwindCSS](https://tailwindcss.com/)
 
 ## Code Snippets
-### Example 1
-javascript
+### Rendered Ingredient card
+https://github.com/jbxamora/SPICE/blob/2d05f28d1ddd12376549cdb16a0eb9d77be81f6e/client/src/components/IngredientCard/index.jsx#L39-L75
 
 
 ### Example 2
