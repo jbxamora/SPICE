@@ -49,7 +49,7 @@ Enjoy Exploring The Project!
 - [TailwindCSS](https://tailwindcss.com/)
 
 ## Code Snippets
-### Rendered Ingredient card In React Using Tailwind
+### Rendered Ingredient card Using React and Tailwind
 https://github.com/jbxamora/SPICE/blob/2d05f28d1ddd12376549cdb16a0eb9d77be81f6e/client/src/components/IngredientCard/index.jsx#L39-L75
 
 
