@@ -5,6 +5,21 @@ import { searchPlaceholders } from "../../constants/constants";
 import Auth from "../../utils/auth";
 
 const Navbar = () => {
+  
+    // Function to conditionally render the Create button
+    const renderCreateButton = () => {
+      if (Auth.loggedIn()) {
+        return (
+          <Link
+            to="/create"
+            className="text-gray-300 hover:text-white px-4 py-2 rounded text-base font-thefont font-medium transition-colors duration-200"
+          >
+            Create
+          </Link>
+        );
+      }
+    };
+
   // State to manage the mobile navigation menu
   const [isOpen, setIsOpen] = useState(false);
 
@@ -91,7 +106,6 @@ const Navbar = () => {
           </div>
           <div className="hidden md:flex items-center">
             {renderSearchBar()}
-
             <div className="flex items-baseline space-x-4 ml-4">
               <Link
                 to="/home"
@@ -99,19 +113,14 @@ const Navbar = () => {
               >
                 Home
               </Link>
-              <Link
-                to="/create"
-                className="text-gray-300 hover:text-white px-4 py-2 rounded text-base font-thefont font-medium transition-colors duration-200"
-              >
-                Create
-              </Link>
+              {renderCreateButton()}
               {renderAuthButton()}
             </div>
           </div>
-          <div className="-mr-2  flex md:hidden">
+          <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`inline-flex  items-center justify-center p-2 rounded-md hamburger-btn ${
+              className={`inline-flex items-center justify-center p-2 rounded-md hamburger-btn ${
                 isOpen ? "open" : ""
               } focus:outline-none`}
             >
@@ -129,13 +138,7 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            to="/create"
-            onClick={handleMobileNavLinkClick}
-            className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Create
-          </Link>
+          {renderCreateButton()}
           <div onClick={handleMobileNavLinkClick}>{renderAuthButton()}</div>
         </div>
       </div>

@@ -43,12 +43,53 @@ export const ADD_RECIPE = gql`
 }
 `;
 
+export const ADD_COMMENT = gql`
+  mutation AddComment($recipeId: ID!, $commentText: String!) {
+    addComment(recipeId: $recipeId, commentText: $commentText) {
+      _id
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
+    }
+  }
+`;
 
+export const DELETE_COMMENT = gql`
+  mutation RemoveComment($recipeId: ID!, $commentId: ID!) {
+    removeComment(recipeId: $recipeId, commentId: $commentId) {
+      _id
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
+    }
+  }
+`;
 
-
-
-
-
+export const DELETE_RECIPE = gql`
+  mutation removeRecipe($recipeId: ID!) {
+  removeRecipe(recipeId: $recipeId) {
+    _id
+    name
+    ingredients
+    instructions
+    imgUrl
+    recipeAuthor
+    createdAt
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+    }
+  }
+}
+`;
 
 
 

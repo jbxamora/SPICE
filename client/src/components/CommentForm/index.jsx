@@ -1,37 +1,58 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_COMMENT } from "../../utils/mutations";
+import { useParams } from 'react-router-dom';
 
-// AddCommentForm component receives addComment function as a prop
-const AddCommentForm = ({ addComment }) => {
-  // State to manage the text input value
-  const [text, setText] = useState("");
+const AddCommentForm = ({ reply }) => {
+  const { id } = useParams();
+  const recipeId = id;
 
-  // Function to handle the form submission
-  const handleSubmit = (e) => {
+  const [commentText, setText] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [addComment, { error }] = useMutation(ADD_COMMENT);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Check if the text input is not empty
-    if (text.trim()) {
-      // Call the addComment function with a new comment object
-      addComment({ id: Date.now(), text, children: [] });
-      // Reset the text input value
-      setText("");
+    if (commentText.trim()) {
+      try {
+        await addComment({
+          variables: {
+            recipeId,
+            commentText,
+            parentId: reply ? reply._id : null, // Set the parent ID if this is a reply comment
+          },
+        });
+        setText("");
+        setSubmitted(true);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
-  // Render the AddCommentForm component
+  const showButton = !submitted && (!reply || !reply.comments || reply.comments.length === 0); // Hide the button if there are comments
+
+  if (submitted) {
+    return;
+  }
+
   return (
     <form onSubmit={handleSubmit} className="mt-2">
       <textarea
-        value={text}
+        value={commentText}
         onChange={(e) => setText(e.target.value)}
         className="w-full p-2 bg-transparent text-white border border-cyan-400 rounded"
         rows="1"
       ></textarea>
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-      >
-        Add Comment
-      </button>
+      {showButton && (
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+        >
+          Add Comment
+        </button>
+      )}
+      {error && <p className="text-red-500">Error adding comment.</p>}
     </form>
   );
 };

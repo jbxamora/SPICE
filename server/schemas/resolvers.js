@@ -100,6 +100,7 @@ const resolvers = {
           }
         );
       }
+      
       throw new AuthenticationError('You need to be logged in!');
     },
     // Remove a recipe
@@ -229,5 +230,24 @@ const resolvers = {
   },
 },
 };
+
+// deleteRecipe: async (parent, { recipeId }, context) => {
+//   const user = checkAuth(context);
+
+//   try {
+//     const recipe = await Recipe.findById(recipeId);
+//     if (!recipe) {
+//       throw new Error('Recipe not found');
+//     }
+//     if (user.username !== recipe.username) {
+//       throw new AuthenticationError('Action not allowed');
+//     }
+//     await recipe.delete();
+//     return recipe;
+//   } catch (err) {
+//     throw new Error(err);
+//   }
+// },
+
 
 module.exports = resolvers;

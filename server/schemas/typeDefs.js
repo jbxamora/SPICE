@@ -53,10 +53,6 @@ const typeDefs = gql`
     reactionBody: String!
   }
 
-  input CommentInput {
-    commentText: String!
-  }
-
   type Query {
     me: User
     user(username: String!): User
@@ -76,9 +72,10 @@ const typeDefs = gql`
     removeRecipe(recipeId: ID!): Recipe
     updateRecipe(input: UpdateRecipeInput!): Recipe
     addComment(recipeId: ID!, commentText: String!): Recipe
-    removeComment(recipeId: ID!, commentId: ID!): Recipe
+    removeComment(recipeId: ID, commentId: ID!): Recipe
     createReaction(reactionInput: ReactionInput): Recipe
     removeReaction(reactionId: ID!): Boolean
+    deleteRecipe(recipeId: ID!): Recipe
   }
 `;
 
