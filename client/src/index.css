@@ -142,3 +142,8 @@ footer {
   cursor: pointer;
 }
 
+.bg-hero-pattern {
+  filter: blur(4px);
+  width: 100%;
+  height: 100%;
+}
