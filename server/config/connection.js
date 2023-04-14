@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://username:FakePassword@spicecluster.b7zvgzp.mongodb.net/test', 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/spice', 
 {
   useNewUrlParser: true,
   useUnifiedTopology: true,
