@@ -1,6 +1,6 @@
 # SPICE
 
-SPICE is a MERN stack recipe blog application that allows users to create, read, update, and delete recipes. The acronym SPICE stands for "Submit, Personalize, Improve, Create, Enjoy", and the application is designed to provide an easy-to-use platform for users to share and discover new recipes.
+SPICE is a MERN stack recipe application that allows users to create, read, update, and delete recipes. The acronym SPICE stands for "Submit, Personalize, Improve, Create, Enjoy", and the application is designed to provide an easy-to-use platform for users to share and discover new recipes. It also serves as a community for those looking to enhance their culinary abilities. SPICE is a judgement free platform that welcomes food lovers from every background.
 
 ## Table of Contents
 
@@ -63,10 +63,10 @@ javascript
 
 ## Contributors
 
-- [Contributor 1](https://github.com/example1)
-- [Contributor 2](https://github.com/example2)
-- [Contributor 1](https://github.com/example1)
-- [Contributor 2](https://github.com/example2)
+- [Alex Kim](https://github.com/kji00)
+- [Jorge Zamora](https://github.com/jbxamora)
+- [Ryan Pabalate](https://github.com/rypab4)
+- [Savannah Munn](https://github.com/Savannahmunn1996)
 
 ## Contributions
 
