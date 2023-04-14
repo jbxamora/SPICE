@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 import { QUERY_RECIPES, QUERY_ME } from '../utils/queries';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 
 const CreatePost = () => {
@@ -54,7 +55,18 @@ const CreatePost = () => {
     ["clean"], 
 
   ];
-
+  // Add this function to remove the HTML tags
+  const transform = (node) => {
+    if (node.type === 'tag' && node.name === 'span' && node.attribs.style) {
+      delete node.attribs.style;
+    }
+    return convertNodeToElement(node, 0, transform);
+  };
+  
+  const parsedInstructions = ReactHtmlParser(instructions, { transform });
+  
+  console.log("Content:", parsedInstructions);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
