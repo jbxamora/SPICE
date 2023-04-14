@@ -57,7 +57,7 @@ https://github.com/jbxamora/SPICE/blob/2d05f28d1ddd12376549cdb16a0eb9d77be81f6e/
 https://github.com/jbxamora/SPICE/blob/3794e2a9daf9a92aca3779f76ad54e07eb2a421a/server/models/Recipe.js#L5-L55
 
 
-### Resolver For Adding A New Recipe
+### Resolver For Adding A New Recipe Using Graphql
 https://github.com/jbxamora/SPICE/blob/3a8e5fae530e5488f16201b79546fd1fc42e834b/server/schemas/resolvers.js#L67-L85
 
 
