@@ -17,7 +17,7 @@ const Landing = () => {
       <div className="bg-hero-pattern absolute inset-0 z-0 bg-cover bg-center"></div>
       <div className="max-w-xl text-center z-10">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          Welcome to <span className="font-thefon gradient-text">SPICE</span>
+          Welcome to <span className="font-thefont gradient-text">SPICE</span>
         </h1>
         <p className="text-xl md:text-2xl mb-10">
           A community-driven recipe sharing website! Share your favorite recipes
