@@ -49,12 +49,12 @@ Enjoy Exploring The Project!
 - [TailwindCSS](https://tailwindcss.com/)
 
 ## Code Snippets
-### Rendered Ingredient card
+### Rendered Ingredient card In React Using Tailwind
 https://github.com/jbxamora/SPICE/blob/2d05f28d1ddd12376549cdb16a0eb9d77be81f6e/client/src/components/IngredientCard/index.jsx#L39-L75
 
 
-### Example 2
-javascript
+### Recipe Model Using Mongoose
+https://github.com/jbxamora/SPICE/blob/3794e2a9daf9a92aca3779f76ad54e07eb2a421a/server/models/Recipe.js#L5-L55
 
 
 ### Example 3
