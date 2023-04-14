@@ -6,7 +6,6 @@ SPICE is a MERN stack recipe application that allows users to create, read, upda
 
 - [Installation and Usage](#installation-and-usage)
 - [Deployment](#deployment)
-- [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
 - [Code Snippets](#code-snippets)
 - [Contributions](#contributions)
@@ -30,11 +29,9 @@ Enjoy Exploring The Project!
 [Visit the deployed application](https://example.com)
 
 ## Screenshots
+![Screen Shot 2023-04-14 at 11 23 06 AM (2)](https://user-images.githubusercontent.com/113401054/232126773-fdb22b20-75c4-4d8c-8206-aca52000ea2d.png)
 
-![Landing Page](![Screen Shot 2023-04-14 at 11 23 06 AM (2)](https://user-images.githubusercontent.com/113401054/232126773-fdb22b20-75c4-4d8c-8206-aca52000ea2d.png)
-)
-![Screenshot 2](screenshot2.png)
-![Screenshot 3](screenshot3.png)
+![Screen Shot 2023-04-14 at 11 23 22 AM (2)](https://user-images.githubusercontent.com/113401054/232127461-15e5c6c4-2e37-43af-b862-5dca0a096010.png)
 
 ## Technologies Used
 
