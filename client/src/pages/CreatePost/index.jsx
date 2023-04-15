@@ -18,11 +18,6 @@ const CreatePost = () => {
   const [instructions, setInstructions] = useState("");
   const [imgUrl, setImgurl] = useState("");
 
-  const removeHtmlTags = (html) => {
-    const quill = new Quill(document.createElement('div'));
-    quill.setContents(quill.clipboard.convert(html));
-    return quill.getText();
-  };
   const [addRecipes, { error, data }] = useMutation(ADD_RECIPE, {
     update(cache, { data: { addRecipe } }) {
       try {
@@ -145,10 +140,7 @@ const CreatePost = () => {
           <ReactQuill
             id="content"
             value={instructions}
-            onChange={(content, delta, source, editor) => {
-              const plainText = removeHtmlTags(content);
-              setInstructions(plainText);
-            }}
+            onChange={setInstructions}
             theme="snow"
             className="text-lg mt-auto px-3 py-4"
             style={{ minHeight: "25rem", className: "h-44 text-white" }}
