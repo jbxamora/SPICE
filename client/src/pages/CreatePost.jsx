@@ -75,7 +75,7 @@ const CreatePost = () => {
         variables: {
           name: name,
           imgUrl: imgUrl,
-          instructions: instructions,
+          instructions: parsedInstructions,
           ingredients: ingredients,
         },
       });
