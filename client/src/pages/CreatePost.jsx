@@ -14,6 +14,13 @@ const CreatePost = () => {
   const [instructions, setInstructions] = useState("");
   const [imgUrl, setImgurl] = useState("");
 
+  const stripHtmlTags = (str) => {
+    if (!str || typeof str !== 'string') {
+      return '';
+    }
+    return str.replace(/<\/?[^>]+(>|$)/g, '');
+  };
+  
   const [addRecipes, { error, data }] = useMutation(ADD_RECIPE, {
     update(cache, { data: { addRecipe } }) {
       try {
@@ -55,21 +62,23 @@ const CreatePost = () => {
 
   ];
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
     try {
+      const strippedInstructions = stripHtmlTags(instructions);
       const { data } = await addRecipes({
         variables: {
           name: name,
           imgUrl: imgUrl,
-          instructions: instructions,
+          instructions: strippedInstructions,
           ingredients: ingredients,
         },
       });
-      
+  
       console.log("Title:", name);
-      console.log("Content:", instructions);
+      console.log("Content:", strippedInstructions);
       console.log("imgUrl:", imgUrl);
       console.log("Ingredients:", ingredients);
   
