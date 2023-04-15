@@ -18,7 +18,7 @@ const CreatePost = () => {
     if (!str || typeof str !== 'string') {
       return '';
     }
-    return str.replace(/<\/?[^>]+(>|$)/g, '');
+    return str.replace(/<[^>]*>/g, '').trim();
   };
   
   const [addRecipes, { error, data }] = useMutation(ADD_RECIPE, {
