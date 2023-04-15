@@ -13,7 +13,11 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
   introspection: true,
+<<<<<<< HEAD
+  playground: true,
+=======
   playground: true, 
+>>>>>>> 4fd274bc1e5173b3a6c61657a45676b57e61bd2f
 });
 
 app.use(cors());
