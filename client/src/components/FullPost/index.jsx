@@ -1,13 +1,8 @@
 import React from "react";
-import { reaction } from "../../assets";
-
 
 // FullPost component receives a recipe object as a prop
 const FullPost = ({ recipe }) => {
   const { name, imgUrl, instructions, recipeAuthor, createdAt } = recipe || {};
-
-  // Dummy function for handling the reaction button click
-  const handleReactionClick = () => {};
 
   // Render the FullPost component
   return (
@@ -28,15 +23,15 @@ const FullPost = ({ recipe }) => {
       </div>
       <div className="px-6 pt-4 pb-2">
         {/* Add any relevant tags here */}
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #example-tag
+         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+          #newcook
         </span>
       </div>
-      <div className="px-6 py-4 flex items-center">
+       {/* <div className="px-6 py-4 flex items-center"> */}
         {/* Render the reaction button */}
-        <button onClick={handleReactionClick}>
+        {/* <button onClick={handleReactionClick}>
           <img src={reaction} alt="Reaction" className="h-[25px]" />
-        </button>
+        </button> */}
 
         {/* Render the author's avatar */}
         {/* <img src={recipeAuthor?.avatarUrl} alt={`${recipeAuthor.name}'s avatar`} /> */}
@@ -47,7 +42,7 @@ const FullPost = ({ recipe }) => {
           <p className="text-gray-600">{createdAt}</p>
           
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
