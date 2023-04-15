@@ -82,7 +82,7 @@ const CreatePost = () => {
         variables: {
           name: name,
           imgUrl: imgUrl,
-          instructions: parsedInstructions,
+          instructions: instructions,
           ingredients: ingredients,
         },
       });
