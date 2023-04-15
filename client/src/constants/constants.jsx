@@ -8,7 +8,9 @@ import {
 } from "../assets";
 
 
-export const dummyPosts = [
+
+
+export const dummySavedPosts = [
   {
     id: "4",
     title: "Tried Making A Michelin Desert",

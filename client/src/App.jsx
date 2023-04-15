@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { dummyPosts } from "./constants/constants";
 import {
   ApolloClient,
   InMemoryCache,
@@ -51,7 +50,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<PostsList posts={dummyPosts} />} />
+          <Route path="/home" element={<PostsList/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/create" element={<CreatePost />} />
