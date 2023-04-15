@@ -1,12 +1,11 @@
 # SPICE
 
-SPICE is a MERN stack recipe blog application that allows users to create, read, update, and delete recipes. The acronym SPICE stands for "Submit, Personalize, Improve, Create, Enjoy", and the application is designed to provide an easy-to-use platform for users to share and discover new recipes.
+SPICE is a MERN stack recipe application that allows users to create, read, update, and delete recipes. The acronym SPICE stands for "Submit, Personalize, Improve, Create, Enjoy", and the application is designed to provide an easy-to-use platform for users to share and discover new recipes. It also serves as a community for those looking to enhance their culinary abilities. SPICE is a judgement free platform that welcomes food lovers from every background.
 
 ## Table of Contents
 
 - [Installation and Usage](#installation-and-usage)
 - [Deployment](#deployment)
-- [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
 - [Code Snippets](#code-snippets)
 - [Contributions](#contributions)
@@ -30,10 +29,9 @@ Enjoy Exploring The Project!
 [Visit the deployed application](https://example.com)
 
 ## Screenshots
+![Screen Shot 2023-04-14 at 11 23 06 AM (2)](https://user-images.githubusercontent.com/113401054/232126773-fdb22b20-75c4-4d8c-8206-aca52000ea2d.png)
 
-![Screenshot 1](screenshot1.png)
-![Screenshot 2](screenshot2.png)
-![Screenshot 3](screenshot3.png)
+![Screen Shot 2023-04-14 at 11 23 22 AM (2)](https://user-images.githubusercontent.com/113401054/232127461-15e5c6c4-2e37-43af-b862-5dca0a096010.png)
 
 ## Technologies Used
 
@@ -49,24 +47,24 @@ Enjoy Exploring The Project!
 - [TailwindCSS](https://tailwindcss.com/)
 
 ## Code Snippets
-### Example 1
-javascript
+### Rendered Ingredient card Using React and Tailwind
+https://github.com/jbxamora/SPICE/blob/2d05f28d1ddd12376549cdb16a0eb9d77be81f6e/client/src/components/IngredientCard/index.jsx#L39-L75
 
 
-### Example 2
-javascript
+### Recipe Model Using Mongoose
+https://github.com/jbxamora/SPICE/blob/3794e2a9daf9a92aca3779f76ad54e07eb2a421a/server/models/Recipe.js#L5-L55
 
 
-### Example 3
-javascript
+### Resolver For Adding A New Recipe Using Graphql
+https://github.com/jbxamora/SPICE/blob/3a8e5fae530e5488f16201b79546fd1fc42e834b/server/schemas/resolvers.js#L67-L85
 
 
 ## Contributors
 
-- [Contributor 1](https://github.com/example1)
-- [Contributor 2](https://github.com/example2)
-- [Contributor 1](https://github.com/example1)
-- [Contributor 2](https://github.com/example2)
+- [Alex Kim](https://github.com/kji00)
+- [Jorge Zamora](https://github.com/jbxamora)
+- [Ryan Pabalate](https://github.com/rypab4)
+- [Savannah Munn](https://github.com/Savannahmunn1996)
 
 ## Contributions
 

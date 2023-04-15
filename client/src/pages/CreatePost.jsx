@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 import { QUERY_RECIPES, QUERY_ME } from '../utils/queries';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import Quill from 'quill';
 
 
 const CreatePost = () => {
@@ -14,30 +16,36 @@ const CreatePost = () => {
   const [instructions, setInstructions] = useState("");
   const [imgUrl, setImgurl] = useState("");
 
+  const removeHtmlTags = (html) => {
+    const quill = new Quill(document.createElement('div'));
+    quill.setContents(quill.clipboard.convert(html));
+    return quill.getText();
+  };
   const [addRecipes, { error, data }] = useMutation(ADD_RECIPE, {
     update(cache, { data: { addRecipe } }) {
       try {
-        const { recipes } = cache.readQuery({ query: QUERY_RECIPES })??{};
+        const { recipes } = cache.readQuery({ query: QUERY_RECIPES }) ?? {};
 
-        if (recipes){
-        cache.writeQuery({
-          query: QUERY_RECIPES,
-          data: { recipes: [addRecipe, ...recipes] },
-        });}
+        if (recipes) {
+          cache.writeQuery({
+            query: QUERY_RECIPES,
+            data: { recipes: [addRecipe, ...recipes] },
+          });
+        }
       } catch (e) {
         console.error(e);
       }
       // update me object's cache
-      const { meData } = cache.readQuery({ query: QUERY_ME })?.meData??{};
+      const { meData } = cache.readQuery({ query: QUERY_ME })?.meData ?? {};
       if (meData) {
         const { me } = meData;
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, recipes: [...me.recipes, addRecipe] } },
-      
-      });
-  };
-},
+        cache.writeQuery({
+          query: QUERY_ME,
+          data: { me: { ...me, recipes: [...me.recipes, addRecipe] } },
+
+        });
+      };
+    },
   });
   const toolbarOptions = [
     ["bold", "italic", "underline"], // toggled buttons
@@ -51,9 +59,20 @@ const CreatePost = () => {
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ font: [] }],
     [{ align: [] }],
-    ["clean"], 
+    ["clean"],
 
   ];
+  // Add this function to remove the HTML tags
+  const transform = (node) => {
+    if (node.type === 'tag' && node.name === 'span' && node.attribs.style) {
+      delete node.attribs.style;
+    }
+    return convertNodeToElement(node, 0, transform);
+  };
+
+  const parsedInstructions = ReactHtmlParser(instructions, { transform });
+
+  console.log("Content:", parsedInstructions);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,16 +82,16 @@ const CreatePost = () => {
         variables: {
           name: name,
           imgUrl: imgUrl,
-          instructions: instructions,
+          instructions: parsedInstructions,
           ingredients: ingredients,
         },
       });
-      
+
       console.log("Title:", name);
       console.log("Content:", instructions);
       console.log("imgUrl:", imgUrl);
       console.log("Ingredients:", ingredients);
-  
+
       // Redirect to /home after successful submission
       navigate("/home");
     } catch (err) {
@@ -126,7 +145,10 @@ const CreatePost = () => {
           <ReactQuill
             id="content"
             value={instructions}
-            onChange={setInstructions}
+            onChange={(content, delta, source, editor) => {
+              const plainText = removeHtmlTags(content);
+              setInstructions(plainText);
+            }}
             theme="snow"
             className="text-lg mt-auto px-3 py-4"
             style={{ minHeight: "25rem", className: "h-44 text-white" }}
