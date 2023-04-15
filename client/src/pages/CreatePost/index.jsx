@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from '@apollo/client';
-import { ADD_RECIPE } from '../utils/mutations';
-import { QUERY_RECIPES, QUERY_ME } from '../utils/queries';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-
+import { useMutation } from "@apollo/client";
+import { ADD_RECIPE } from "../../utils/mutations";
+import { QUERY_RECIPES, QUERY_ME } from "../../utils/queries";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from "react-html-parser";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -18,27 +21,27 @@ const CreatePost = () => {
   const [addRecipes, { error, data }] = useMutation(ADD_RECIPE, {
     update(cache, { data: { addRecipe } }) {
       try {
-        const { recipes } = cache.readQuery({ query: QUERY_RECIPES })??{};
+        const { recipes } = cache.readQuery({ query: QUERY_RECIPES }) ?? {};
 
-        if (recipes){
-        cache.writeQuery({
-          query: QUERY_RECIPES,
-          data: { recipes: [addRecipe, ...recipes] },
-        });}
+        if (recipes) {
+          cache.writeQuery({
+            query: QUERY_RECIPES,
+            data: { recipes: [addRecipe, ...recipes] },
+          });
+        }
       } catch (e) {
         console.error(e);
       }
       // update me object's cache
-      const { meData } = cache.readQuery({ query: QUERY_ME })?.meData??{};
+      const { meData } = cache.readQuery({ query: QUERY_ME })?.meData ?? {};
       if (meData) {
         const { me } = meData;
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, recipes: [...me.recipes, addRecipe] } },
-      
-      });
-  };
-},
+        cache.writeQuery({
+          query: QUERY_ME,
+          data: { me: { ...me, recipes: [...me.recipes, addRecipe] } },
+        });
+      }
+    },
   });
   const toolbarOptions = [
     ["bold", "italic", "underline"], // toggled buttons
@@ -52,21 +55,20 @@ const CreatePost = () => {
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ font: [] }],
     [{ align: [] }],
-    ["clean"], 
-
+    ["clean"],
   ];
-  // Add this function to remove the HTML tags
+  // Function to remove the HTML tags
   const transform = (node) => {
-    if (node.type === 'tag' && node.name === 'span' && node.attribs.style) {
+    if (node.type === "tag" && node.name === "span" && node.attribs.style) {
       delete node.attribs.style;
     }
     return convertNodeToElement(node, 0, transform);
   };
-  
+
   const parsedInstructions = ReactHtmlParser(instructions, { transform });
-  
+
   console.log("Content:", parsedInstructions);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -79,12 +81,12 @@ const CreatePost = () => {
           ingredients: ingredients,
         },
       });
-      
+
       console.log("Title:", name);
       console.log("Content:", instructions);
       console.log("imgUrl:", imgUrl);
       console.log("Ingredients:", ingredients);
-  
+
       // Redirect to /home after successful submission
       navigate("/home");
     } catch (err) {
@@ -178,7 +180,7 @@ const CreatePost = () => {
                 value={ingredient}
                 onChange={(e) => handleUpdateIngredient(index, e.target.value)}
                 className="w-full p-4 text-lg border bg-transparent text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-                style={{ minHeight: '2rem' }}
+                style={{ minHeight: "2rem" }}
               />
               <button
                 type="button"
